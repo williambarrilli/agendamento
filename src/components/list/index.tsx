@@ -8,6 +8,7 @@ interface ListComponentsProps {
 export default function ListComponents({
   setHourSelected,
 }: ListComponentsProps) {
+  // TODO: Componente de listagem recebe a lista como parametro
   const horarios = [
     { hour: "08:00", reserved: true },
     { hour: "09:00", reserved: false },

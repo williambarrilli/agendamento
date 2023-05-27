@@ -1,19 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./styles.module.scss";
 import bannerImage from "../../assets/bannerImage.jpg";
-import CalendarView from "../../views/calendarView";
-import SelectHourView from "../../views/selectHourView";
-import ButtonsView from "../../views/buttonsView";
+import CalendarView from "../../views/home/calendarView";
+import SelectHourView from "../../views/home/selectHourView";
+import ButtonsView from "../../views/home/buttonsView";
 import { EnumMenu } from "../../types/enums";
 import ModalComponent from "../../components/modal";
 import Button from "../../components/button";
 import { sendMessage } from "../../utils/send-message-whats-app";
+import Input from "../../components/input";
 
 export default function Home() {
   const [typeBody, setTypeBody] = useState<EnumMenu>(EnumMenu.INITIAL);
+  // TODO: criar form
   const [dateSelected, setDateSelected] = useState<string>("");
   const [hourSelected, setHourSelected] = useState<string>("");
   const [modalConfirm, setModalConfirm] = useState<boolean>(false);
+
+  //----- fluxo Cliente
+  // 1. Agendar
+  // 2. Nome + telefone
+  // 3. Data
+  // 4. Hora
+  // 5. Confirmacao
+  // 6. bloquear horario agenda atendente
+
+  // ----- fluxo atendente
+  // 1. Credenciais
+  // 2. Visualizar agenda
+  // 3. Aprovar ou reprovar e entrar em contato com cliente
 
   const renderBody = () => {
     const types = {

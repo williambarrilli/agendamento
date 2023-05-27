@@ -1,6 +1,6 @@
-import Button from "../../components/button";
-import ListComponents from "../../components/list";
-import { EnumMenu } from "../../types/enums";
+import Button from "../../../components/button";
+import ListComponents from "../../../components/list";
+import { EnumMenu } from "../../../types/enums";
 import styles from "./styles.module.scss";
 
 interface SelectHourViewProps {
@@ -14,14 +14,18 @@ export default function SelectHourView({
   dateSelected,
   onBack,
 }: SelectHourViewProps) {
+  // TODO: estilizar textos
   return (
     <>
-      <div className={styles.container}>Selecione o horario</div>
       <div className={styles.container}>Data selecionada: {dateSelected}</div>
-      <div className={styles.container}>Horarios disponiveis</div>
+      <div className={styles.container}>Horarios disponiveis:</div>
       <ListComponents setHourSelected={(value) => setHourSelected(value)} />
-
-      <Button onclick={() => onBack(EnumMenu.SELECTDATE)} text={"Voltar"} />
+      <div className={styles.container}>Selecione o horario!</div>
+      <Button
+        styleOption="secondary"
+        onclick={() => onBack(EnumMenu.SELECTDATE)}
+        text={"Voltar"}
+      />
     </>
   );
 }
