@@ -6,8 +6,8 @@ import SelectHourView from "../../views/selectHourView";
 import ButtonsView from "../../views/buttonsView";
 
 export default function Home() {
-  const [modalHour, setModalHour] = useState(true);
-  const calendar = true;
+  const [modalHour, setModalHour] = useState(false);
+  const calendar = false;
   return (
     <div className="container">
       <div>
@@ -19,7 +19,8 @@ export default function Home() {
       <ButtonsView />
 
       {calendar && <CalendarView />}
-      <SelectHourView isOpen={modalHour} />
+
+      <SelectHourView isOpen={modalHour} onClose={() => setModalHour(false)} />
     </div>
   );
 }

@@ -1,0 +1,5 @@
+export interface EnumMenu {
+  INITIAL: "INITIAL";
+  SELECTSERVICE: "SELECTSERVICE";
+  SELECTDATE: "SELECTDATE";
+}
