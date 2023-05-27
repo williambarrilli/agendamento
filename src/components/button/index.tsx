@@ -1,14 +1,20 @@
-import "./styles.css";
+import "./styles.button.scss";
 
 interface ButtonProps {
   text: string;
   onclick: () => void;
+  styleOption?: "primary" | "secondary";
 }
 
-export default function Button({ text, onclick }: ButtonProps) {
+export default function Button({
+  text,
+  onclick,
+  styleOption = "primary",
+}: ButtonProps) {
+  const buttonClassName = `button ${styleOption}`;
   return (
     <div>
-      <button className="button" onClick={() => onclick()}>
+      <button className={buttonClassName} onClick={() => onclick()}>
         {text}
       </button>
     </div>

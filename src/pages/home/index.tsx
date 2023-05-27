@@ -40,7 +40,7 @@ export default function Home() {
         <img className={styles.banner} src={bannerImage} alt="bannerImage" />
       </div>
       <div>
-        <h1 className="text"> Juliana Silva </h1>
+        <h1 className={styles.text}> Juliana Silva </h1>
       </div>
       {renderBody()}
 
