@@ -1,0 +1,7 @@
+.container-buttons {
+  display: flex;
+  justify-content: center;
+}
+.content-buttons {
+  margin: 30px;
+}
