@@ -1,0 +1,13 @@
+.container {
+  padding: 2%;
+  background-color: lightgrey;
+}
+
+.content {
+  margin: 5%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+}
