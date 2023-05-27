@@ -1,12 +1,3 @@
-import React from 'react';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      
-    </div>
-  );
+export default function SelectProfessionalView() {
+  return <div>home</div>;
 }
-
-export default App;
