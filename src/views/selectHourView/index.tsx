@@ -1,4 +1,5 @@
 import Button from "../../components/button";
+import ListComponents from "../../components/list";
 import ModalComponent from "../../components/modal";
 import styles from "./styles.module.scss";
 
@@ -21,8 +22,9 @@ export default function SelectHourView({
         <div className={styles.container}>Selecione o horario</div>
         <div className={styles.container}>Data selecionada: {dateSelected}</div>
         <div className={styles.container}>Horarios disponiveis</div>
-        []
+        <ListComponents dateSelected={dateSelected} />
         <Button onclick={() => setDateSelected("")} text={"Voltar"} />
+        {/* <Button onclick={() => setDateSelected("")} text={"Agendar"} /> */}
       </ModalComponent>
     );
 
