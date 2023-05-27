@@ -18,17 +18,27 @@ export default function CalendarView({
 }: CalendarViewProps) {
   return (
     <div className={styles.container}>
-      <header>
-        <h4>Escolha uma data</h4>
-      </header>
-      <div className="content">
-        <Calendar
-          onClickDay={(value) => setDateSelected(value.toLocaleDateString())}
-          value={new Date()}
-          minDate={new Date()}
-        />
+      <div>
+        <div>
+          <header>
+            <h4 className={styles.text}>Escolha uma data:</h4>
+          </header>
+        </div>
+        <div className="content">
+          <Calendar
+            onClickDay={(value) => setDateSelected(value.toLocaleDateString())}
+            value={new Date()}
+            minDate={new Date()}
+          />
+        </div>
+        <div className="content-buttons">
+          <Button
+            styleOption="secondary"
+            onclick={() => onBack(EnumMenu.INITIAL)}
+            text={"Voltar"}
+          />
+        </div>
       </div>
-      <Button onclick={() => onBack(EnumMenu.INITIAL)} text={"Voltar"} />
     </div>
   );
 }

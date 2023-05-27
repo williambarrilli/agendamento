@@ -13,6 +13,7 @@ export default function ButtonsView({ onClick }: ButtonViewProps) {
   return (
     <div className="container-buttons">
       <div>
+        <div className="divider"></div>
         <div className="content-buttons">
           <Button text="Agenda" onclick={() => onClick(EnumMenu.SELECTDATE)} />
         </div>
@@ -28,6 +29,7 @@ export default function ButtonsView({ onClick }: ButtonViewProps) {
             onclick={() => sendMessage(message)}
           />
         </div>
+        <div className="divider"></div>
       </div>
     </div>
   );

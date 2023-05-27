@@ -16,12 +16,15 @@ export default function SelectHourView({
 }: SelectHourViewProps) {
   return (
     <>
-      <div className={styles.container}>Selecione o horario</div>
       <div className={styles.container}>Data selecionada: {dateSelected}</div>
-      <div className={styles.container}>Horarios disponiveis</div>
+      <div className={styles.container}>Horarios disponiveis:</div>
       <ListComponents setHourSelected={(value) => setHourSelected(value)} />
-
-      <Button onclick={() => onBack(EnumMenu.SELECTDATE)} text={"Voltar"} />
+      <div className={styles.container}>Selecione o horario!</div>
+      <Button
+        styleOption="secondary"
+        onclick={() => onBack(EnumMenu.SELECTDATE)}
+        text={"Voltar"}
+      />
     </>
   );
 }
