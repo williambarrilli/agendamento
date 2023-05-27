@@ -1,3 +1,3 @@
 export default function Input() {
-  return <div>home</div>;
+  return <input>qual seu nome</input>;
 }
