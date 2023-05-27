@@ -1,23 +1,16 @@
-import "./App.css";
+import "./styles.css";
 
 interface ButtonProps {
   text: string;
   onclick: () => void;
-  hierarchy?:
-    | "primary"
-    | "secondary-color"
-    | "secondary-gray"
-    | "secondary-blue";
 }
 
-export default function Button({
-  text,
-  onclick,
-  hierarchy = "primary",
-}: ButtonProps) {
+export default function Button({ text, onclick }: ButtonProps) {
   return (
-    <div className="App">
-      <button onClick={() => onclick()}>{text}</button>
+    <div>
+      <button className="button" onClick={() => onclick()}>
+        {text}
+      </button>
     </div>
   );
 }
