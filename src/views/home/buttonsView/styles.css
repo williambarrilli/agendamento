@@ -4,6 +4,10 @@
 }
 .content-buttons {
   margin: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .divider {
   border-top: 3px solid #d1966a;
