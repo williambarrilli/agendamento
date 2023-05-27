@@ -1,8 +1,8 @@
 import styles from "./styles.module.scss";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import Button from "../../components/button";
-import { EnumMenu } from "../../types/enums";
+import Button from "../../../components/button";
+import { EnumMenu } from "../../../types/enums";
 
 export interface CalendarViewProps {
   setDateSelected: (value: string) => void;

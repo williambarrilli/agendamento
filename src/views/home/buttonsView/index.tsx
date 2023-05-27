@@ -1,6 +1,6 @@
-import Button from "../../components/button";
-import { EnumMenu } from "../../types/enums";
-import { sendMessage } from "../../utils/send-message-whats-app";
+import Button from "../../../components/button";
+import { EnumMenu } from "../../../types/enums";
+import { sendMessage } from "../../../utils/send-message-whats-app";
 import "./styles.css";
 
 export interface ButtonViewProps {

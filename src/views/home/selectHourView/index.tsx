@@ -1,6 +1,6 @@
-import Button from "../../components/button";
-import ListComponents from "../../components/list";
-import { EnumMenu } from "../../types/enums";
+import Button from "../../../components/button";
+import ListComponents from "../../../components/list";
+import { EnumMenu } from "../../../types/enums";
 import styles from "./styles.module.scss";
 
 interface SelectHourViewProps {

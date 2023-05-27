@@ -1,9 +1,9 @@
 import { useState } from "react";
 import styles from "./styles.module.scss";
 import bannerImage from "../../assets/bannerImage.jpg";
-import CalendarView from "../../views/calendarView";
-import SelectHourView from "../../views/selectHourView";
-import ButtonsView from "../../views/buttonsView";
+import CalendarView from "../../views/home/calendarView";
+import SelectHourView from "../../views/home/selectHourView";
+import ButtonsView from "../../views/home/buttonsView";
 import { EnumMenu } from "../../types/enums";
 import ModalComponent from "../../components/modal";
 import Button from "../../components/button";
