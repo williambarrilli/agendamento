@@ -3,6 +3,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Button from "../../components/button";
 import { EnumMenu } from "../../types/enums";
+import moment from "moment";
 
 export interface CalendarViewProps {
   setDateSelected: (value: string) => void;
@@ -22,8 +23,8 @@ export default function CalendarView({
       </header>
       <div className="content">
         <Calendar
-          onClickDay={(value) => setDateSelected(value?.toLocaleDateString())}
-          value={dateSelected}
+          onClickDay={(value) => setDateSelected(value.toLocaleDateString())}
+          value={new Date()}
           minDate={new Date()}
         />
       </div>
