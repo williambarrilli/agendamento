@@ -1,10 +1,13 @@
+import React, { useState } from "react";
 import "./styles.css";
 import bannerImage from "../../assets/bannerImage.jpg";
 import Button from "../../components/button";
 import CalendarView from "../../views/calendarView";
+import SelectHourView from "../../views/selectHourView";
 
 export default function Home() {
-  const calendar = false;
+  const [modalHour, setModalHour] = useState(true);
+  const calendar = true;
   return (
     <div className="container">
       <div>
@@ -17,6 +20,7 @@ export default function Home() {
         <Button text="Agende" onclick={() => alert("batata")} />
       </div>
       {calendar && <CalendarView />}
+      <SelectHourView isOpen={modalHour} />
     </div>
   );
 }
