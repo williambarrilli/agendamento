@@ -4,10 +4,22 @@
 //onChange = função para quando for digitado
 // placeholder
 
-export default function Input() {
+export default function Input(
+  type: string,
+  value: string,
+  placeholder: string,
+  onChange: Function,
+  label: string
+) {
   return (
     <div>
-      <input type="text" name="input" value=""></input>
+      <h1>{label}</h1>
+      <input
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+      ></input>
     </div>
   );
 }

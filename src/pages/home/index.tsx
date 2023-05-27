@@ -8,6 +8,7 @@ import { EnumMenu } from "../../types/enums";
 import ModalComponent from "../../components/modal";
 import Button from "../../components/button";
 import { sendMessage } from "../../utils/send-message-whats-app";
+import Input from "../../components/input";
 
 export default function Home() {
   const [typeBody, setTypeBody] = useState<EnumMenu>(EnumMenu.INITIAL);
