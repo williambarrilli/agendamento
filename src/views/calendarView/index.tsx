@@ -3,7 +3,6 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Button from "../../components/button";
 import { EnumMenu } from "../../types/enums";
-import moment from "moment";
 
 export interface CalendarViewProps {
   setDateSelected: (value: string) => void;

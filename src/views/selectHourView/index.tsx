@@ -14,6 +14,7 @@ export default function SelectHourView({
   dateSelected,
   onBack,
 }: SelectHourViewProps) {
+  // TODO: estilizar textos
   return (
     <>
       <div className={styles.container}>Data selecionada: {dateSelected}</div>
