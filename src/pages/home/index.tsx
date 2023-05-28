@@ -4,11 +4,12 @@ import bannerImage from "../../assets/bannerImage.jpg";
 import CalendarView from "../../views/home/calendarView";
 import SelectHourView from "../../views/home/selectHourView";
 import ButtonsView from "../../views/home/buttonsView";
-import { EnumMenu } from "../../types/enums";
+import { EnumMenu, EnumStatus } from "../../types/enums";
 import ModalComponent from "../../components/modal";
 import Button from "../../components/button";
 import { sendMessage } from "../../utils/send-message-whats-app";
 import Input from "../../components/input";
+import { sendSolicitationReserved } from "../../controllers/firestore";
 
 export default function Home() {
   const [typeBody, setTypeBody] = useState<EnumMenu>(EnumMenu.INITIAL);
@@ -61,11 +62,14 @@ export default function Home() {
     return types[typeBody] || types[EnumMenu.INITIAL];
   };
 
-  const onSend = () => {
-    sendMessage(
-      `Olá estou entrando em contato para agendar um serviço no dia ${dateSelected} as ${hourSelected} poderia confirmar disponibilidade?`,
-      "5554981559983"
-    );
+  const onConfirm = () => {
+    sendSolicitationReserved("MLJ0k39Q9ELsH78X3lHW", {
+      name: "rodolfo",
+      phone: "54981559983",
+      date: dateSelected,
+      hour: hourSelected,
+      status: EnumStatus.PENDENT,
+    });
     setModalConfirm(false);
     setDateSelected("");
     setHourSelected("");
@@ -96,7 +100,7 @@ export default function Home() {
                 />
               </div>
               <div className={styles["footer-button-box"]}>
-                <Button onclick={() => onSend()} text={"Confirmar"} />
+                <Button onclick={() => onConfirm()} text={"Confirmar"} />
               </div>
             </div>
           </div>

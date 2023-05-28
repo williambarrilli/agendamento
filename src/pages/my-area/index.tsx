@@ -1,31 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import Button from "../../components/button";
 import ListComponents from "../../components/listComponents";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { getSolicitationList } from "../../controllers/firestore";
+import { Shop } from "../../types/shop";
 
 export default function MyArea() {
-  const listTest = [
-    {
-      name: "William",
-      phone: "5554981559983",
-      date: "27/08/2023",
-      hour: "16:00",
-    },
-    {
-      name: "Mariana",
-      phone: "5466767343",
-      date: "27/08/2023",
-      hour: "14:00",
-    },
-    {
-      name: "Juliana",
-      phone: "5466767343",
-      date: "27/08/2023",
-      hour: "10:00",
-    },
-  ];
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const solicitationList = await getSolicitationList(
+          "MLJ0k39Q9ELsH78X3lHW"
+        );
+        setList(solicitationList);
+      } catch (error) {
+        console.log("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className={styles.container}>
       <h2>Minhas solicitações</h2>
@@ -36,7 +35,7 @@ export default function MyArea() {
           value={new Date()}
           minDate={new Date()}
         />
-        <ListComponents listItems={listTest} />
+        <ListComponents listItems={list} />
       </div>
     </div>
   );
