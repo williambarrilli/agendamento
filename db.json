@@ -1,34 +1,48 @@
 {
-  "budgets": [
+  "shops": [
     {
-      "id": 1,
-      "name": "Carrots",
-      "amount": "1500",
-      "reminder": false
+      "name": "Juliana Silva",
+      "url": "juliana-silva",
+      "phone": "1500",
+      "instagram": "",
+      "reservedList": [
+        {
+          "name": "rodolfo",
+          "phone": "54981559983",
+          "date": "25/07/2023",
+          "hour": "16:00",
+          "status": "aproved"
+        },
+        {
+          "name": "Felipe",
+          "phone": "54981559983",
+          "date": "25/07/2023",
+          "hour": "15:00",
+          "status": "reproved"
+        },
+        {
+          "name": "Wilson",
+          "phone": "54981559983",
+          "date": "25/07/2023",
+          "hour": "12:00",
+          "status": "pendent"
+        }
+      ],
+      "solicitationList": []
     },
     {
-      "id": 2,
-      "name": "Laundry",
-      "amount": "2500",
-      "reminder": true
+      "name": "william Barrilli",
+      "url": "william",
+      "phone": "1500",
+      "reservedList": [],
+      "solicitationList": []
     },
     {
-      "id": 3,
-      "name": "Ginger",
-      "amount": "1000",
-      "reminder": true
-    },
-    {
-      "id": 4,
-      "name": "Electricity",
-      "amount": "10000",
-      "reminder": true
-    },
-    {
-      "name": "Water",
-      "amount": "13000",
-      "reminder": true,
-      "id": 5
+      "name": "mariana lais",
+      "url": "juliana-silva",
+      "phone": "1500",
+      "reservedList": [],
+      "solicitationList": []
     }
   ]
 }

@@ -5,3 +5,9 @@ export enum EnumMenu {
   SELECTHOUR = "SELECTHOUR",
   MYSERVICES = "MYSERVICES",
 }
+
+export enum EnumStatus {
+  APROVED = "aproved",
+  REPROVED = "reproved",
+  PENDENT = "pendent",
+}
