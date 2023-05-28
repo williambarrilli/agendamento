@@ -19,20 +19,19 @@ export default function CalendarView({
     <div className={styles.container}>
       <div>
         <div>
-          <header>
-            <h4 className={styles.text}>Escolha uma data:</h4>
-          </header>
+          <h4 className={styles.text}>Escolha uma data:</h4>
         </div>
-        <div className="content">
+        <div className={styles.content}>
           <Calendar
             onClickDay={(value) => setDateSelected(value.toLocaleDateString())}
             value={new Date()}
             minDate={new Date()}
           />
         </div>
-        <div className="content-buttons">
+        <div className={styles.contentButtons}>
           <Button
             styleOption="secondary"
+            size="md"
             onclick={() => onBack(EnumMenu.INITIAL)}
             text={"Voltar"}
           />

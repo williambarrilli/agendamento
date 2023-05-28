@@ -1,28 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
-import Button from "../../components/button";
+import ListComponents from "../../components/listComponents";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import { getSolicitationList } from "../../controllers/firestore";
 
 export default function MyArea() {
-  const [code, setCode] = useState("");
+  const [list, setList] = useState([]);
 
-  const validCodes = ["12345"];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const solicitationList = await getSolicitationList(
+          "MLJ0k39Q9ELsH78X3lHW"
+        );
+        setList(solicitationList);
+      } catch (error) {
+        console.log("Error fetching data:", error);
+      }
+    };
 
-  const validCode = () => {
-    if (!!validCodes.includes(code)) return true;
-  };
+    fetchData();
+  }, []);
 
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
-        <label>Digite seu codigo de acesso</label>
-        <div className={styles["input-box"]}>
-          <input
-            type="password"
-            onChange={(e) => setCode(e.target.value)}
-            value={code}
+      <div>
+        <h2 className={styles.text}>Minhas solicitações</h2>
+        <div className={styles.content}>
+          <Calendar
+            onClickDay={(value) => console.log(value.toLocaleDateString())}
+            value={new Date()}
+            minDate={new Date()}
           />
+          <ListComponents listItems={list} />
         </div>
-        <Button onclick={() => validCode()} text="Login" />
       </div>
     </div>
   );

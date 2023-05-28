@@ -1,15 +1,18 @@
 .container {
-  display: flex;
+  display:flex;
   justify-content: center;
 }
 
-.text{
+.text {
   font-family: Didot, serif;
   text-align: center;
   color: #ac7246;
-  font-size: 20px;
+  font-size: 23px;
 }
-.content-buttons {
+.contentButtons {
   display: flex;
-  
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
 }

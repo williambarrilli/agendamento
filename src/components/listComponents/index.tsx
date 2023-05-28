@@ -1,0 +1,68 @@
+import { updateSolicitationReserve } from "../../controllers/firestore";
+import { EnumStatus } from "../../types/enums";
+import { Reserved } from "../../types/reserved";
+import { sendMessage } from "../../utils/send-message-whats-app";
+import Button from "../button";
+import styles from "./styles.module.scss";
+
+interface ListComponentsProps {
+  listItems: Reserved[];
+}
+
+export default function ListComponents({ listItems }: ListComponentsProps) {
+  const onConfirm = (item: Reserved, index: number) => {
+    item.status = EnumStatus.APROVED;
+    updateSolicitationReserve("MLJ0k39Q9ELsH78X3lHW", item, index);
+    const messageConfirm = `Olá, sua solicitação de agendamento foi confirmada, te aguardo no dia ${item.date} as ${item.hour} horas.`;
+    sendMessage(messageConfirm, item.phone);
+  };
+  const onReject = (item: Reserved, index: number) => {
+    item.status = EnumStatus.REPROVED;
+    updateSolicitationReserve("MLJ0k39Q9ELsH78X3lHW", item, index);
+    const messageReject = `Olá, não estarei disponivel neste horário, podemos agendar um outro horário?`;
+    sendMessage(messageReject, item.phone);
+  };
+
+  return (
+    <div className={styles.container}>
+      {listItems.map((item, index) => (
+        <div key={index} className={styles.card}>
+          <div className={styles.row}>
+            <div className={styles.text}>Nome: </div> {item.name}
+            <div className={styles.text}>{"| Data: "} </div>
+            {item.date}
+            <div className={styles.text}>{"| Hora: "} </div>
+            {item.hour}
+          </div>
+          <div className={styles.row}>
+            <div>
+              <Button
+                styleOption="secondary"
+                size="sm"
+                text="Rejeitar"
+                onclick={() => onReject(item, index)}
+              />
+            </div>
+            <div className={styles.rowBotton}>
+              <Button
+                styleOption="secondary"
+                size="sm"
+                text="Confirmar"
+                onclick={() => onConfirm(item, index)}
+              />
+            </div>
+            <div className={styles.rowBotton}>
+              <Button
+                styleOption="secondary"
+                size="sm"
+                text="Entrar em contato"
+                onclick={() => sendMessage("Olá tudo bem?", "5554981559983")}
+              />
+            </div>
+          </div>
+          <div className="bold"></div>
+        </div>
+      ))}
+    </div>
+  );
+}

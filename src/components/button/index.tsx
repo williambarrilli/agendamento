@@ -4,17 +4,21 @@ interface ButtonProps {
   text: string;
   onclick: () => void;
   styleOption?: "primary" | "secondary";
+  size?: "sm" | "md" | "lg" | "xl";
 }
 
 export default function Button({
   text,
   onclick,
   styleOption = "primary",
+  size = "md",
 }: ButtonProps) {
-  const buttonClassName = `button ${styleOption}`;
   return (
     <div>
-      <button className={buttonClassName} onClick={() => onclick()}>
+      <button
+        className={`button ${styleOption} ${size}`}
+        onClick={() => onclick()}
+      >
         {text}
       </button>
     </div>

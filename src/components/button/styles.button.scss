@@ -1,22 +1,41 @@
 .button {
-  height: 50px;
-  font-size: 20px;
   text-align: center;
   cursor: pointer;
   font-family: Didot, serif;
 }
 .primary {
-  width: 150px;
-  background-color: #d1966a;
+  background-color: #be885e;
   color: #e6eef6;
   border: none;
 }
 
 .secondary {
-  width: 100px;
   background-color: white;
-  color:#d1966a;
-  border: solid ;
+  color: #d1966a;
+  border: 1px solid;
   border-color: #d1966a;
-  margin-left: 30%;
+}
+
+.sm {
+  height: 25px;
+  font-size: 18px;
+}
+
+.md {
+  padding: 5px 15px;
+  height: 40px;
+  font-size: 20px;
+}
+
+.lg {
+  padding: 5px 15px;
+  height: 40px;
+  width: 185px;
+  font-size: 22px;
+}
+
+.xl {
+  padding: 16px 28px;
+  height: 40px;
+  font-size: 20px;
 }
