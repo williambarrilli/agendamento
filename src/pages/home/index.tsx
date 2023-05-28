@@ -91,6 +91,7 @@ export default function Home() {
                 <Button
                   onclick={() => setModalConfirm(false)}
                   text={"Voltar"}
+                  styleOption="secondary"
                 />
               </div>
               <div className={styles["footer-button-box"]}>

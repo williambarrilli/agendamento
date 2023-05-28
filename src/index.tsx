@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <Home />
-    {/* <MyArea /> */}
+    {/* <Home /> */}
+    <MyArea />
   </React.StrictMode>
 );

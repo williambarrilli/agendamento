@@ -19,7 +19,7 @@ export default function Input(
         value={value}
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
-      ></input>
+      />
     </div>
   );
 }
