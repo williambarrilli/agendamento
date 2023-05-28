@@ -1,34 +1,53 @@
+import { useMemo } from "react";
+import { Reserved } from "../../types/reserved";
 import styles from "./styles.module.scss";
 import objStr from "obj-str";
 
 interface ListComponentsProps {
   setHourSelected: (value: string) => void;
+  reservedList: Reserved[];
 }
 
 export default function ListComponents({
   setHourSelected,
+  reservedList,
 }: ListComponentsProps) {
   // TODO: Componente de listagem recebe a lista como parametro
-  const horarios = [
-    { hour: "08:00", reserved: true },
-    { hour: "09:00", reserved: false },
-    { hour: "10:00", reserved: false },
-    { hour: "11:00", reserved: false },
-    { hour: "14:00", reserved: true },
-    { hour: "15:00", reserved: false },
-    { hour: "16:00", reserved: false },
-    { hour: "17:00", reserved: true },
-  ];
 
+  const horarios = useMemo(
+    () => [
+      "08:00",
+      "09:00",
+      "10:00",
+      "11:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+    ],
+    []
+  );
+
+  const listHours = useMemo(() => {
+    console.log(reservedList);
+
+    if (!horarios.length || !reservedList.length) return [];
+    return horarios.map((hour) => {
+      const hasReservation = reservedList?.some(
+        (reserva) => reserva.hour === hour
+      );
+      return { hour, hasReservation };
+    });
+  }, [reservedList, horarios]);
   return (
     <div className={styles.container}>
-      {horarios.map((horario, index) => (
+      {listHours.map((horario, index) => (
         <button
           className={`${objStr({
             [styles["itemHour"]]: true,
-            [styles["itemHour-reserved"]]: horario.reserved,
+            [styles["itemHour-reserved"]]: horario,
           })}`}
-          disabled={horario.reserved}
+          disabled={horario.hasReservation}
           key={index}
           onClick={() => setHourSelected(horario.hour)}
         >

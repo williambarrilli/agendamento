@@ -1,17 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, updateDoc } from "firebase/firestore";
 import { firebaseConfig } from "../init-firebase";
-import {
-  collection,
-  doc,
-  addDoc,
-  getDocs,
-  updateDoc,
-  query,
-  where,
-  getDoc,
-} from "firebase/firestore";
-import { Shop } from "../types/shop";
+import { collection, doc, addDoc, getDoc } from "firebase/firestore";
 import { Reserved } from "../types/reserved";
 import { EnumStatus } from "../types/enums";
 
@@ -44,6 +34,15 @@ export const getSolicitationList = async (shopId: string) => {
   }
 };
 
+export const getReservedHours = async (shopId: string) => {
+  const documentRef = doc(db, "shops", shopId);
+  const docSnapshot = await getDoc(documentRef);
+  if (docSnapshot.exists()) {
+    const documentData = docSnapshot.data();
+    return documentData.reservedList || [];
+  }
+};
+
 export const sendSolicitationReserved = async (
   shopId: string,
   reserved: Reserved
@@ -55,10 +54,12 @@ export const sendSolicitationReserved = async (
     const docSnapshot = await getDoc(documentRef);
     if (docSnapshot.exists()) {
       const documentData = docSnapshot.data();
+
       documentData.solicitationList.push(reserved);
-      // await updateDoc(documentRef, {
-      //   solicitationList: documentData?.solicitationList,
-      // });
+
+      await updateDoc(documentRef, {
+        solicitationList: documentData?.solicitationList,
+      });
     } else {
       console.log("Document not found");
     }
@@ -77,14 +78,16 @@ export const updateSolicitationReserve = async (
     const docSnapshot = await getDoc(documentRef);
     if (docSnapshot.exists()) {
       const documentData = docSnapshot.data();
+
       documentData.solicitationList[index] = reserved;
+
       if (reserved.status === EnumStatus.APROVED) {
         documentData?.reservedList.push(reserved);
       }
-      // await updateDoc(documentRef, {
-      //   solicitationList: documentData.solicitationList,
-      //   reservedList: documentData.reservedLis,
-      // });
+      await updateDoc(documentRef, {
+        solicitationList: documentData.solicitationList,
+        reservedList: documentData.reservedList,
+      });
     } else {
       console.log("Document not found");
     }

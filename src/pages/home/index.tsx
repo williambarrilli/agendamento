@@ -63,7 +63,7 @@ export default function Home() {
 
   const onConfirm = () => {
     sendSolicitationReserved("MLJ0k39Q9ELsH78X3lHW", {
-      name: "rodolfo",
+      name: "teste",
       phone: "54981559983",
       date: dateSelected,
       hour: hourSelected,
