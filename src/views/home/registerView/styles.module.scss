@@ -1,11 +1,16 @@
 .container {
-  display:flex;
-  margin-top: 20px;
-  justify-content: center;
+  
+  margin-top: 40%;
+  
 }
 
 .content {
-  padding: 10px;
+  display: flex;
+  justify-content: center;
+align-items: center;
+  width: 100%;
+  margin-top: 10%;
+  
 }
 .text {
   font-family: Didot, serif;

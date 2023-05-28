@@ -15,17 +15,23 @@ export default function ButtonsView({ onClick }: ButtonViewProps) {
       <div>
         <div className="divider"></div>
         <div className="content-buttons">
-          <Button text="Agenda" onclick={() => onClick(EnumMenu.SELECTDATE)} />
+          <Button
+            text="Agenda"
+            size="lg"
+            onclick={() => onClick(EnumMenu.SELECTDATE)}
+          />
         </div>
         <div className="content-buttons">
           <Button
+            size="lg"
             text="Reservas"
             onclick={() => onClick(EnumMenu.MYSERVICES)}
           />
         </div>
         <div className="content-buttons">
           <Button
-            text="Entre em contato"
+            size="lg"
+            text="Contato"
             onclick={() => sendMessage(message, "5554981559983")}
           />
         </div>

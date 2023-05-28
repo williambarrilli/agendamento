@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
-import Button from "../../components/button";
 import ListComponents from "../../components/listComponents";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { getSolicitationList } from "../../controllers/firestore";
-import { Shop } from "../../types/shop";
 
 export default function MyArea() {
   const [list, setList] = useState([]);
@@ -27,15 +25,16 @@ export default function MyArea() {
 
   return (
     <div className={styles.container}>
-      <h2>Minhas solicitações</h2>
-
-      <div className={styles.content}>
-        <Calendar
-          onClickDay={(value) => console.log(value.toLocaleDateString())}
-          value={new Date()}
-          minDate={new Date()}
-        />
-        <ListComponents listItems={list} />
+      <div>
+        <h2 className={styles.text}>Minhas solicitações</h2>
+        <div className={styles.content}>
+          <Calendar
+            onClickDay={(value) => console.log(value.toLocaleDateString())}
+            value={new Date()}
+            minDate={new Date()}
+          />
+          <ListComponents listItems={list} />
+        </div>
       </div>
     </div>
   );

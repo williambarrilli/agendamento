@@ -22,14 +22,28 @@ export default function ListComponents({ listItems }: ListComponentsProps) {
         <div key={index} className={styles.card}>
           <div className={styles.row}>
             <div className={styles.text}>Nome: </div> {item.name}
-            <div className={styles.text}>{"Data: "} </div>
+            <div className={styles.text}>{"| Data: "} </div>
             {item.date}
-            <div className={styles.text}>{"Hora: "} </div>
+            <div className={styles.text}>{"| Hora: "} </div>
             {item.hour}
           </div>
           <div className={styles.row}>
-            <Button text="Confirmar" onclick={() => onConfirm(item)} />
-            <Button text="Rejeitar" onclick={() => onReject(item)} />
+            <div>
+              <Button
+                styleOption="secondary"
+                size="sm"
+                text="Rejeitar"
+                onclick={() => onReject(item)}
+              />
+            </div>
+            <div className={styles.rowBotton}>
+              <Button
+                styleOption="secondary"
+                size="sm"
+                text="Confirmar"
+                onclick={() => onConfirm(item)}
+              />
+            </div>
           </div>
           <div className="bold"></div>
         </div>
