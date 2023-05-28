@@ -63,7 +63,8 @@ export default function Home() {
 
   const onSend = () => {
     sendMessage(
-      `Olá estou entrando em contato para agendar um serviço no dia ${dateSelected} as ${hourSelected} poderia confirmar disponibilidade?`
+      `Olá estou entrando em contato para agendar um serviço no dia ${dateSelected} as ${hourSelected} poderia confirmar disponibilidade?`,
+      "5554981559983"
     );
     setModalConfirm(false);
     setDateSelected("");

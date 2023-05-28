@@ -26,7 +26,7 @@ export default function ButtonsView({ onClick }: ButtonViewProps) {
         <div className="content-buttons">
           <Button
             text="Entre em contato"
-            onclick={() => sendMessage(message)}
+            onclick={() => sendMessage(message, "5554981559983")}
           />
         </div>
         <div className="divider"></div>

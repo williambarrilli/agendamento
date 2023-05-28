@@ -1,8 +1,5 @@
-export const sendMessage = (textMessage: string) => {
+export const sendMessage = (textMessage: string, phone: string) => {
   const message = encodeURIComponent(textMessage);
-  const phoneNumber = "5554981559983";
 
-  window.open(
-    `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`
-  );
+  window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${message}`);
 };

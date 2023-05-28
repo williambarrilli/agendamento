@@ -23,7 +23,7 @@ export default function CalendarView({
             <h4 className={styles.text}>Escolha uma data:</h4>
           </header>
         </div>
-        <div className="content">
+        <div className={styles.content}>
           <Calendar
             onClickDay={(value) => setDateSelected(value.toLocaleDateString())}
             value={new Date()}
