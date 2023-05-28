@@ -28,15 +28,16 @@ export default function MyArea() {
   ];
   return (
     <div className={styles.container}>
-      <h2>Minhas solicitações</h2>
-
-      <div className={styles.content}>
-        <Calendar
-          onClickDay={(value) => console.log(value.toLocaleDateString())}
-          value={new Date()}
-          minDate={new Date()}
-        />
-        <ListComponents listItems={listTest} />
+      <div>
+        <h2 className={styles.text}>Minhas solicitações</h2>
+        <div className={styles.content}>
+          <Calendar
+            onClickDay={(value) => console.log(value.toLocaleDateString())}
+            value={new Date()}
+            minDate={new Date()}
+          />
+          <ListComponents listItems={listTest} />
+        </div>
       </div>
     </div>
   );

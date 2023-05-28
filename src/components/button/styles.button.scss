@@ -1,11 +1,10 @@
 .button {
-  font-size: 20px;
   text-align: center;
   cursor: pointer;
   font-family: Didot, serif;
 }
 .primary {
-  background-color: #d1966a;
+  background-color: #be885e;
   color: #e6eef6;
   border: none;
 }
@@ -13,26 +12,30 @@
 .secondary {
   background-color: white;
   color: #d1966a;
-  border: solid;
+  border: 1px solid;
   border-color: #d1966a;
 }
 
 .sm {
-  padding: 5px 8px;
-  height: 36px;
+  height: 25px;
+  font-size: 18px;
 }
 
 .md {
-  padding: 10px 16px;
+  padding: 5px 15px;
   height: 40px;
+  font-size: 20px;
 }
 
 .lg {
-  padding: 10px 18px;
-  height: 44px;
+  padding: 5px 15px;
+  height: 40px;
+  width: 185px;
+  font-size: 22px;
 }
 
 .xl {
   padding: 16px 28px;
-  height: 48px;
+  height: 40px;
+  font-size: 20px;
 }

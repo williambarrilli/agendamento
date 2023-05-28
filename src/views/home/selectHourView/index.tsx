@@ -21,11 +21,14 @@ export default function SelectHourView({
       <div className={styles.container}>Horarios disponiveis:</div>
       <ListComponents setHourSelected={(value) => setHourSelected(value)} />
       <div className={styles.container}>Selecione o horario!</div>
-      <Button
-        styleOption="secondary"
-        onclick={() => onBack(EnumMenu.SELECTDATE)}
-        text={"Voltar"}
-      />
+      <div className={styles.contentButton}>
+        <Button
+          size="md"
+          styleOption="secondary"
+          onclick={() => onBack(EnumMenu.SELECTDATE)}
+          text={"Voltar"}
+        />
+      </div>
     </>
   );
 }
