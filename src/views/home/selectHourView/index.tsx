@@ -41,7 +41,7 @@ export default function SelectHourView({
     <>
       <div className={styles.container}>Data selecionada: {dateSelected}</div>
       <div className={styles.container}>Horarios disponiveis:</div>
-      {listReserveDate?.length && (
+      {!!listReserveDate?.length && (
         <>
           <ListComponents
             reservedList={listReserveDate}
