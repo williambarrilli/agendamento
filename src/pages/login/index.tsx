@@ -1,14 +1,16 @@
 import { useState } from "react";
 import styles from "./styles.module.scss";
-import Button from "../../../components/button";
+import Button from "../../components/button";
+import { useNavigate } from "react-router-dom";
 
-export default function MyArea() {
+export default function Login() {
   const [code, setCode] = useState("");
+  const navigate = useNavigate();
 
-  const validCodes = ["12345"];
+  const validCodes = ["123"];
 
   const validCode = () => {
-    if (!!validCodes.includes(code)) return true;
+    if (!!validCodes.includes(code)) navigate("/minha-area");
   };
 
   return (
