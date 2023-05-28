@@ -68,12 +68,12 @@ export const sendSolicitationReserved = async (
 };
 
 export const updateSolicitationReserve = async (
+  shopId: string,
   reserved: Reserved,
-  index: number,
-  shopId: string
+  index: number
 ) => {
   try {
-    const documentRef = doc(db, "shops", "MLJ0k39Q9ELsH78X3lHW");
+    const documentRef = doc(db, "shops", shopId);
     const docSnapshot = await getDoc(documentRef);
     if (docSnapshot.exists()) {
       const documentData = docSnapshot.data();

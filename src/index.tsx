@@ -11,7 +11,6 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     {/* <Home /> */}
-    {/* <MyArea /> */}
-    <RegisterView />
+    <MyArea />
   </React.StrictMode>
 );
