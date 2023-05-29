@@ -41,13 +41,11 @@ export default function SelectHourView({
     <>
       <div className={styles.container}>Data selecionada: {dateSelected}</div>
       <div className={styles.container}>Horarios disponiveis:</div>
-      <>
-        <ListComponents
-          reservedList={listReserveDate}
-          setHourSelected={(value) => setHourSelected(value)}
-        />
-        <div className={styles.container}>Selecione o horario!</div>
-      </>
+      <ListComponents
+        reservedList={listReserveDate}
+        setHourSelected={(value) => setHourSelected(value)}
+      />
+      <div className={styles.container}>Selecione o horario!</div>
 
       <Button
         size="md"

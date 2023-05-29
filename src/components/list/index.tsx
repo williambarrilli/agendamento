@@ -29,16 +29,15 @@ export default function ListComponents({
   );
 
   const listHours = useMemo(() => {
-    console.log(reservedList);
-
-    if (!reservedList.length)
+    if (!reservedList.length) {
       return horarios.map((item) => {
         return { hour: item, hasReservation: false };
       });
+    }
     return horarios.map((hour) => {
-      const hasReservation = reservedList?.some(
+      const hasReservation = !!reservedList?.filter(
         (reserva) => reserva.hour === hour
-      );
+      ).length;
       return { hour, hasReservation };
     });
   }, [reservedList, horarios]);
@@ -48,7 +47,7 @@ export default function ListComponents({
         <button
           className={`${objStr({
             [styles["itemHour"]]: true,
-            [styles["itemHour-reserved"]]: horario,
+            [styles["itemHour-reserved"]]: !!horario.hasReservation,
           })}`}
           disabled={horario.hasReservation}
           key={index}
