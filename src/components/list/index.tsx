@@ -31,7 +31,10 @@ export default function ListComponents({
   const listHours = useMemo(() => {
     console.log(reservedList);
 
-    if (!horarios.length || !reservedList.length) return [];
+    if (!reservedList.length)
+      return horarios.map((item) => {
+        return { hour: item, hasReservation: false };
+      });
     return horarios.map((hour) => {
       const hasReservation = reservedList?.some(
         (reserva) => reserva.hour === hour
