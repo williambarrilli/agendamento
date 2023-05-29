@@ -4,6 +4,7 @@ export enum EnumMenu {
   SELECTDATE = "SELECTDATE",
   SELECTHOUR = "SELECTHOUR",
   MYSERVICES = "MYSERVICES",
+  SELECTREGISTER = "SELECTREGISTER",
 }
 
 export enum EnumStatus {

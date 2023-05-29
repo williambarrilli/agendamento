@@ -7,8 +7,9 @@ import ButtonsView from "../../views/home/buttonsView";
 import { EnumMenu, EnumStatus } from "../../types/enums";
 import ModalComponent from "../../components/modal";
 import Button from "../../components/button";
-
 import { sendSolicitationReserved } from "../../controllers/firestore";
+import RegisterView from "../../views/home/registerView";
+import { string } from "yargs";
 
 export default function Home() {
   const [typeBody, setTypeBody] = useState<EnumMenu>(EnumMenu.INITIAL);
@@ -16,6 +17,8 @@ export default function Home() {
   const [dateSelected, setDateSelected] = useState<string>("");
   const [hourSelected, setHourSelected] = useState<string>("");
   const [modalConfirm, setModalConfirm] = useState<boolean>(false);
+  const [nome, setNome] = useState("");
+  const [phone, setPhone] = useState("");
 
   //----- fluxo Cliente
   // 1. Agendar
@@ -56,6 +59,7 @@ export default function Home() {
           onBack={(value: EnumMenu) => setTypeBody(value)}
         />
       ),
+      SELECTREGISTER: <></>,
       MYSERVICES: <></>,
     };
     return types[typeBody] || types[EnumMenu.INITIAL];

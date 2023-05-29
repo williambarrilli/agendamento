@@ -1,17 +1,15 @@
 import Input from "../../../components/input";
 import Button from "../../../components/button";
 import styles from "./styles.module.scss";
-import React, { useState } from "react";
-import { EnumMenu } from "../../../types/enums";
 
-export interface ButtonViewProps {
-  onClick: (value: EnumMenu) => void;
-}
-export default function RegisterView() {
-  const [nome, setNome] = useState("");
-  const [phone, setPhone] = useState("");
+export default function RegisterView(
+  name: string,
+  phone: string,
+  setName: (value: string) => void,
+  setPhone: (value: string) => void
+) {
   const handleNomeChange = (value: any) => {
-    setNome(value);
+    setName(value);
   };
   const handlePhoneChange = (value: any) => {
     setPhone(value);
@@ -23,7 +21,7 @@ export default function RegisterView() {
         <div>
           <Input
             type="text"
-            value={nome}
+            value={name}
             placeholder="Digite seu nome"
             label="Nome:"
             onChange={handleNomeChange}
@@ -32,7 +30,7 @@ export default function RegisterView() {
           <Input
             type="text"
             value={phone}
-            placeholder="(**)*****-****"
+            placeholder="(*)*-*"
             label="Telefone:"
             onChange={handlePhoneChange}
           />
