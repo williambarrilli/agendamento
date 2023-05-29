@@ -9,7 +9,6 @@ import ModalComponent from "../../components/modal";
 import Button from "../../components/button";
 import { sendSolicitationReserved } from "../../controllers/firestore";
 import RegisterView from "../../views/home/registerView";
-import { string } from "yargs";
 
 export default function Home() {
   const [typeBody, setTypeBody] = useState<EnumMenu>(EnumMenu.INITIAL);
@@ -17,7 +16,7 @@ export default function Home() {
   const [dateSelected, setDateSelected] = useState<string>("");
   const [hourSelected, setHourSelected] = useState<string>("");
   const [modalConfirm, setModalConfirm] = useState<boolean>(false);
-  const [nome, setNome] = useState("");
+  const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
 
   //----- fluxo Cliente
@@ -59,7 +58,15 @@ export default function Home() {
           onBack={(value: EnumMenu) => setTypeBody(value)}
         />
       ),
-      SELECTREGISTER: <></>,
+      SELECTREGISTER: (
+        <RegisterView
+          name={name}
+          phone={phone}
+          alterarName={(value) => setName(value)}
+          alterarPhone={(value) => setPhone(value)}
+          onConfirm={(value) => setTypeBody(value)}
+        />
+      ),
       MYSERVICES: <></>,
     };
     return types[typeBody] || types[EnumMenu.INITIAL];

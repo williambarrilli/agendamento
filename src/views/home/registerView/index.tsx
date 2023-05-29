@@ -1,19 +1,29 @@
 import Input from "../../../components/input";
 import Button from "../../../components/button";
 import styles from "./styles.module.scss";
+import { EnumMenu } from "../../../types/enums";
+export interface RegisterViewProps {
+  name: string;
+  phone: string;
+  alterarName: (value: string) => void;
+  alterarPhone: (value: string) => void;
+  onConfirm: (value: EnumMenu) => void;
+}
 
-export default function RegisterView(
-  name: string,
-  phone: string,
-  setName: (value: string) => void,
-  setPhone: (value: string) => void
-) {
+export default function RegisterView({
+  name,
+  phone,
+  alterarName,
+  alterarPhone,
+  onConfirm,
+}: RegisterViewProps) {
   const handleNomeChange = (value: any) => {
-    setName(value);
+    alterarName(value);
   };
   const handlePhoneChange = (value: any) => {
-    setPhone(value);
+    alterarPhone(value);
   };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.text}> Registro do cliente </h1>
@@ -30,7 +40,7 @@ export default function RegisterView(
           <Input
             type="text"
             value={phone}
-            placeholder="(*)*-*"
+            placeholder="()-*"
             label="Telefone:"
             onChange={handlePhoneChange}
           />
@@ -39,7 +49,7 @@ export default function RegisterView(
             styleOption="secondary"
             text="Continuar"
             size="md"
-            onclick={() => alert} //onClick(EnumMenu.SELECTDATE) Eu queria por assim esse caralho p ir pra agenda mas aqui não da certo igual da no buttonsView
+            onclick={() => onConfirm(EnumMenu.SELECTDATE)} //onClick(EnumMenu.SELECTDATE) Eu queria por assim esse caralho p ir pra agenda mas aqui não da certo igual da no buttonsView
           />
         </div>
       </div>

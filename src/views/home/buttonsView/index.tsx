@@ -18,7 +18,7 @@ export default function ButtonsView({ onClick }: ButtonViewProps) {
           <Button
             text="Agenda"
             size="lg"
-            onclick={() => onClick(EnumMenu.SELECTDATE)}
+            onclick={() => onClick(EnumMenu.SELECTREGISTER)}
           />
         </div>
         <div className="content-buttons">
