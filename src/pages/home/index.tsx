@@ -74,8 +74,8 @@ export default function Home() {
 
   const onConfirm = () => {
     sendSolicitationReserved("MLJ0k39Q9ELsH78X3lHW", {
-      name: "teste",
-      phone: "54981559983",
+      name: name,
+      phone: phone,
       date: dateSelected,
       hour: hourSelected,
       status: EnumStatus.PENDENT,
@@ -83,7 +83,10 @@ export default function Home() {
     setModalConfirm(false);
     setDateSelected("");
     setHourSelected("");
-    alert("ok");
+    setName("");
+    setPhone("");
+
+    alert("Solicitação de reserva enviada");
     setTypeBody(EnumMenu.INITIAL);
   };
 
