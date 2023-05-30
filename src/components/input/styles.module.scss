@@ -3,36 +3,15 @@
   cursor: pointer;
   font-family: Didot, serif;
   border: 1px solid #be885e;
-  background:#ffffff5e;
+  background: #ffffff5e;
   color: white;
   width: 300px;
   height: 30px;
   font-size: 15px;
-  
 }
 .text {
   font-family: Didot, serif;
-  
+
   color: #ac7246;
   font-size: 20px;
 }
-
-// export const Container = styled.div`
-//   width: 100%;
-//   margin: 8px 5px;
-// `;
-
-// export const InputStyle = styled.input`
-//   width: ${(props) => props.width || 500}px;
-//   padding: 12px 20px;
-//   text-align: center;
-//   border: 1px solid #0a1a35;
-//   background: transparent;
-//   border-radius: 1px;
-//   box-sizing: border-box;
-// `;
-
-// export const Label = styled.label`
-//   width: 50%;
-//   margin: 8px 5px;
-// `;

@@ -26,7 +26,7 @@ export default function RegisterView({
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.text}> Registro do cliente </h1>
+      <h2 className={styles.text}> Informações do cliente </h2>
       <div className={styles.content}>
         <div>
           <Input
@@ -40,17 +40,18 @@ export default function RegisterView({
           <Input
             type="text"
             value={phone}
-            placeholder="()-*"
+            placeholder="(**)****-****"
             label="Telefone:"
             onChange={handlePhoneChange}
           />
-
-          <Button
-            styleOption="secondary"
-            text="Continuar"
-            size="md"
-            onclick={() => onConfirm(EnumMenu.SELECTDATE)} //onClick(EnumMenu.SELECTDATE) Eu queria por assim esse caralho p ir pra agenda mas aqui não da certo igual da no buttonsView
-          />
+          <div className={styles["box-button"]}>
+            <Button
+              styleOption="secondary"
+              text="Continuar"
+              size="md"
+              onclick={() => onConfirm(EnumMenu.SELECTDATE)}
+            />
+          </div>
         </div>
       </div>
     </div>
