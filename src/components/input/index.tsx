@@ -1,16 +1,12 @@
-// recebe parametro label =
-// text= acima do input,
-// value= valor do input
-//onChange = função para quando for digitado
-// placeholder
 import styles from "./styles.module.scss";
+import { HTMLInputTypeAttribute } from "react";
 
 interface InputProps {
-  type: any;
+  type?: HTMLInputTypeAttribute;
   value: string;
-  placeholder: string;
+  placeholder?: string;
   onChange: Function;
-  label: string;
+  label?: string;
 }
 export default function Input({
   type,
@@ -18,11 +14,13 @@ export default function Input({
   placeholder,
   onChange,
   label,
-}: InputProps): JSX.Element {
+  ...rest
+}: InputProps) {
   return (
     <div>
       <h1 className={styles.text}>{label}</h1>
       <input
+        {...rest}
         className={styles.input}
         type={type}
         value={value}

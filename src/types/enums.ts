@@ -12,3 +12,9 @@ export enum EnumStatus {
   REPROVED = "reproved",
   PENDENT = "pendent",
 }
+
+export enum EnumStatusKeys {
+  "aproved" = "Aprovado",
+  "reproved" = "Reprovado",
+  "pendent" = "Pendente",
+}
