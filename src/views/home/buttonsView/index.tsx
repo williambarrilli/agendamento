@@ -1,13 +1,10 @@
 import Button from "../../../components/button";
-import { EnumMenu } from "../../../types/enums";
 import { sendMessage } from "../../../utils/send-message-whats-app";
 import "./styles.css";
+import { useNavigate } from "react-router-dom";
 
-export interface ButtonViewProps {
-  onClick: (value: EnumMenu) => void;
-}
-
-export default function ButtonsView({ onClick }: ButtonViewProps) {
+export default function ButtonsView() {
+  const navigate = useNavigate();
   const message =
     "Olá, tenho interesse em saber mais sobre os serviços oferecidos!";
   return (
@@ -15,17 +12,13 @@ export default function ButtonsView({ onClick }: ButtonViewProps) {
       <div>
         <div className="divider"></div>
         <div className="content-buttons">
-          <Button
-            text="Agenda"
-            size="lg"
-            onclick={() => onClick(EnumMenu.SELECTREGISTER)}
-          />
+          <Button text="Agenda" size="lg" onclick={() => navigate("/agenda")} />
         </div>
         <div className="content-buttons">
           <Button
             size="lg"
             text="Reservas"
-            onclick={() => onClick(EnumMenu.MYSERVICES)}
+            onclick={() => console.log("reservas")}
           />
         </div>
         <div className="content-buttons">

@@ -3,6 +3,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Button from "../../../components/button";
 import { EnumMenu } from "../../../types/enums";
+import { useNavigate } from "react-router-dom";
 
 export interface CalendarViewProps {
   setDateSelected: (value: string) => void;
@@ -15,6 +16,8 @@ export default function CalendarView({
   dateSelected,
   onBack,
 }: CalendarViewProps) {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.container}>
       <div>
@@ -32,7 +35,7 @@ export default function CalendarView({
           <Button
             styleOption="secondary"
             size="md"
-            onclick={() => onBack(EnumMenu.INITIAL)}
+            onclick={() => navigate("/home")}
             text={"Voltar"}
           />
         </div>
