@@ -12,7 +12,11 @@ export default function ButtonsView() {
       <div>
         <div className="divider"></div>
         <div className="content-buttons">
-          <Button text="Agenda" size="lg" onclick={() => navigate("/agenda")} />
+          <Button
+            text="Agendar"
+            size="lg"
+            onclick={() => navigate("/agenda")}
+          />
         </div>
         <div className="content-buttons">
           <Button

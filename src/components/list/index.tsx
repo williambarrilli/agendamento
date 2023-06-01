@@ -34,6 +34,7 @@ export default function ListComponents({
         return { hour: item, hasReservation: false };
       });
     }
+
     return horarios.map((hour) => {
       const hasReservation = !!reservedList?.filter(
         (reserva) => reserva.hour === hour

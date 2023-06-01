@@ -8,11 +8,13 @@ import { sendSolicitationReserved } from "../../controllers/firestore";
 import RegisterView from "../../views/home/registerView";
 import SelectHourView from "../../views/home/selectHourView";
 import { useNavigate } from "react-router-dom";
+import BannerComponent from "../../components/banner";
+import bannerImage from "../../assets/bannerImage.jpg";
 
 export default function Agenda() {
   const navigate = useNavigate();
 
-  const [typeBody, setTypeBody] = useState<EnumMenu>(EnumMenu.SELECTDATE);
+  const [typeBody, setTypeBody] = useState<EnumMenu>(EnumMenu.SELECTREGISTER);
   const [dateSelected, setDateSelected] = useState<string>("");
   const [hourSelected, setHourSelected] = useState<string>("");
   const [modalConfirm, setModalConfirm] = useState<boolean>(false);
@@ -21,15 +23,12 @@ export default function Agenda() {
 
   const renderBody = () => {
     const types = {
-      SELECTSERVICE: <></>,
       SELECTDATE: (
         <CalendarView
           setDateSelected={(value: string) => {
             setDateSelected(value);
             setTypeBody(EnumMenu.SELECTHOUR);
           }}
-          dateSelected={dateSelected}
-          onBack={(value: EnumMenu) => setTypeBody(value)}
         />
       ),
       SELECTHOUR: (
@@ -53,7 +52,7 @@ export default function Agenda() {
       ),
       MYSERVICES: <></>,
     };
-    return types[typeBody] || types[EnumMenu.SELECTDATE];
+    return types[typeBody] || types[EnumMenu.SELECTREGISTER];
   };
 
   const onConfirm = () => {
@@ -71,18 +70,12 @@ export default function Agenda() {
     setPhone("");
 
     alert("Solicitação de reserva enviada");
-    navigate("/agenda");
+    navigate("/");
   };
   return (
     <div className={styles.container}>
-      <CalendarView
-        setDateSelected={(value: string) => {
-          setDateSelected(value);
-          setTypeBody(EnumMenu.SELECTHOUR);
-        }}
-        dateSelected={dateSelected}
-        onBack={(value: EnumMenu) => setTypeBody(value)}
-      />
+      <BannerComponent bannerImage={bannerImage} />
+      {renderBody()}
       {modalConfirm && (
         <ModalComponent isOpen={modalConfirm}>
           <div className={styles["modal-content"]}>

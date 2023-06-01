@@ -1,17 +1,19 @@
 .container {
-    font-family: Didot, serif;
-    text-align: center;
-    justify-content: centers;
-    color: #ac7246;
-    font-size: 20px;
-  
+  font-family: Didot, serif;
+  text-align: center;
+  justify-content: centers;
+  color: #ac7246;
+  font-size: 20px;
+}
 
-  }
-
-
-.contentButton {
-  
+.content {
   align-items: center;
   width: 100%;
-  margin-top: 20px;
+  margin: 5% 0;
+}
+
+.list-box {
+  // align-items: center;
+  // width: 100%;
+  margin: 5% 14%;
 }

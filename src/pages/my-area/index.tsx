@@ -27,24 +27,28 @@ export default function MyArea() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (!!dateFilter) {
-      const date = moment(dateFilter).format("DD/MM/YYYY");
-      setList(list.filter((item: Reserved) => item.date === date));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateFilter]);
+  // useEffect(() => {
+  //   if (!!dateFilter) {
+  //     const date = moment(dateFilter);
+  //     list.map((item: Reserved) => {
+  //       console.log(moment(item.date).format("DD/MM/YYYY"));
+  //       console.log(date.format("DD/MM/YYYY"));
+  //     });
+  //     // setList(list.filter((item: Reserved) => item.date === date));
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [dateFilter]);
 
   return (
     <div className={styles.container}>
       <div>
         <h2 className={styles.text}>Minhas solicitações</h2>
         <div className={styles.content}>
-          <Input
+          {/* <Input
             onChange={(value: string) => setDateFilter(value)}
             value={dateFilter}
             type="date"
-          />
+          /> */}
 
           <ListComponents listItems={list} />
         </div>
