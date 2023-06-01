@@ -3,6 +3,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Button from "../../../components/button";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 export interface CalendarViewProps {
   setDateSelected: (value: string) => void;
@@ -19,8 +20,10 @@ export default function CalendarView({ setDateSelected }: CalendarViewProps) {
         </div>
         <div className={styles.content}>
           <Calendar
-            onClickDay={(value) => setDateSelected(value.toLocaleDateString())}
-            value={new Date()}
+            onClickDay={(value) =>
+              setDateSelected(moment(value).format("DD/MM/YYYY"))
+            }
+            value={moment().format("DD/MM/YYYY")}
             minDate={new Date()}
           />
         </div>
