@@ -2,10 +2,13 @@
   display: flex;
   flex-wrap: wrap;
   margin: 6%;
+  max-width: 300px;
+
 }
 
 .itemHour {
   color: #0056a8;
+  font-size: 20px;
   margin: 5px;
   border: 2px solid #e6eef6;
   border-radius: 4px;

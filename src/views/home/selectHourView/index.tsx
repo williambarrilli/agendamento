@@ -38,9 +38,10 @@ export default function SelectHourView({
 
   // TODO: estilizar textos
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.container}>Data selecionada: {dateSelected}</div>
       <div className={styles.container}>Horarios disponiveis:</div>
+
       <ListComponents
         reservedList={listReserveDate}
         setHourSelected={(value) => setHourSelected(value)}
@@ -54,6 +55,6 @@ export default function SelectHourView({
         text={"Voltar"}
       />
       <div className={styles.contentButton}></div>
-    </>
+    </div>
   );
 }

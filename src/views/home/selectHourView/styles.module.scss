@@ -1,14 +1,16 @@
 .container {
     font-family: Didot, serif;
     text-align: center;
+    justify-content: centers;
     color: #ac7246;
     font-size: 20px;
+  
+
   }
 
 
 .contentButton {
-  display: flex;
-  justify-content: center;
+  
   align-items: center;
   width: 100%;
   margin-top: 20px;
