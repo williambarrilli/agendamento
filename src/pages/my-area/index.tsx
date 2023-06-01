@@ -3,7 +3,6 @@ import styles from "./styles.module.scss";
 import ListComponents from "../../components/listComponents";
 import "react-calendar/dist/Calendar.css";
 import { getSolicitationList } from "../../controllers/firestore";
-import Input from "../../components/input";
 import { Reserved } from "../../types/reserved";
 import moment from "moment";
 
@@ -27,12 +26,16 @@ export default function MyArea() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
+  const onFilter = () => {
     if (!!dateFilter) {
       setList(list.filter((item: Reserved) => item.date === dateFilter));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateFilter]);
+  };
+
+  const onClearFilter = () => {
+    fetchData();
+    setDateFilter("");
+  };
 
   return (
     <div className={styles.container}>
@@ -40,14 +43,22 @@ export default function MyArea() {
         <h2 className={styles.text}>Minhas solicitações</h2>
         <div className={styles.content}>
           Data Selecionada: {dateFilter}
-          <Input
-            onChange={(value: string) =>
-              setDateFilter(moment(value).format("DD/MM/YYYY"))
-            }
+          <input
             placeholder="oi"
             value={dateFilter}
             type="date"
+            onChange={(e) =>
+              setDateFilter(moment(e.target.value).format("DD/MM/yyyy"))
+            }
           />
+          <div>
+            <button type="button" onClick={() => onFilter()}>
+              Filtrar
+            </button>
+            <button type="button" onClick={() => onClearFilter()}>
+              Limpar filtro
+            </button>
+          </div>
           <ListComponents listItems={list} />
         </div>
       </div>

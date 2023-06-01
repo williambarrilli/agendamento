@@ -27,7 +27,13 @@ export default function ListComponents({ listItems }: ListComponentsProps) {
     const messageReject = `Olá, não estarei disponivel neste horário, podemos agendar um outro horário?`;
     sendMessage(messageReject, item.phone);
   };
-
+  if (!listItems?.length) {
+    return (
+      <div className={styles.text}>
+        {"Nenhuma solicitação reserva encontrada para esta data"}
+      </div>
+    );
+  }
   return (
     <div className={styles.container}>
       {listItems.map((item, index) => (
