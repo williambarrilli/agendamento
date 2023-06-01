@@ -38,14 +38,16 @@ export default function SelectHourView({
 
   // TODO: estilizar textos
   return (
-    <>
-      <div className={styles.container}>Data selecionada: {dateSelected}</div>
-      <div className={styles.container}>Horarios disponiveis:</div>
-      <ListComponents
-        reservedList={listReserveDate}
-        setHourSelected={(value) => setHourSelected(value)}
-      />
-      <div className={styles.container}>Selecione o horario!</div>
+    <div className={styles.container}>
+      <div className={styles.content}>Data selecionada: {dateSelected}</div>
+      <div className={styles.content}>Horarios disponiveis:</div>
+      <div className={styles["list-box"]}>
+        <ListComponents
+          reservedList={listReserveDate}
+          setHourSelected={(value) => setHourSelected(value)}
+        />
+      </div>
+      <div className={styles.content}>Selecione seu horário </div>
 
       <Button
         size="md"
@@ -53,7 +55,6 @@ export default function SelectHourView({
         onclick={() => onBack(EnumMenu.SELECTDATE)}
         text={"Voltar"}
       />
-      <div className={styles.contentButton}></div>
-    </>
+    </div>
   );
 }

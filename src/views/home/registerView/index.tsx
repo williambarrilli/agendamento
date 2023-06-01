@@ -1,29 +1,37 @@
 import Input from "../../../components/input";
 import Button from "../../../components/button";
 import styles from "./styles.module.scss";
-import React, { useState } from "react";
 import { EnumMenu } from "../../../types/enums";
-
-export interface ButtonViewProps {
-  onClick: (value: EnumMenu) => void;
+export interface RegisterViewProps {
+  name: string;
+  phone: string;
+  alterarName: (value: string) => void;
+  alterarPhone: (value: string) => void;
+  onConfirm: (value: EnumMenu) => void;
 }
-export default function RegisterView() {
-  const [nome, setNome] = useState("");
-  const [phone, setPhone] = useState("");
+
+export default function RegisterView({
+  name,
+  phone,
+  alterarName,
+  alterarPhone,
+  onConfirm,
+}: RegisterViewProps) {
   const handleNomeChange = (value: any) => {
-    setNome(value);
+    alterarName(value);
   };
   const handlePhoneChange = (value: any) => {
-    setPhone(value);
+    alterarPhone(value);
   };
+
   return (
     <div className={styles.container}>
-      <h1 className={styles.text}> Registro do cliente </h1>
+      <h2 className={styles.text}> Informações do cliente </h2>
       <div className={styles.content}>
         <div>
           <Input
             type="text"
-            value={nome}
+            value={name}
             placeholder="Digite seu nome"
             label="Nome:"
             onChange={handleNomeChange}
@@ -32,17 +40,18 @@ export default function RegisterView() {
           <Input
             type="text"
             value={phone}
-            placeholder="(**)*****-****"
+            placeholder="(**)****-****"
             label="Telefone:"
             onChange={handlePhoneChange}
           />
-
-          <Button
-            styleOption="secondary"
-            text="Continuar"
-            size="md"
-            onclick={() => alert} //onClick(EnumMenu.SELECTDATE) Eu queria por assim esse caralho p ir pra agenda mas aqui não da certo igual da no buttonsView
-          />
+          <div className={styles["box-button"]}>
+            <Button
+              styleOption="secondary"
+              text="Continuar"
+              size="md"
+              onclick={() => onConfirm(EnumMenu.SELECTDATE)}
+            />
+          </div>
         </div>
       </div>
     </div>

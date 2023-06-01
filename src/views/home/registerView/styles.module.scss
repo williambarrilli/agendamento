@@ -1,22 +1,23 @@
 .container {
-  
-  margin-top: 40%;
-  
+  text-align: center;
 }
 
 .content {
   display: flex;
   justify-content: center;
-align-items: center;
+  align-items: center;
   width: 100%;
   margin-top: 10%;
-  
 }
 .text {
   font-family: Didot, serif;
   font-style: italic;
   text-align: center;
   font-weight: 500px;
-  font-size: 40px;
+  font-size: 30px;
   color: #ac7348;
+}
+
+.box-button {
+  margin-top: 30px;
 }

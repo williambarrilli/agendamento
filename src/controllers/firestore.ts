@@ -4,6 +4,7 @@ import { firebaseConfig } from "../init-firebase";
 import { collection, doc, addDoc, getDoc } from "firebase/firestore";
 import { Reserved } from "../types/reserved";
 import { EnumStatus } from "../types/enums";
+const moment = require("moment");
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -25,7 +26,10 @@ export const addData = async () => {
   }
 };
 
-export const getSolicitationList = async (shopId: string) => {
+export const getSolicitationList = async (
+  shopId: string,
+  dateFilter?: string
+) => {
   const documentRef = doc(db, "shops", shopId);
   const docSnapshot = await getDoc(documentRef);
   if (docSnapshot.exists()) {
@@ -48,8 +52,6 @@ export const sendSolicitationReserved = async (
   reserved: Reserved
 ) => {
   try {
-    // qnd user solicita reserva
-    // const dataShopRef = doc(db, "shops", "MLJ0k39Q9ELsH78X3lHW");
     const documentRef = doc(db, "shops", shopId);
     const docSnapshot = await getDoc(documentRef);
     if (docSnapshot.exists()) {
