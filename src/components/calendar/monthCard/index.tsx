@@ -7,8 +7,8 @@ import styles from "./styles.module.scss";
 export interface MonthCardProps {
   month: string;
   currentYear: number;
-  dateSelected: number[];
-  setDateSelected: (value: number[]) => void;
+  dateSelected: Moment;
+  setDateSelected: (value: Moment) => void;
 }
 
 export default function MonthCard({
@@ -24,7 +24,8 @@ export default function MonthCard({
   useEffect(() => {
     setMonthAndYear(moment().locale("pt").month(month).year(currentYear));
     setCalendar(calendarBuild(monthAndYear));
-  }, [month, currentYear, monthAndYear]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [month]);
 
   return (
     <div className={styles.container}>
@@ -38,17 +39,16 @@ export default function MonthCard({
       </div>
       {calendar?.map((week, index) => (
         <div className={styles.week} key={index}>
-          {week &&
-            week?.map((day, index) => (
-              <DayCard
-                key={index}
-                day={day}
-                month={month}
-                year={currentYear}
-                dateSelected={dateSelected}
-                setDateSelected={setDateSelected}
-              />
-            ))}
+          {week.map((day, index) => (
+            <DayCard
+              key={index}
+              day={day}
+              month={month}
+              year={currentYear}
+              dateSelected={dateSelected}
+              setDateSelected={setDateSelected}
+            />
+          ))}
         </div>
       ))}
     </div>

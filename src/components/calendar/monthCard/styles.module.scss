@@ -15,7 +15,14 @@
   border-bottom: 1px solid #ccc;
   color: #143296;
 }
-
+.week-day {
+  display: inline-block;
+  width: 30px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.9em;
+  margin: 1px;
+}
 .week {
-  margin: 2px;
+  margin: 4px;
 }

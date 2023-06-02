@@ -1,6 +1,24 @@
-.container {
-  margin: 10px;
-  border: 1px solid #ccc;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: white;
+.day {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+  transform: scale(0.9);
+  transition: all ease 0.2s;
+  cursor: pointer;
+  // border-radius: 20px;
+  border: none;
+  text-align: center;
+  vertical-align: center;
+  margin: 1px;
+  background-color: #fff;
+
+  &:nonpertencemonth {
+    opacity: 0.3;
+    cursor: default;
+  }
+  &:selected {
+    background-color: #20deae;
+    color: #fff;
+  }
 }

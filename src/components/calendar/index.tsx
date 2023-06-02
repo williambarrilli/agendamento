@@ -1,20 +1,14 @@
-import { useEffect, useState } from "react";
-import moment from "moment";
+import { useState } from "react";
+import moment, { Moment } from "moment";
 import MonthCard from "./monthCard";
-// import { IconButton } from "@mui/material";
-// import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-// import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+
 import styles from "./styles.module.scss";
 
 export default function Calendar() {
-  const [currentYear, setCurrentYear] = useState<number>(2023);
-  const [dateSelected, setDateSelected] = useState<number>(1);
-
-  useEffect(() => {
-    const dateNow = moment();
-    setCurrentYear(Number(dateNow.format("YYYY")));
-    setDateSelected(Number(dateNow.format("DD")));
-  }, []);
+  const [currentYear, setCurrentYear] = useState<number>(
+    Number(moment().format("YYYY"))
+  );
+  const [dateSelected, setDateSelected] = useState<Moment>(moment());
 
   const month = [
     "January",
@@ -64,7 +58,7 @@ export default function Calendar() {
         </IconButton> */}
       </div>
       <div className={styles["content"]}>
-        {/* {month.map((value) => (
+        {month.map((value) => (
           <MonthCard
             key={value}
             month={value}
@@ -72,7 +66,7 @@ export default function Calendar() {
             dateSelected={dateSelected}
             setDateSelected={setDateSelected}
           />
-        ))} */}
+        ))}
       </div>
     </div>
   );
