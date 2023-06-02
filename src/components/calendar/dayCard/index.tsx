@@ -1,7 +1,7 @@
 import moment from "moment";
 import { Moment } from "moment";
 import { useState, useEffect } from "react";
-import Days from "react-calendar/dist/cjs/MonthView/Days";
+import styles from "./styles.module.scss";
 
 export interface DayCardProps {
   day: Moment;
@@ -48,9 +48,8 @@ export default function DayCard({
   };
 
   return (
-    <div></div>
-    // <Days state={state} onClick={handleClickDate}>
-    //   {props.day.format("DD").toString()}
-    // </Days>
+    <button className={styles.days} onClick={handleClickDate}>
+      {day.format("DD").toString()}
+    </button>
   );
 }

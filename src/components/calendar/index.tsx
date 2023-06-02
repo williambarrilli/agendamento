@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import moment from "moment";
-import "./calendar.scss";
 import MonthCard from "./monthCard";
 // import { IconButton } from "@mui/material";
 // import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 // import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import styles from "./styles.module.scss";
 
 export default function Calendar() {
   const [currentYear, setCurrentYear] = useState<number>(2023);
@@ -47,8 +47,8 @@ export default function Calendar() {
     ],
   });
   return (
-    <div id="calendar-page">
-      <div className="header-page">
+    <div className={styles.container}>
+      <div className={styles["header-page"]}>
         {/* <IconButton
           size="small"
           onClick={() => setCurrentYear(currentYear - 1)}
@@ -63,7 +63,7 @@ export default function Calendar() {
           <KeyboardArrowRightIcon style={{ color: "#143296", fontSize: 40 }} />
         </IconButton> */}
       </div>
-      <div className="content">
+      <div className={styles["content"]}>
         {/* {month.map((value) => (
           <MonthCard
             key={value}

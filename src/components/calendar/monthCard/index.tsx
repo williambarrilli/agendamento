@@ -2,6 +2,7 @@ import moment, { Moment } from "moment";
 import { useEffect, useState, useMemo } from "react";
 import calendarBuild from "../calendarBuild";
 import DayCard from "../dayCard";
+import styles from "./styles.module.scss";
 
 export interface MonthCardProps {
   month: string;
@@ -26,17 +27,17 @@ export default function MonthCard({
   }, [month, currentYear, monthAndYear]);
 
   return (
-    <div id="month-card">
-      <div className="header">{monthAndYear?.format("MMMM")}</div>
-      <div className="week-days">
+    <div className={styles.container}>
+      <div className={styles.header}>{monthAndYear?.format("MMMM")}</div>
+      <div className={styles["week-days"]}>
         {weekDays.map((value, index) => (
-          <div className="week-day" key={index}>
+          <div className={styles["week-day"]} key={index}>
             {value}
           </div>
         ))}
       </div>
       {calendar?.map((week, index) => (
-        <div className="week" key={index}>
+        <div className={styles.week} key={index}>
           {week &&
             week?.map((day, index) => (
               <DayCard
