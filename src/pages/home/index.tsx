@@ -3,7 +3,7 @@ import bannerImage from "../../assets/bannerImage.jpg";
 
 import ButtonsView from "../../views/home/buttonsView";
 import BannerComponent from "../../components/banner";
-import moment from "moment-timezone";
+import moment from "moment";
 moment.locale("pt-br");
 
 export default function Home() {

@@ -5,6 +5,7 @@ import "react-calendar/dist/Calendar.css";
 import { getSolicitationList } from "../../controllers/firestore";
 import { Reserved } from "../../types/reserved";
 import moment from "moment";
+import Calendar from "../../components/calendar";
 
 export default function MyArea() {
   const [list, setList] = useState([]);
@@ -59,7 +60,7 @@ export default function MyArea() {
               Limpar filtro
             </button>
           </div>
-          <ListComponents listItems={list} />
+          <Calendar />
         </div>
       </div>
     </div>
