@@ -43,24 +43,7 @@ export default function MyArea() {
       <div>
         <h2 className={styles.text}>Minhas solicitações</h2>
         <div className={styles.content}>
-          Data Selecionada: {dateFilter}
-          <input
-            placeholder="oi"
-            value={dateFilter}
-            type="date"
-            onChange={(e) =>
-              setDateFilter(moment(e.target.value).format("DD/MM/yyyy"))
-            }
-          />
-          <div>
-            <button type="button" onClick={() => onFilter()}>
-              Filtrar
-            </button>
-            <button type="button" onClick={() => onClearFilter()}>
-              Limpar filtro
-            </button>
-          </div>
-          <Calendar />
+          <Calendar onSelectDate={() => console.log("first")} />
         </div>
       </div>
     </div>

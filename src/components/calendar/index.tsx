@@ -1,55 +1,33 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import moment, { Moment } from "moment";
 import MonthCard from "./monthCard";
+import arrowRight from "../../assets/arrowRight.svg";
 
+import arrowLeft from "../../assets/arrowLeft.svg";
 import styles from "./styles.module.scss";
 
-export default function Calendar() {
-  const [currentYear, setCurrentYear] = useState<number>(
-    Number(moment().format("YYYY"))
-  );
+export interface CalendarProps {
+  onSelectDate: () => void;
+}
+
+export default function Calendar({ onSelectDate }: CalendarProps) {
   const [dateSelected, setDateSelected] = useState<Moment>(moment());
 
-  const month = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  moment.updateLocale("pt", {
-    months: [
-      "Janeiro",
-      "Fevereiro",
-      "Março",
-      "Abril",
-      "Maio",
-      "Junho",
-      "Julho",
-      "Agosto",
-      "Setembro",
-      "Outubro",
-      "Novembro",
-      "Dezembro",
-    ],
-  });
+  const [monthEndYearSelected, setMonthEndYearSelected] = useState<Moment>(
+    moment()
+  );
+
+  const dateNow = useMemo(() => moment(), []);
+
   return (
     <div className={styles.container}>
       <div className={styles["header-page"]}>
-        {/* <IconButton
-          size="small"
-          onClick={() => setCurrentYear(currentYear - 1)}
+        <button
+          onClick={() => setMonthEndYearSelected(monthEndYearSelected.year(-1))}
         >
-          <KeyboardArrowLeftIcon style={{ color: "#143296", fontSize: 40 }} />
-        </IconButton> */}
-        {currentYear}
+          <img className={styles.arrow} src={arrowLeft} alt="arrowLeft" />
+        </button>
+        {dateNow.format("YYYY")}
         {/* <IconButton
           size="small"
           onClick={() => setCurrentYear(currentYear + 1)}
@@ -58,15 +36,13 @@ export default function Calendar() {
         </IconButton> */}
       </div>
       <div className={styles["content"]}>
-        {month.map((value) => (
-          <MonthCard
-            key={value}
-            month={value}
-            currentYear={currentYear}
-            dateSelected={dateSelected}
-            setDateSelected={setDateSelected}
-          />
-        ))}
+        <MonthCard
+          monthEndYearSelected={monthEndYearSelected}
+          setMonthEndYearSelected={setMonthEndYearSelected}
+          dateSelected={dateSelected}
+          setDateSelected={setDateSelected}
+          onClick={() => onSelectDate()}
+        />
       </div>
     </div>
   );
