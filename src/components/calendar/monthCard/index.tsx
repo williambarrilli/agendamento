@@ -3,13 +3,14 @@ import { useMemo } from "react";
 import calendarBuild from "../calendarBuild";
 import styles from "./styles.module.scss";
 import objStr from "obj-str";
-
+import arrowRight from "../../../assets/arrowRight.svg";
+import arrowLeft from "../../../assets/arrowLeft.svg";
 export interface MonthCardProps {
   monthEndYearSelected: Moment;
   dateSelected: Moment;
   setMonthEndYearSelected: (value: Moment) => void;
   setDateSelected: (value: Moment) => void;
-  onClick: () => void;
+  onClick: (value: Moment) => void;
 }
 
 export default function MonthCard({
@@ -51,13 +52,39 @@ export default function MonthCard({
 
   const handleClick = (day: Moment) => {
     setDateSelected(day);
-    onClick();
+    onClick(day);
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        {getMonth(Number(monthEndYearSelected?.format("M")))}
+        <span className={styles["arrow-box"]}>
+          <img
+            onClick={() =>
+              setMonthEndYearSelected(
+                moment(monthEndYearSelected).subtract(1, "year")
+              )
+            }
+            className={styles["arrow-img"]}
+            src={arrowLeft}
+            alt="arrowLeft"
+          />
+        </span>
+        <span className={styles.tittle}>
+          {getMonth(Number(monthEndYearSelected?.format("M")))}
+        </span>
+        <span className={styles["arrow-box"]}>
+          <img
+            onClick={() =>
+              setMonthEndYearSelected(
+                moment(monthEndYearSelected).add(1, "year")
+              )
+            }
+            className={styles["arrow-img"]}
+            src={arrowRight}
+            alt="arrowRight"
+          />
+        </span>
       </div>
       <div className={styles["week-days"]}>
         {weekDays.map((value, index) => (
