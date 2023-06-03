@@ -6,6 +6,10 @@ import Home from "./pages/home";
 import MyArea from "./pages/my-area";
 import Login from "./pages/login";
 import Agenda from "./pages/agenda";
+
+import moment from "moment";
+moment.locale("pt-br");
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

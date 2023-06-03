@@ -26,10 +26,7 @@ export const addData = async () => {
   }
 };
 
-export const getSolicitationList = async (
-  shopId: string,
-  dateFilter?: string
-) => {
+export const getSolicitationList = async (shopId: string) => {
   const documentRef = doc(db, "shops", shopId);
   const docSnapshot = await getDoc(documentRef);
   if (docSnapshot.exists()) {
