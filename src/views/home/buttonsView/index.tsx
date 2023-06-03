@@ -18,13 +18,13 @@ export default function ButtonsView() {
             onclick={() => navigate("/agenda")}
           />
         </div>
-        <div className="content-buttons">
+        {/* <div className="content-buttons">
           <Button
             size="lg"
             text="Reservas"
             onclick={() => console.log("reservas")}
           />
-        </div>
+        </div> */}
         <div className="content-buttons">
           <Button
             size="lg"
