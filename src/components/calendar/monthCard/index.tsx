@@ -5,12 +5,14 @@ import styles from "./styles.module.scss";
 import objStr from "obj-str";
 import arrowRight from "../../../assets/arrowRight.svg";
 import arrowLeft from "../../../assets/arrowLeft.svg";
+import { Reserved } from "../../../types/reserved";
 export interface MonthCardProps {
   monthEndYearSelected: Moment;
   dateSelected: Moment;
   setMonthEndYearSelected: (value: Moment) => void;
   setDateSelected: (value: Moment) => void;
   onClick: (value: Moment) => void;
+  jobsForDays: Reserved[];
 }
 
 export default function MonthCard({
@@ -19,6 +21,7 @@ export default function MonthCard({
   setMonthEndYearSelected,
   setDateSelected,
   onClick,
+  jobsForDays = [],
 }: MonthCardProps) {
   const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"];
 
@@ -53,6 +56,16 @@ export default function MonthCard({
   const handleClick = (day: Moment) => {
     setDateSelected(day);
     onClick(day);
+  };
+
+  const getJobsOfDay = (day: Moment) => {
+    const numberJobs = jobsForDays.filter((job) =>
+      day.isSame(moment(job.date, "DD/MM/YYYY"), "day")
+    ).length;
+    if (!numberJobs) return;
+    if (numberJobs <= 1) return "low";
+    if (numberJobs <= 3) return "medium";
+    if (numberJobs >= 4) return "high";
   };
 
   return (
@@ -109,7 +122,16 @@ export default function MonthCard({
               })}`}
               onClick={() => handleClick(day)}
             >
-              <>{day.format("DD").toString()}</>
+              <div>
+                {day.format("DD").toString()}
+
+                <div
+                  className={`${objStr({
+                    [styles["sublime"]]: true,
+                    [styles[`${getJobsOfDay(day)}`]]: true,
+                  })}`}
+                ></div>
+              </div>
             </span>
           ))}
         </div>

@@ -1,9 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import styles from "./styles.module.scss";
 import "react-calendar/dist/Calendar.css";
 import { getSolicitationList } from "../../controllers/firestore";
 import { Reserved } from "../../types/reserved";
-import { Moment } from "moment";
+import moment, { Moment } from "moment";
 import Calendar from "../../components/calendar";
 import ModalComponent from "../../components/modal";
 import ListComponents from "../../components/listComponents";
@@ -58,17 +58,13 @@ export default function MyArea() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const filterlistDate = useCallback(
-    (dateSelected: string | undefined) => {
-      if (dateSelected)
-        return list.filter((reserved) => dateSelected === reserved.date);
-      return [];
-    },
-    [list]
-  );
-
   useEffect(() => {
-    setFilterList(filterlistDate(dateSelected?.format("DD/MM/YYYY")));
+    if (list.length)
+      setFilterList(
+        list.filter((reserved) =>
+          dateSelected?.isSame(moment(reserved.date, "DD/MM/YYYY"))
+        )
+      );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dateSelected, list]);
 
@@ -84,7 +80,10 @@ export default function MyArea() {
         <h3 className={styles.text}>Selecione o dia que deseja visualizar</h3>
 
         <div className={styles.content}>
-          <Calendar onSelectDate={(value: Moment) => setDateSelected(value)} />
+          <Calendar
+            onSelectDate={(value: Moment) => setDateSelected(value)}
+            listReserved={list}
+          />
         </div>
         <h3 className={styles.text}>Solicitações de reservas</h3>
 
