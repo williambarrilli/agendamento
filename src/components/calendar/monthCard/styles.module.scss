@@ -17,12 +17,34 @@
 }
 .week-day {
   display: inline-block;
-  width: 30px;
+  width: 31px;
   text-align: center;
   font-weight: bold;
   font-size: 0.9em;
-  margin: 1px;
+  margin: 4px;
 }
 .week {
   margin: 4px;
+}
+
+.day {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+  transform: scale(0.9);
+  transition: all ease 0.2s;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  vertical-align: center;
+  margin: 1px;
+}
+.is-not-current-month {
+  opacity: 0.3;
+  cursor: default;
+}
+.is-selected {
+  background-color: #20deae;
+  color: #fff;
 }

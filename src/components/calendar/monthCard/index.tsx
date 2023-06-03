@@ -1,35 +1,64 @@
 import moment, { Moment } from "moment";
-import { useEffect, useState, useMemo } from "react";
+import { useMemo } from "react";
 import calendarBuild from "../calendarBuild";
-import DayCard from "../dayCard";
 import styles from "./styles.module.scss";
+import objStr from "obj-str";
 
 export interface MonthCardProps {
-  month: string;
-  currentYear: number;
+  monthEndYearSelected: Moment;
   dateSelected: Moment;
+  setMonthEndYearSelected: (value: Moment) => void;
   setDateSelected: (value: Moment) => void;
+  onClick: () => void;
 }
 
 export default function MonthCard({
-  month,
-  currentYear,
+  monthEndYearSelected,
   dateSelected,
+  setMonthEndYearSelected,
   setDateSelected,
+  onClick,
 }: MonthCardProps) {
-  const [monthAndYear, setMonthAndYear] = useState(moment());
-  const [calendar, setCalendar] = useState<Moment[][]>([]);
   const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"];
 
-  useEffect(() => {
-    setMonthAndYear(moment().locale("pt").month(month).year(currentYear));
-    setCalendar(calendarBuild(monthAndYear));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [month]);
+  const getMonth = (month: number) => {
+    const months = [
+      "Janeiro",
+      "Fevereiro",
+      "Março",
+      "Abril",
+      "Maio",
+      "Junho",
+      "Julho",
+      "Agosto",
+      "Setembro",
+      "Outubro",
+      "Novembro",
+      "Dezembro",
+    ];
+    return months[month];
+  };
+  const calendar: Moment[][] = useMemo(
+    () =>
+      calendarBuild(
+        moment()
+          .locale("pt")
+          .month(monthEndYearSelected.month())
+          .year(monthEndYearSelected.year())
+      ) || [],
+    [monthEndYearSelected]
+  );
+
+  const handleClick = (day: Moment) => {
+    setDateSelected(day);
+    onClick();
+  };
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>{monthAndYear?.format("MMMM")}</div>
+      <div className={styles.header}>
+        {getMonth(Number(monthEndYearSelected?.format("M")))}
+      </div>
       <div className={styles["week-days"]}>
         {weekDays.map((value, index) => (
           <div className={styles["week-day"]} key={index}>
@@ -40,14 +69,21 @@ export default function MonthCard({
       {calendar?.map((week, index) => (
         <div className={styles.week} key={index}>
           {week.map((day, index) => (
-            <DayCard
+            <span
               key={index}
-              day={day}
-              month={month}
-              year={currentYear}
-              dateSelected={dateSelected}
-              setDateSelected={setDateSelected}
-            />
+              className={`${objStr({
+                [styles["day"]]: true,
+                [styles["state"]]: true,
+                [styles["is-selected"]]: dateSelected.isSame(day),
+                [styles["is-not-current-month"]]: !monthEndYearSelected.isSame(
+                  day,
+                  "month"
+                ),
+              })}`}
+              onClick={() => handleClick(day)}
+            >
+              <>{day.format("DD").toString()}</>
+            </span>
           ))}
         </div>
       ))}
