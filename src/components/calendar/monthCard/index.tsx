@@ -37,7 +37,7 @@ export default function MonthCard({
       "Novembro",
       "Dezembro",
     ];
-    return months[month];
+    return months[month - 1];
   };
   const calendar: Moment[][] = useMemo(
     () =>
@@ -62,7 +62,7 @@ export default function MonthCard({
           <img
             onClick={() =>
               setMonthEndYearSelected(
-                moment(monthEndYearSelected).subtract(1, "year")
+                moment(monthEndYearSelected).subtract(1, "month")
               )
             }
             className={styles["arrow-img"]}
@@ -77,7 +77,7 @@ export default function MonthCard({
           <img
             onClick={() =>
               setMonthEndYearSelected(
-                moment(monthEndYearSelected).add(1, "year")
+                moment(monthEndYearSelected).add(1, "month")
               )
             }
             className={styles["arrow-img"]}
