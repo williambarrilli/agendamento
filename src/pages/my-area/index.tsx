@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 import "react-calendar/dist/Calendar.css";
 import { getSolicitationList } from "../../controllers/firestore";
 import { Reserved } from "../../types/reserved";
-import moment, { Moment } from "moment";
+import { Moment } from "moment";
 import Calendar from "../../components/calendar";
 import ModalComponent from "../../components/modal";
 import ListComponents from "../../components/listComponents";

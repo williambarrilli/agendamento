@@ -4,7 +4,6 @@ import { firebaseConfig } from "../init-firebase";
 import { collection, doc, addDoc, getDoc } from "firebase/firestore";
 import { Reserved } from "../types/reserved";
 import { EnumStatus } from "../types/enums";
-const moment = require("moment");
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
