@@ -10,11 +10,13 @@
   font-weight: bold;
   color: #ac7348;
   font-size: 20px;
+
 }
 
 .week-days {
   border-bottom: 1px solid #ccc;
   color: #ac7348;
+  text-align: center;
 }
 .week-day {
   display: inline-block;
@@ -23,9 +25,11 @@
   font-weight: bold;
   font-size: 0.9em;
   margin: 4px;
+  
 }
 .week {
   margin: 4px;
+  text-align: center;
 }
 
 .day {
@@ -59,5 +63,7 @@
 }
 
 .tittle {
-  padding: 10px;
+  margin: 15px;
+  position: relative;
+  top: -6px;
 }

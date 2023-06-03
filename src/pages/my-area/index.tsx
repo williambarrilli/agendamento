@@ -89,7 +89,7 @@ export default function MyArea() {
               ))
             ) : (
               <p className={styles.textHorarios}>
-                Sem horarios agendados para está data
+                Sem horarios agendados para esta data
               </p>
             )}
           </div>
