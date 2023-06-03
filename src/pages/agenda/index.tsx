@@ -63,7 +63,6 @@ export default function Agenda() {
       hour: hourSelected,
       status: EnumStatus.PENDENT,
     });
-    setModalConfirm(false);
     setDateSelected("");
     setHourSelected("");
     setName("");
@@ -76,28 +75,29 @@ export default function Agenda() {
     <div className={styles.container}>
       <BannerComponent bannerImage={bannerImage} />
       {renderBody()}
-      {modalConfirm && (
-        <ModalComponent isOpen={modalConfirm}>
-          <div className={styles["modal-content"]}>
-            <h4>Confirme seu agendamento</h4>
-            <h5>
-              Data: {dateSelected} as {hourSelected}
-            </h5>
-            <div className={styles["footer-buttons-modal"]}>
-              <div className={styles["footer-button-box"]}>
-                <Button
-                  onclick={() => setModalConfirm(false)}
-                  text={"Voltar"}
-                  styleOption="secondary"
-                />
-              </div>
-              <div className={styles["footer-button-box"]}>
-                <Button onclick={() => onConfirm()} text={"Confirmar"} />
-              </div>
+      <ModalComponent
+        isOpen={modalConfirm}
+        onClose={() => setModalConfirm(false)}
+      >
+        <div className={styles["modal-content"]}>
+          <h4>Confirme seu agendamento</h4>
+          <h5>
+            Data: {dateSelected} as {hourSelected}
+          </h5>
+          <div className={styles["footer-buttons-modal"]}>
+            <div className={styles["footer-button-box"]}>
+              <Button
+                onclick={() => setModalConfirm(false)}
+                text={"Voltar"}
+                styleOption="secondary"
+              />
+            </div>
+            <div className={styles["footer-button-box"]}>
+              <Button onclick={() => onConfirm()} text={"Confirmar"} />
             </div>
           </div>
-        </ModalComponent>
-      )}
+        </div>
+      </ModalComponent>
     </div>
   );
 }
