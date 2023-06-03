@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import "react-calendar/dist/Calendar.css";
 import { getSolicitationList } from "../../controllers/firestore";
