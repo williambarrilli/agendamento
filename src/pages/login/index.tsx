@@ -16,15 +16,18 @@ export default function Login() {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <label>Digite seu codigo de acesso:</label>
+        <label className={styles.text}>Digite seu codigo de acesso:</label>
         <div className={styles["input-box"]}>
           <input
+            className={styles.input}
             type="password"
             onChange={(e) => setCode(e.target.value)}
             value={code}
           />
         </div>
-        <Button onclick={() => validCode()} text="Login" />
+        <div className={styles.center}>
+          <Button onclick={() => validCode()} text="Login" />
+        </div>
       </div>
     </div>
   );

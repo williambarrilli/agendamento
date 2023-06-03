@@ -5,12 +5,14 @@ import styles from "./styles.module.scss";
 import objStr from "obj-str";
 import arrowRight from "../../../assets/arrowRight.svg";
 import arrowLeft from "../../../assets/arrowLeft.svg";
+import { Reserved } from "../../../types/reserved";
 export interface MonthCardProps {
   monthEndYearSelected: Moment;
   dateSelected: Moment;
   setMonthEndYearSelected: (value: Moment) => void;
   setDateSelected: (value: Moment) => void;
   onClick: (value: Moment) => void;
+  jobsForDays: Reserved[];
 }
 
 export default function MonthCard({
@@ -19,6 +21,7 @@ export default function MonthCard({
   setMonthEndYearSelected,
   setDateSelected,
   onClick,
+  jobsForDays = [],
 }: MonthCardProps) {
   const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"];
 
@@ -37,7 +40,7 @@ export default function MonthCard({
       "Novembro",
       "Dezembro",
     ];
-    return months[month];
+    return months[month - 1];
   };
   const calendar: Moment[][] = useMemo(
     () =>
@@ -55,6 +58,16 @@ export default function MonthCard({
     onClick(day);
   };
 
+  const getJobsOfDay = (day: Moment) => {
+    const numberJobs = jobsForDays.filter((job) =>
+      day.isSame(moment(job.date, "DD/MM/YYYY"), "day")
+    ).length;
+    if (!numberJobs) return;
+    if (numberJobs <= 1) return "low";
+    if (numberJobs <= 3) return "medium";
+    if (numberJobs >= 4) return "high";
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -62,7 +75,7 @@ export default function MonthCard({
           <img
             onClick={() =>
               setMonthEndYearSelected(
-                moment(monthEndYearSelected).subtract(1, "year")
+                moment(monthEndYearSelected).subtract(1, "month")
               )
             }
             className={styles["arrow-img"]}
@@ -77,7 +90,7 @@ export default function MonthCard({
           <img
             onClick={() =>
               setMonthEndYearSelected(
-                moment(monthEndYearSelected).add(1, "year")
+                moment(monthEndYearSelected).add(1, "month")
               )
             }
             className={styles["arrow-img"]}
@@ -109,7 +122,16 @@ export default function MonthCard({
               })}`}
               onClick={() => handleClick(day)}
             >
-              <>{day.format("DD").toString()}</>
+              <div>
+                {day.format("DD").toString()}
+
+                <div
+                  className={`${objStr({
+                    [styles["sublime"]]: true,
+                    [styles[`${getJobsOfDay(day)}`]]: true,
+                  })}`}
+                ></div>
+              </div>
             </span>
           ))}
         </div>

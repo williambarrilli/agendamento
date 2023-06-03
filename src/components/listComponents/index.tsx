@@ -50,7 +50,7 @@ export default function ListComponents({ listItems }: ListComponentsProps) {
               <>{EnumStatusKeys[item.status]}</>
             ) : (
               <>
-                <div>
+                <div className={styles.rowBotton}>
                   <Button
                     styleOption="secondary"
                     size="sm"
@@ -68,12 +68,11 @@ export default function ListComponents({ listItems }: ListComponentsProps) {
                 </div>
               </>
             )}
-
             <div className={styles.rowBotton}>
               <Button
                 styleOption="secondary"
                 size="sm"
-                text="Entrar em contato"
+                text="Contato"
                 onclick={() => sendMessage("Olá tudo bem?", "5554981559983")}
               />
             </div>
