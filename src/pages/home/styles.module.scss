@@ -29,3 +29,31 @@
   width: 300px;
   padding: 7%;
 }
+.red{
+ color: red; 
+ font-family: Didot, serif;
+ font-size: 23px;
+}
+.green{
+  color: green;
+  font-family: Didot, serif;
+  font-size: 23px;
+}
+.text {
+  font-family: Didot, serif;
+  text-align: center;
+  color: #ac7246;
+  font-size: 23px;
+}
+.textHorarios {
+  font-family: Didot, serif;
+  text-align: center;
+  color: #ac7246;
+  font-size: 23px;
+  margin-right: 20px;
+}
+.horarioContainer {
+  /* Estilos para o contêiner de cada horário */
+  display: flex;
+  align-items: center;
+}
