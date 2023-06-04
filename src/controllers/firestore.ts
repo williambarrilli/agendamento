@@ -1,7 +1,16 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, updateDoc } from "firebase/firestore";
+import {
+  getDocs,
+  getFirestore,
+  query,
+  updateDoc,
+  where,
+  collection,
+  doc,
+  addDoc,
+  getDoc,
+} from "firebase/firestore";
 import { firebaseConfig } from "../init-firebase";
-import { collection, doc, addDoc, getDoc } from "firebase/firestore";
 import { Reserved } from "../types/reserved";
 import { EnumStatus } from "../types/enums";
 
@@ -12,6 +21,7 @@ const db = getFirestore(app);
 export const addData = async () => {
   try {
     const docRef = await addDoc(collection(db, "shops"), {
+      id: "mariana",
       name: "Juliana Silva",
       url: "juliana-silva",
       phone: "1500",
@@ -41,6 +51,18 @@ export const getReservedHours = async (shopId: string) => {
     const documentData = docSnapshot.data();
     return documentData.reservedList || [];
   }
+};
+
+export const getShopInfo = async (url: string | undefined) => {
+  const shopsRef = collection(db, "shops");
+  const searchQuery = query(shopsRef, where("url", "==", url));
+
+  const querySnapshot = await getDocs(searchQuery);
+  let retorno;
+  querySnapshot.forEach((doc) => {
+    if (doc.data().name) retorno = { ...doc.data(), id: doc.id };
+  });
+  return retorno;
 };
 
 export const sendSolicitationReserved = async (

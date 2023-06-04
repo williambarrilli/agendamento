@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 import moment, { Moment } from "moment";
 import MonthCard from "./monthCard";
-import arrowRight from "../../assets/arrowRight.svg";
-import arrowLeft from "../../assets/arrowLeft.svg";
+import arrowRight from "../../assets/icons/arrowRight.svg";
+import arrowLeft from "../../assets/icons/arrowLeft.svg";
 import styles from "./styles.module.scss";
 import { Reserved } from "../../types/reserved";
 import { EnumStatus } from "../../types/enums";

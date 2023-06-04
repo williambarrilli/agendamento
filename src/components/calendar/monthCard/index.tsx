@@ -3,8 +3,8 @@ import { useMemo } from "react";
 import calendarBuild from "../calendarBuild";
 import styles from "./styles.module.scss";
 import objStr from "obj-str";
-import arrowRight from "../../../assets/arrowRight.svg";
-import arrowLeft from "../../../assets/arrowLeft.svg";
+import arrowRight from "../../../assets/icons/arrowRight.svg";
+import arrowLeft from "../../../assets/icons/arrowLeft.svg";
 import { Reserved } from "../../../types/reserved";
 export interface MonthCardProps {
   monthEndYearSelected: Moment;
