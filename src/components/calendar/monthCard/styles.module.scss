@@ -10,7 +10,6 @@
   font-weight: bold;
   color: #ac7348;
   font-size: 20px;
-
 }
 
 .week-days {
@@ -25,7 +24,6 @@
   font-weight: bold;
   font-size: 0.9em;
   margin: 4px;
-  
 }
 .week {
   margin: 4px;
@@ -50,7 +48,7 @@
   cursor: default;
 }
 .is-selected {
-  background-color: #20deae;
+  background-color: #ac7348;
   color: #fff;
 }
 
@@ -66,4 +64,18 @@
   margin: 15px;
   position: relative;
   top: -6px;
+}
+
+.sublime {
+  width: 30px;
+  height: 3px;
+}
+.low {
+  background-color: green;
+}
+.medium {
+  background-color: yellow;
+}
+.high {
+  background-color: red;
 }

@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CalendarView from "../../views/home/calendarView";
 import { EnumMenu, EnumStatus } from "../../types/enums";
 import Button from "../../components/button";
@@ -7,12 +7,12 @@ import ModalComponent from "../../components/modal";
 import { sendSolicitationReserved } from "../../controllers/firestore";
 import RegisterView from "../../views/home/registerView";
 import SelectHourView from "../../views/home/selectHourView";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import BannerComponent from "../../components/banner";
-import bannerImage from "../../assets/bannerImage.jpg";
 
 export default function Agenda() {
   const navigate = useNavigate();
+  const { loja } = useParams();
 
   const [typeBody, setTypeBody] = useState<EnumMenu>(EnumMenu.SELECTREGISTER);
   const [dateSelected, setDateSelected] = useState<string>("");
@@ -73,7 +73,7 @@ export default function Agenda() {
   };
   return (
     <div className={styles.container}>
-      <BannerComponent bannerImage={bannerImage} />
+      <BannerComponent bannerImage={loja} />
       {renderBody()}
       <ModalComponent
         isOpen={modalConfirm}

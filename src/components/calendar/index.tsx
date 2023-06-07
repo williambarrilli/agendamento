@@ -1,19 +1,36 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import moment, { Moment } from "moment";
 import MonthCard from "./monthCard";
-import arrowRight from "../../assets/arrowRight.svg";
-import arrowLeft from "../../assets/arrowLeft.svg";
+import arrowRight from "../../assets/icons/arrowRight.svg";
+import arrowLeft from "../../assets/icons/arrowLeft.svg";
 import styles from "./styles.module.scss";
+import { Reserved } from "../../types/reserved";
+import { EnumStatus } from "../../types/enums";
 
 export interface CalendarProps {
   onSelectDate: (value: Moment) => void;
+  listReserved?: Reserved[];
 }
 
-export default function Calendar({ onSelectDate }: CalendarProps) {
+export default function Calendar({
+  onSelectDate,
+  listReserved = [],
+}: CalendarProps) {
   const [dateSelected, setDateSelected] = useState<Moment>(moment());
-
   const [monthEndYearSelected, setMonthEndYearSelected] = useState<Moment>(
     moment()
+  );
+
+  const jobsForDays: Reserved[] = useMemo(
+    () =>
+      listReserved.filter(
+        (reserved) =>
+          monthEndYearSelected.isSame(
+            moment(reserved.date, "DD/MM/YYYY"),
+            "month"
+          ) && reserved.status === EnumStatus.APROVED
+      ) || [],
+    [monthEndYearSelected, listReserved]
   );
 
   return (
@@ -52,6 +69,7 @@ export default function Calendar({ onSelectDate }: CalendarProps) {
           dateSelected={dateSelected}
           setDateSelected={setDateSelected}
           onClick={(value: Moment) => onSelectDate(value)}
+          jobsForDays={jobsForDays}
         />
       </div>
     </div>
