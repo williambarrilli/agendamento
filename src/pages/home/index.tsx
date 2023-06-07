@@ -7,7 +7,8 @@ import { useEffect, useMemo, useState } from "react";
 import { Shop } from "../../types/shop";
 
 export default function Home() {
-  const { loja } = useParams();
+  // const { loja } = useParams();
+  const loja = "juliana-silva";
   const [loading, setLoading] = useState(true);
   const [shop, setShop] = useState<Shop>();
 

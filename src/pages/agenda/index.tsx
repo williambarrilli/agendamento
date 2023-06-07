@@ -12,7 +12,8 @@ import BannerComponent from "../../components/banner";
 
 export default function Agenda() {
   const navigate = useNavigate();
-  const { loja } = useParams();
+  // const { loja } = useParams();
+  const loja = "juliana-silva";
 
   const [typeBody, setTypeBody] = useState<EnumMenu>(EnumMenu.SELECTREGISTER);
   const [dateSelected, setDateSelected] = useState<string>("");
