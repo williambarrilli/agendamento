@@ -98,14 +98,24 @@ export default function MyArea() {
         isOpen={isOpenModal}
         onClose={() => setIsOpenModal(false)}
       >
-        {/* <h1> Horarios do dia: {dateSelected?.format("DD/MM/YYYY")} </h1> */}
-        <table>
-          <thead>
-            <th>Horário</th>
-            <th>Nome</th>
-            <th>Contato</th>
+        <h1 className={styles.text}>
+          {" "}
+          Horarios do dia: {dateSelected?.format("DD/MM/YYYY")}{" "}
+        </h1>
+        <table className={styles.table}>
+          <thead className={styles.textTread}>
+            <th className={styles.teste}>Horário</th>
+            <th className={styles.teste}>Nome</th>
+            <th className={styles.teste}>Contato</th>
           </thead>
-          <tbody>{renderTableBody()}</tbody>
+
+          <tr>
+            <td className={styles.separator}></td>
+            <td className={styles.separator}></td>
+            <td className={styles.separator}></td>
+          </tr>
+
+          <tbody className={styles.textTable}>{renderTableBody()}</tbody>
         </table>
       </ModalComponent>
     </div>
