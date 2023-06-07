@@ -13,6 +13,7 @@ import {
 import { firebaseConfig } from "../init-firebase";
 import { Reserved } from "../types/reserved";
 import { EnumStatus } from "../types/enums";
+import { getSessionStorage, setSessionStorage } from "../utils/sessionStorage";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -62,6 +63,7 @@ export const getShopInfo = async (url: string | undefined) => {
   querySnapshot.forEach((doc) => {
     if (doc.data().name) retorno = { ...doc.data(), id: doc.id };
   });
+  if (retorno) setSessionStorage("shopData", retorno);
   return retorno;
 };
 

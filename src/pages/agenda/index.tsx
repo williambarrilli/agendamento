@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import CalendarView from "../../views/home/calendarView";
 import { EnumMenu, EnumStatus } from "../../types/enums";
 import Button from "../../components/button";
@@ -7,13 +7,14 @@ import ModalComponent from "../../components/modal";
 import { sendSolicitationReserved } from "../../controllers/firestore";
 import RegisterView from "../../views/home/registerView";
 import SelectHourView from "../../views/home/selectHourView";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import BannerComponent from "../../components/banner";
+import { Shop } from "../../types/shop";
+import { getSessionStorage } from "../../utils/sessionStorage";
+import { Reserved } from "../../types/reserved";
 
 export default function Agenda() {
   const navigate = useNavigate();
-  // const { loja } = useParams();
-  const loja = "juliana-silva";
 
   const [typeBody, setTypeBody] = useState<EnumMenu>(EnumMenu.SELECTREGISTER);
   const [dateSelected, setDateSelected] = useState<string>("");
@@ -22,6 +23,21 @@ export default function Agenda() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
 
+  const shop: Shop = getSessionStorage("shopData");
+
+  useEffect(() => {
+    if (!shop?.url) {
+      navigate("/");
+    }
+  }, [navigate, shop]);
+
+  const listReserveDate: Reserved[] = useMemo(
+    () =>
+      shop?.reservedList.filter(
+        (rerseve: Reserved) => rerseve?.date === dateSelected
+      ) || [],
+    [dateSelected, shop?.reservedList]
+  );
   const renderBody = () => {
     const types = {
       SELECTDATE: (
@@ -40,6 +56,7 @@ export default function Agenda() {
           }}
           dateSelected={dateSelected}
           onBack={(value: EnumMenu) => setTypeBody(value)}
+          listReserveDate={listReserveDate}
         />
       ),
       SELECTREGISTER: (
@@ -74,7 +91,7 @@ export default function Agenda() {
   };
   return (
     <div className={styles.container}>
-      <BannerComponent bannerImage={loja} />
+      <BannerComponent bannerImage={shop.url} />
       {renderBody()}
       <ModalComponent
         isOpen={modalConfirm}
@@ -101,4 +118,7 @@ export default function Agenda() {
       </ModalComponent>
     </div>
   );
+}
+function setLoading(arg0: boolean) {
+  throw new Error("Function not implemented.");
 }
