@@ -21,19 +21,32 @@ const db = getFirestore(app);
 
 export const addData = async () => {
   try {
-    const docRef = await addDoc(collection(db, "shops"), {
-      id: "mariana",
-      name: "Juliana Silva",
-      url: "juliana-silva",
-      phone: "1500",
-      instagram: "",
-      reservedList: [],
-      solicitationList: [],
-    });
-    console.log("Document written with ID: ", docRef.id);
+    if (!(await getShopByUrl("will"))) {
+      const docRef = await addDoc(collection(db, "shops"), {
+        name: "Will Barber",
+        url: "will",
+        phone: "54981559983",
+        instagram: "@williambarrilli",
+        reservedList: [],
+        solicitationList: [],
+      });
+      console.log("Document written with ID: ", docRef.id);
+    }
   } catch (e) {
     console.error("Error adding document: ", e);
   }
+};
+
+export const getShopByUrl = async (url: string | undefined) => {
+  const shopsRef = collection(db, "shops");
+  const searchQuery = query(shopsRef, where("url", "==", url));
+
+  const querySnapshot = await getDocs(searchQuery);
+  let retorno;
+  querySnapshot.forEach((doc) => {
+    if (doc.data().name) retorno = { ...doc.data(), id: doc.id };
+  });
+  return retorno;
 };
 
 export const getSolicitationList = async (shopId: string) => {

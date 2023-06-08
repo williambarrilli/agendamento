@@ -4,7 +4,7 @@ import CalendarView from "../../views/home/calendarView";
 import { EnumMenu, EnumStatus } from "../../types/enums";
 import Button from "../../components/button";
 import ModalComponent from "../../components/modal";
-import { sendSolicitationReserved } from "../../controllers/firestore";
+import { addData, sendSolicitationReserved } from "../../controllers/firestore";
 import RegisterView from "../../views/home/registerView";
 import SelectHourView from "../../views/home/selectHourView";
 import { useNavigate } from "react-router-dom";
@@ -30,7 +30,6 @@ export default function Agenda() {
       navigate("/");
     }
   }, [navigate, shop]);
-
   const listReserveDate: Reserved[] = useMemo(
     () =>
       shop?.reservedList.filter(
@@ -38,14 +37,20 @@ export default function Agenda() {
       ) || [],
     [dateSelected, shop?.reservedList]
   );
+
+  const handleScreen = (screen: EnumMenu) => {
+    setTypeBody(screen);
+  };
+
   const renderBody = () => {
     const types = {
       SELECTDATE: (
         <CalendarView
           setDateSelected={(value: string) => {
             setDateSelected(value);
-            setTypeBody(EnumMenu.SELECTHOUR);
+            handleScreen(EnumMenu.SELECTHOUR);
           }}
+          url={shop.url}
         />
       ),
       SELECTHOUR: (
@@ -55,7 +60,7 @@ export default function Agenda() {
             setModalConfirm(true);
           }}
           dateSelected={dateSelected}
-          onBack={(value: EnumMenu) => setTypeBody(value)}
+          onBack={(value: EnumMenu) => handleScreen(value)}
           listReserveDate={listReserveDate}
         />
       ),
@@ -65,7 +70,7 @@ export default function Agenda() {
           phone={phone}
           alterarName={(value) => setName(value)}
           alterarPhone={(value) => setPhone(value)}
-          onConfirm={(value) => setTypeBody(value)}
+          onConfirm={(value) => handleScreen(value)}
         />
       ),
       MYSERVICES: <></>,
@@ -87,7 +92,7 @@ export default function Agenda() {
     setPhone("");
 
     alert("Solicitação de reserva enviada");
-    navigate("/");
+    navigate("/" + shop.url);
   };
   return (
     <div className={styles.container}>
