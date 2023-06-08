@@ -8,11 +8,12 @@ import arrowLeft from "../../../assets/icons/arrowLeft.svg";
 import { Reserved } from "../../../types/reserved";
 export interface MonthCardProps {
   monthEndYearSelected: Moment;
-  dateSelected: Moment;
+  dateSelected: Moment | null;
   setMonthEndYearSelected: (value: Moment) => void;
   setDateSelected: (value: Moment) => void;
   onClick: (value: Moment) => void;
   jobsForDays: Reserved[];
+  minDate?: Moment;
 }
 
 export default function MonthCard({
@@ -22,6 +23,7 @@ export default function MonthCard({
   setDateSelected,
   onClick,
   jobsForDays = [],
+  minDate,
 }: MonthCardProps) {
   const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"];
 
@@ -54,6 +56,7 @@ export default function MonthCard({
   );
 
   const handleClick = (day: Moment) => {
+    if (minDate && isCurrentDay(day)) return;
     setDateSelected(day);
     onClick(day);
   };
@@ -66,6 +69,11 @@ export default function MonthCard({
     if (numberJobs <= 1) return "low";
     if (numberJobs <= 3) return "medium";
     if (numberJobs >= 4) return "high";
+  };
+
+  const isCurrentDay = (day: Moment) => {
+    if (!monthEndYearSelected.isSame(day, "month")) return true;
+    if (minDate && minDate > day) return true;
   };
 
   return (
@@ -114,11 +122,8 @@ export default function MonthCard({
               className={`${objStr({
                 [styles["day"]]: true,
                 [styles["state"]]: true,
-                [styles["is-selected"]]: dateSelected.isSame(day),
-                [styles["is-not-current-month"]]: !monthEndYearSelected.isSame(
-                  day,
-                  "month"
-                ),
+                [styles["is-selected"]]: dateSelected?.isSame(day),
+                [styles["is-not-current-month"]]: isCurrentDay(day),
               })}`}
               onClick={() => handleClick(day)}
             >
@@ -130,7 +135,7 @@ export default function MonthCard({
                     [styles["sublime"]]: true,
                     [styles[`${getJobsOfDay(day)}`]]: true,
                   })}`}
-                ></div>
+                />
               </div>
             </span>
           ))}

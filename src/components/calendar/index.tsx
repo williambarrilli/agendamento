@@ -10,13 +10,18 @@ import { EnumStatus } from "../../types/enums";
 export interface CalendarProps {
   onSelectDate: (value: Moment) => void;
   listReserved?: Reserved[];
+  minDate?: Moment;
+  dateSelected: Moment | null;
+  setDateSelected: (value: Moment) => void;
 }
 
 export default function Calendar({
   onSelectDate,
   listReserved = [],
+  minDate,
+  dateSelected,
+  setDateSelected,
 }: CalendarProps) {
-  const [dateSelected, setDateSelected] = useState<Moment>(moment());
   const [monthEndYearSelected, setMonthEndYearSelected] = useState<Moment>(
     moment()
   );
@@ -70,6 +75,7 @@ export default function Calendar({
           setDateSelected={setDateSelected}
           onClick={(value: Moment) => onSelectDate(value)}
           jobsForDays={jobsForDays}
+          minDate={minDate}
         />
       </div>
     </div>

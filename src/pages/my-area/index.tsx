@@ -83,6 +83,8 @@ export default function MyArea() {
           <Calendar
             onSelectDate={(value: Moment) => setDateSelected(value)}
             listReserved={list}
+            setDateSelected={setDateSelected}
+            dateSelected={dateSelected}
           />
         </div>
         <h3 className={styles.text}>Solicitações de reservas</h3>

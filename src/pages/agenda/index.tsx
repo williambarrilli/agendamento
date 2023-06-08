@@ -4,7 +4,7 @@ import CalendarView from "../../views/home/calendarView";
 import { EnumMenu, EnumStatus } from "../../types/enums";
 import Button from "../../components/button";
 import ModalComponent from "../../components/modal";
-import { addData, sendSolicitationReserved } from "../../controllers/firestore";
+import { sendSolicitationReserved } from "../../controllers/firestore";
 import RegisterView from "../../views/home/registerView";
 import SelectHourView from "../../views/home/selectHourView";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ import BannerComponent from "../../components/banner";
 import { Shop } from "../../types/shop";
 import { getSessionStorage } from "../../utils/sessionStorage";
 import { Reserved } from "../../types/reserved";
+import moment, { Moment } from "moment";
 
 export default function Agenda() {
   const navigate = useNavigate();
@@ -46,11 +47,12 @@ export default function Agenda() {
     const types = {
       SELECTDATE: (
         <CalendarView
-          setDateSelected={(value: string) => {
-            setDateSelected(value);
+          setDateSelected={(value: Moment) => {
+            setDateSelected(value.format("DDD/MM/YYYY"));
             handleScreen(EnumMenu.SELECTHOUR);
           }}
           url={shop.url}
+          dateSelected={moment(dateSelected)}
         />
       ),
       SELECTHOUR: (
