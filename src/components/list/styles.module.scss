@@ -2,23 +2,20 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  
- 
+  min-width: 75vw;
 }
 .content {
   align-items: center;
-  max-width: 360px;
 }
 
 .itemHour {
-  color:#ffffff;
-  
+  color: #ffffff;
   font-size: 20px;
   margin: 5px;
   border: 2px solid #906646;
   background: #906646;
   padding: 5px;
- 
+
   &:disabled {
     background-color: #fafafa72;
     color: #d1d1d1;
@@ -26,7 +23,6 @@
   }
   &:hover {
     background: #d1966a;
-    color: #fafafa96;
-    
+    color: #ffffff;
   }
 }

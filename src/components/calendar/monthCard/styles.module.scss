@@ -42,14 +42,18 @@
   text-align: center;
   vertical-align: center;
   margin: 1px;
+  &:hover {
+    background: #d1966a;
+    color: #ffffff;
+  }
 }
 .is-not-current-month {
   opacity: 0.3;
   cursor: default;
 }
 .is-selected {
-  background-color: #ac7348;
-  color: #fff;
+  background: #d1966a;
+  color: #ffffff;
 }
 
 .arrow-box {
