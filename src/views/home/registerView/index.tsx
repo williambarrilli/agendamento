@@ -46,7 +46,7 @@ export default function RegisterView({
           />
           <div className={styles["box-button"]}>
             <Button
-              styleOption="secondary"
+              styleOption="primary"
               text="Continuar"
               size="md"
               onclick={() => onConfirm(EnumMenu.SELECTDATE)}
