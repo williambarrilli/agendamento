@@ -1,15 +1,14 @@
 .container {
-
+display: flex;
+justify-content: center;
 }
 
 .content {
-  padding: 10%;
-  width: 60%;
-  border-radius: 4px;
-  background-color: white;
-  position:fixed;
-  top: 50%;
-  left: 10%;
+  margin-top: 20%;
+  max-width: 60%;
+
+ 
+  
 }
 .input-box {
   margin: 10% 0;

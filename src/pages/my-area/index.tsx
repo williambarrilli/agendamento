@@ -103,9 +103,9 @@ export default function MyArea() {
         </h1>
         <table className={styles.table}>
           <thead className={styles.textTread}>
-            <th className={styles.teste}>Horário</th>
-            <th className={styles.teste}>Nome</th>
-            <th className={styles.teste}>Contato</th>
+            <th>Horário</th>
+            <th className={styles.columMax}>Nome</th>
+            <th>Contato</th>
           </thead>
 
           <tr>
