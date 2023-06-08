@@ -36,9 +36,11 @@ export default function Home() {
 
   // Verifica se ainda está carregando
   if (loading) {
-    return <div>Carregando...</div>; // Mostra um indicador de carregamento enquanto espera
+    return <div className={styles.content}>Carregando...</div>; // Mostra um indicador de carregamento enquanto espera
   } else if (!loading && !shop?.url)
-    return <div>ops, não encontramos este endereço</div>;
+    return (
+      <div className={styles.content}>ops, não encontramos este endereço</div>
+    );
   else if (shop?.url)
     return (
       <>

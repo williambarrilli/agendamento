@@ -76,6 +76,11 @@ export default function MonthCard({
     if (minDate && minDate > day) return true;
   };
 
+  const isWeekend = (day: Moment) => {
+    const dayOfWeek = day.weekday();
+    return dayOfWeek === 0 || dayOfWeek === 6;
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -124,6 +129,7 @@ export default function MonthCard({
                 [styles["state"]]: true,
                 [styles["is-selected"]]: dateSelected?.isSame(day),
                 [styles["is-not-current-month"]]: isCurrentDay(day),
+                [styles["is-weekend"]]: isWeekend(day),
               })}`}
               onClick={() => handleClick(day)}
             >
