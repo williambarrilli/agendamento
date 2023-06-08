@@ -1,20 +1,5 @@
-// import { bannersByUrl } from "./banners-by-url";
+import { bannersByUrl } from "../../assets/images";
 import styles from "./styles.module.scss";
-
-import JulianaBannerImage from "../../assets/images/juliana-banner-image.jpg";
-import WillBanner from "../../assets/images/will-banner-image.jpg";
-import AnaUnhasBanner from "../../assets/images/ana-unhas-banner-image.jpg";
-
-interface banners {
-  [key: string]: string;
-}
-
-export const bannersByUrl: banners = {
-  "juliana-silva": JulianaBannerImage,
-  will: WillBanner,
-  "ana-unhas": AnaUnhasBanner,
-  default: JulianaBannerImage,
-};
 
 interface BannerComponentProps {
   bannerImage: string | undefined;
