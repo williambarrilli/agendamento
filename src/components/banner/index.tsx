@@ -1,14 +1,17 @@
 // import { bannersByUrl } from "./banners-by-url";
 import styles from "./styles.module.scss";
 
-import julianaBannerImage from "../../assets/images/juliana-banner-image.jpg";
+import JulianaBannerImage from "../../assets/images/juliana-banner-image.jpg";
+import WillBanner from "../../assets/images/will-banner-image.jpg";
+
 interface banners {
   [key: string]: string;
 }
 
 export const bannersByUrl: banners = {
-  "juliana-silva": julianaBannerImage,
-  default: julianaBannerImage,
+  "juliana-silva": JulianaBannerImage,
+  will: WillBanner,
+  default: JulianaBannerImage,
 };
 
 interface BannerComponentProps {
@@ -21,7 +24,7 @@ export default function BannerComponent({ bannerImage }: BannerComponentProps) {
       <div>
         <img
           className={styles.banner}
-          src={bannersByUrl[bannerImage]}
+          src={bannersByUrl[bannerImage] || bannersByUrl.default}
           alt="bannerImage"
         />
       </div>

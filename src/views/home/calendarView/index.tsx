@@ -1,15 +1,18 @@
 import styles from "./styles.module.scss";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
 import Button from "../../../components/button";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
+import Calendar from "../../../components/calendar";
 
 export interface CalendarViewProps {
   setDateSelected: (value: string) => void;
+  url: string;
 }
 
-export default function CalendarView({ setDateSelected }: CalendarViewProps) {
+export default function CalendarView({
+  setDateSelected,
+  url,
+}: CalendarViewProps) {
   const navigate = useNavigate();
 
   return (
@@ -20,18 +23,16 @@ export default function CalendarView({ setDateSelected }: CalendarViewProps) {
         </div>
         <div className={styles.content}>
           <Calendar
-            onClickDay={(value) =>
+            onSelectDate={(value) =>
               setDateSelected(moment(value).format("DD/MM/YYYY"))
             }
-            value={moment().format("DD/MM/YYYY")}
-            minDate={new Date()}
           />
         </div>
         <div className={styles.contentButtons}>
           <Button
             styleOption="secondary"
             size="md"
-            onclick={() => navigate("/")}
+            onclick={() => navigate("/" + url)}
             text={"Voltar"}
           />
         </div>

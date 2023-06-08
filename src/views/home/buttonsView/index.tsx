@@ -15,7 +15,7 @@ export default function ButtonsView() {
           <Button
             text="Agendar"
             size="lg"
-            onclick={() => navigate("/agenda")}
+            onclick={() => navigate("/agendar")}
           />
         </div>
         {/* <div className="content-buttons">

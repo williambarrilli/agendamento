@@ -17,15 +17,11 @@ root.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        {/* <Route Component={Home} path="/" />
-        <Route Component={Home} path="/:loja" />
-        <Route Component={MyArea} path="/:loja/minha-area" />
-        <Route Component={Login} path="/:loja/login" />
-        <Route Component={Agenda} path="/:loja/agenda" /> */}
         <Route Component={Home} path="/" />
+        <Route Component={Home} path="/:loja" />
         <Route Component={MyArea} path="/minha-area" />
         <Route Component={Login} path="/login" />
-        <Route Component={Agenda} path="/agenda" />
+        <Route Component={Agenda} path="/agendar" />
       </Routes>
     </Router>
   </React.StrictMode>
