@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import styles from "./styles.module.scss";
-import "react-calendar/dist/Calendar.css";
-import { getSolicitationList } from "../../controllers/firestore";
-import { Reserved } from "../../types/reserved";
 import moment, { Moment } from "moment";
+import { useEffect, useState } from "react";
+import "react-calendar/dist/Calendar.css";
 import Calendar from "../../components/calendar";
-import ModalComponent from "../../components/modal";
 import ListComponents from "../../components/listComponents";
+import ModalComponent from "../../components/modal";
+import { getSolicitationList } from "../../controllers/firestore";
 import { EnumStatus } from "../../types/enums";
+import { Reserved } from "../../types/reserved";
+import styles from "./styles.module.scss";
 
 export default function MyArea() {
   const [list, setList] = useState<Reserved[]>([]);
@@ -100,8 +100,7 @@ export default function MyArea() {
         onClose={() => setIsOpenModal(false)}
       >
         <h1 className={styles.text}>
-          {" "}
-          Horarios do dia: {dateSelected?.format("DD/MM/YYYY")}{" "}
+          Horarios do dia: {dateSelected?.format("DD/MM/YYYY")}
         </h1>
         <table className={styles.table}>
           <thead className={styles.textTread}>
