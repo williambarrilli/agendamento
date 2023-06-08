@@ -7,7 +7,7 @@ import styles from "./styles.module.scss";
 import { useNavigate } from "react-router-dom";
 
 interface ListComponentsProps {
-  listItems: Reserved[];
+  listItems?: Reserved[];
 }
 
 export default function ListComponents({ listItems }: ListComponentsProps) {

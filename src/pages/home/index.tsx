@@ -2,7 +2,7 @@ import styles from "./styles.module.scss";
 import ButtonsView from "../../views/home/buttonsView";
 import BannerComponent from "../../components/banner";
 import { useParams } from "react-router-dom";
-import { getShopInfo } from "../../controllers/firestore";
+import { addData, getShopInfo } from "../../controllers/firestore";
 import { useEffect, useState } from "react";
 import { Shop } from "../../types/shop";
 import { getSessionStorage } from "../../utils/sessionStorage";
@@ -33,7 +33,6 @@ export default function Home() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   // Verifica se ainda está carregando
   if (loading) {
     return <div className={styles.content}>Carregando...</div>; // Mostra um indicador de carregamento enquanto espera
@@ -46,7 +45,7 @@ export default function Home() {
       <>
         <BannerComponent bannerImage={shop && shop.url} />
         <h1 className={styles.text}> {shop?.name} </h1>
-        <ButtonsView />
+        <ButtonsView shop={shop} />
       </>
     );
   return <></>;

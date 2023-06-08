@@ -81,7 +81,7 @@ export default function Agenda() {
   };
 
   const onConfirm = () => {
-    sendSolicitationReserved("MLJ0k39Q9ELsH78X3lHW", {
+    sendSolicitationReserved(shop.id ? shop.id : "MLJ0k39Q9ELsH78X3lHW", {
       name: name,
       phone: phone,
       date: dateSelected,

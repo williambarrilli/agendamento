@@ -38,7 +38,7 @@ export default function RegisterView({
           />
 
           <Input
-            type="number"
+            type="text"
             value={phone}
             placeholder="(**)****-****"
             label="Telefone:"

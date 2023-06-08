@@ -4,13 +4,17 @@ import "react-calendar/dist/Calendar.css";
 import Calendar from "../../components/calendar";
 import ListComponents from "../../components/listComponents";
 import ModalComponent from "../../components/modal";
-import { getSolicitationList } from "../../controllers/firestore";
+import { getShopByUrl, getSolicitationList } from "../../controllers/firestore";
 import { EnumStatus } from "../../types/enums";
 import { Reserved } from "../../types/reserved";
 import styles from "./styles.module.scss";
+import { useParams } from "react-router-dom";
+import { Shop } from "../../types/shop";
 
 export default function MyArea() {
-  const [list, setList] = useState<Reserved[]>([]);
+  const { loja } = useParams();
+
+  const [shop, setShop] = useState<Shop>();
   const [filterList, setFilterList] = useState<Reserved[]>([]);
 
   const [dateSelected, setDateSelected] = useState<Moment | null>(null);
@@ -44,10 +48,9 @@ export default function MyArea() {
 
   const fetchData = async () => {
     try {
-      const solicitationList = await getSolicitationList(
-        "MLJ0k39Q9ELsH78X3lHW"
-      );
-      setList(solicitationList);
+      const shop = await getShopByUrl(loja ? loja : "MLJ0k39Q9ELsH78X3lHW");
+
+      setShop(shop);
     } catch (error) {
       console.log("Error fetching data:", error);
     }
@@ -59,14 +62,15 @@ export default function MyArea() {
   }, []);
 
   useEffect(() => {
-    if (list.length)
+    console.log(shop, loja);
+    if (shop?.solicitationList.length)
       setFilterList(
-        list.filter((reserved) =>
+        shop?.solicitationList.filter((reserved) =>
           dateSelected?.isSame(moment(reserved.date, "DD/MM/YYYY"))
         )
       );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateSelected, list]);
+  }, [dateSelected, shop]);
 
   useEffect(() => {
     if (dateSelected) return setIsOpenModal(true);
@@ -82,7 +86,7 @@ export default function MyArea() {
         <div className={styles.content}>
           <Calendar
             onSelectDate={(value: Moment) => setDateSelected(value)}
-            listReserved={list}
+            listReserved={shop?.solicitationList}
             setDateSelected={setDateSelected}
             dateSelected={dateSelected}
           />
@@ -90,7 +94,7 @@ export default function MyArea() {
         <h3 className={styles.text}>Solicitações de reservas</h3>
 
         <ListComponents
-          listItems={list.filter(
+          listItems={shop?.solicitationList.filter(
             (reserved) => reserved.status === EnumStatus.PENDENT
           )}
         />

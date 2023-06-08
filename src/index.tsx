@@ -20,6 +20,7 @@ root.render(
         <Route Component={Home} path="/" />
         <Route Component={Home} path="/:loja" />
         <Route Component={MyArea} path="/minha-area" />
+        <Route Component={MyArea} path="/minha-area/:loja" />
         <Route Component={Login} path="/login" />
         <Route Component={Agenda} path="/agendar" />
       </Routes>

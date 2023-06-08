@@ -21,12 +21,12 @@ const db = getFirestore(app);
 
 export const addData = async () => {
   try {
-    if (!(await getShopByUrl("will"))) {
+    if (!(await getShopByUrl("ana-unhas"))) {
       const docRef = await addDoc(collection(db, "shops"), {
-        name: "Will Barber",
-        url: "will",
-        phone: "54981559983",
-        instagram: "@williambarrilli",
+        name: "Ana Oliveira Designer De Unhas",
+        url: "ana-unhas",
+        phone: "55 54 8151-7738",
+        instagram: "ana_oliveira_designer_de_unhas",
         reservedList: [],
         solicitationList: [],
       });

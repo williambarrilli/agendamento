@@ -4,7 +4,7 @@ export interface Shop {
   id?: string;
   name: string;
   url: string;
-  phone: number;
+  phone: string;
   instagram: string;
   reservedList: Reserved[];
   solicitationList: Reserved[];
