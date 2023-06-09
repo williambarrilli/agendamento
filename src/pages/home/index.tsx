@@ -2,7 +2,7 @@ import styles from "./styles.module.scss";
 import ButtonsView from "../../views/home/buttonsView";
 import BannerComponent from "../../components/banner";
 import { useParams } from "react-router-dom";
-import { addData, getShopInfo } from "../../controllers/firestore";
+import { getShopByUrl } from "../../controllers/firestore";
 import { useEffect, useState } from "react";
 import { Shop } from "../../types/shop";
 import { getSessionStorage } from "../../utils/sessionStorage";
@@ -16,12 +16,13 @@ export default function Home() {
 
   //TODO refatorar
   useEffect(() => {
+    if (!loja) return;
     setLoading(true);
     if (session?.url && session?.url === loja) {
       setShop(session);
       setLoading(false);
     } else {
-      getShopInfo(loja?.toString())
+      getShopByUrl(loja?.toString())
         .then((response) => {
           setShop(response);
           setLoading(false); // Altera o estado para "false" quando o request é concluído

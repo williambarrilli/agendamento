@@ -7,35 +7,27 @@ import {
   where,
   collection,
   doc,
-  addDoc,
   getDoc,
 } from "firebase/firestore";
 import { firebaseConfig } from "../init-firebase";
 import { Reserved } from "../types/reserved";
 import { EnumStatus } from "../types/enums";
-import { getSessionStorage, setSessionStorage } from "../utils/sessionStorage";
+import { setSessionStorage } from "../utils/sessionStorage";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export const addData = async () => {
-  try {
-    if (!(await getShopByUrl("ana-unhas"))) {
-      const docRef = await addDoc(collection(db, "shops"), {
-        name: "Ana Oliveira Designer De Unhas",
-        url: "ana-unhas",
-        phone: "55 54 8151-7738",
-        instagram: "ana_oliveira_designer_de_unhas",
-        reservedList: [],
-        solicitationList: [],
-      });
-      console.log("Document written with ID: ", docRef.id);
-    }
-  } catch (e) {
-    console.error("Error adding document: ", e);
-  }
-};
+// export const updateData = async () => {
+//   try {
+//     const ref = doc(db, "shops", "");
+//     await updateDoc(ref,{
+
+//     })
+//   } catch (e) {
+//     console.error("Error adding document: ", e);
+//   }
+// };
 
 export const getShopByUrl = async (url: string | undefined) => {
   const shopsRef = collection(db, "shops");
@@ -46,6 +38,7 @@ export const getShopByUrl = async (url: string | undefined) => {
   querySnapshot.forEach((doc) => {
     if (doc.data().name) retorno = { ...doc.data(), id: doc.id };
   });
+  if (retorno) setSessionStorage("shopData", retorno);
   return retorno;
 };
 
@@ -56,28 +49,6 @@ export const getSolicitationList = async (shopId: string) => {
     const documentData = docSnapshot.data();
     return documentData.solicitationList;
   }
-};
-
-export const getReservedHours = async (shopId: string) => {
-  const documentRef = doc(db, "shops", shopId);
-  const docSnapshot = await getDoc(documentRef);
-  if (docSnapshot.exists()) {
-    const documentData = docSnapshot.data();
-    return documentData.reservedList || [];
-  }
-};
-
-export const getShopInfo = async (url: string | undefined) => {
-  const shopsRef = collection(db, "shops");
-  const searchQuery = query(shopsRef, where("url", "==", url));
-
-  const querySnapshot = await getDocs(searchQuery);
-  let retorno;
-  querySnapshot.forEach((doc) => {
-    if (doc.data().name) retorno = { ...doc.data(), id: doc.id };
-  });
-  if (retorno) setSessionStorage("shopData", retorno);
-  return retorno;
 };
 
 export const sendSolicitationReserved = async (

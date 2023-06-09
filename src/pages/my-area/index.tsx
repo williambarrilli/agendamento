@@ -4,12 +4,13 @@ import "react-calendar/dist/Calendar.css";
 import Calendar from "../../components/calendar";
 import ListComponents from "../../components/listComponents";
 import ModalComponent from "../../components/modal";
-import { getShopByUrl, getSolicitationList } from "../../controllers/firestore";
+import { getShopByUrl } from "../../controllers/firestore";
 import { EnumStatus } from "../../types/enums";
 import { Reserved } from "../../types/reserved";
 import styles from "./styles.module.scss";
 import { useParams } from "react-router-dom";
 import { Shop } from "../../types/shop";
+import { getSessionStorage } from "../../utils/sessionStorage";
 
 export default function MyArea() {
   const { loja } = useParams();
@@ -19,6 +20,7 @@ export default function MyArea() {
 
   const [dateSelected, setDateSelected] = useState<Moment | null>(null);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const session: Shop = getSessionStorage("shopData");
 
   const renderTableBody = () => {
     return horarios.map((horario, index) => {
@@ -48,7 +50,7 @@ export default function MyArea() {
 
   const fetchData = async () => {
     try {
-      const shop = await getShopByUrl(loja ? loja : "MLJ0k39Q9ELsH78X3lHW");
+      const shop = await getShopByUrl(loja ? loja : "juliana-silva");
 
       setShop(shop);
     } catch (error) {
@@ -57,15 +59,16 @@ export default function MyArea() {
   };
 
   useEffect(() => {
-    fetchData();
+    if (session?.url && session?.url === loja) {
+      setShop(session);
+    } else fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    console.log(shop, loja);
-    if (shop?.solicitationList.length)
+    if (shop?.solicitationList?.length)
       setFilterList(
-        shop?.solicitationList.filter((reserved) =>
+        shop?.solicitationList?.filter((reserved) =>
           dateSelected?.isSame(moment(reserved.date, "DD/MM/YYYY"))
         )
       );
@@ -92,12 +95,14 @@ export default function MyArea() {
           />
         </div>
         <h3 className={styles.text}>Solicitações de reservas</h3>
-
-        <ListComponents
-          listItems={shop?.solicitationList.filter(
-            (reserved) => reserved.status === EnumStatus.PENDENT
-          )}
-        />
+        {shop?.id && (
+          <ListComponents
+            shopId={shop.id}
+            listItems={shop?.solicitationList?.filter(
+              (reserved) => reserved.status === EnumStatus.PENDENT
+            )}
+          />
+        )}
       </div>
       <ModalComponent
         isOpen={isOpenModal}

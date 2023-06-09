@@ -8,14 +8,18 @@ import { useNavigate } from "react-router-dom";
 
 interface ListComponentsProps {
   listItems?: Reserved[];
+  shopId: string;
 }
 
-export default function ListComponents({ listItems }: ListComponentsProps) {
+export default function ListComponents({
+  listItems,
+  shopId,
+}: ListComponentsProps) {
   const navigate = useNavigate();
 
   const onConfirm = (item: Reserved, index: number) => {
     item.status = EnumStatus.APROVED;
-    updateSolicitationReserve("MLJ0k39Q9ELsH78X3lHW", item, index);
+    updateSolicitationReserve(shopId, item, index);
     const messageConfirm = `Olá, sua solicitação de agendamento foi confirmada, te aguardo no dia ${item.date} as ${item.hour} horas.`;
     navigate("/minha-area");
     sendMessage(messageConfirm, item.phone);
@@ -23,7 +27,7 @@ export default function ListComponents({ listItems }: ListComponentsProps) {
 
   const onReject = (item: Reserved, index: number) => {
     item.status = EnumStatus.REPROVED;
-    updateSolicitationReserve("MLJ0k39Q9ELsH78X3lHW", item, index);
+    updateSolicitationReserve(shopId, item, index);
     const messageReject = `Olá, não estarei disponivel neste horário, podemos agendar um outro horário?`;
     sendMessage(messageReject, item.phone);
   };

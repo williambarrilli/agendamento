@@ -48,7 +48,7 @@ export default function Agenda() {
       SELECTDATE: (
         <CalendarView
           setDateSelected={(value: Moment) => {
-            setDateSelected(value.format("DDD/MM/YYYY"));
+            setDateSelected(value.format("DD/MM/YYYY"));
             handleScreen(EnumMenu.SELECTHOUR);
           }}
           url={shop.url}

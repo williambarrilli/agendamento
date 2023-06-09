@@ -7,7 +7,7 @@ import Calendar from "../../../components/calendar";
 export interface CalendarViewProps {
   setDateSelected: (value: Moment) => void;
   dateSelected: Moment;
-  url: string;
+  url: string | undefined;
 }
 
 export default function CalendarView({
