@@ -44,19 +44,21 @@ export default function ListComponents({
   }, [reservedList, horarios]);
   return (
     <div className={styles.container}>
-      {listHours.map((horario, index) => (
-        <button
-          className={`${objStr({
-            [styles["itemHour"]]: true,
-            [styles["itemHour-reserved"]]: !!horario.hasReservation,
-          })}`}
-          disabled={horario.hasReservation}
-          key={index}
-          onClick={() => setHourSelected(horario.hour)}
-        >
-          {horario.hour}
-        </button>
-      ))}
+      <div className={styles.content}>
+        {listHours.map((horario, index) => (
+          <button
+            className={`${objStr({
+              [styles["itemHour"]]: true,
+              [styles["itemHour-reserved"]]: !!horario.hasReservation,
+            })}`}
+            disabled={horario.hasReservation}
+            key={index}
+            onClick={() => setHourSelected(horario.hour)}
+          >
+            {horario.hour}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

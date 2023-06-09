@@ -3,7 +3,6 @@
   margin-top: 20px;
   justify-content: center;
 }
-
 .content {
   padding: 10px;
 }
@@ -12,48 +11,29 @@
   font-style: italic;
   text-align: center;
   font-weight: 500px;
-  font-size: 40px;
+  font-size: 23px;
   color: #ac7348;
 }
-
-.footer-buttons-modal {
-  display: flex;
-}
-
-.footer-button-box {
-  margin-right: 5%;
-}
-
-.modal-content {
-  height: 170px;
-  width: 300px;
-  padding: 7%;
-}
-.red {
-  color: red;
-  font-family: Didot, serif;
-  font-size: 23px;
-}
-.green {
-  color: green;
-  font-family: Didot, serif;
-  font-size: 23px;
-}
-.text {
-  font-family: Didot, serif;
-  text-align: center;
-  color: #ac7246;
-  font-size: 23px;
-}
-.textHorarios {
-  font-family: Didot, serif;
-  text-align: center;
-  color: #ac7246;
-  font-size: 23px;
-  margin-right: 20px;
-}
-.horarioContainer {
-  /* Estilos para o contêiner de cada horário */
-  display: flex;
+.table{
   align-items: center;
+}
+.textTread {
+  font-family: Didot, serif;
+  text-align: center;
+  color: #ac7246;
+  font-size: 15px;  
+}
+.textTable {
+  font-family: Didot, serif;
+  text-align: center;
+  font-size: 15px;  
+  color: #442711;
+}
+
+.columMax {
+  padding: 2px 85px;
+}
+
+.separator {
+  border-bottom: 1px solid #ac7246;
 }

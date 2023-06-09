@@ -5,7 +5,7 @@ interface InputProps {
   type?: HTMLInputTypeAttribute;
   value: string;
   placeholder?: string;
-  onChange: Function;
+  onChange: (value: string) => void;
   label?: string;
 }
 export default function Input({

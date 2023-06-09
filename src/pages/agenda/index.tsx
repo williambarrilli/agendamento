@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import CalendarView from "../../views/home/calendarView";
 import { EnumMenu, EnumStatus } from "../../types/enums";
 import Button from "../../components/button";
@@ -9,7 +9,10 @@ import RegisterView from "../../views/home/registerView";
 import SelectHourView from "../../views/home/selectHourView";
 import { useNavigate } from "react-router-dom";
 import BannerComponent from "../../components/banner";
-import bannerImage from "../../assets/bannerImage.jpg";
+import { Shop } from "../../types/shop";
+import { getSessionStorage } from "../../utils/sessionStorage";
+import { Reserved } from "../../types/reserved";
+import moment, { Moment } from "moment";
 
 export default function Agenda() {
   const navigate = useNavigate();
@@ -21,14 +24,35 @@ export default function Agenda() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
 
+  const shop: Shop = getSessionStorage("shopData");
+
+  useEffect(() => {
+    if (!shop?.url) {
+      navigate("/");
+    }
+  }, [navigate, shop]);
+  const listReserveDate: Reserved[] = useMemo(
+    () =>
+      shop?.reservedList.filter(
+        (rerseve: Reserved) => rerseve?.date === dateSelected
+      ) || [],
+    [dateSelected, shop?.reservedList]
+  );
+
+  const handleScreen = (screen: EnumMenu) => {
+    setTypeBody(screen);
+  };
+
   const renderBody = () => {
     const types = {
       SELECTDATE: (
         <CalendarView
-          setDateSelected={(value: string) => {
-            setDateSelected(value);
-            setTypeBody(EnumMenu.SELECTHOUR);
+          setDateSelected={(value: Moment) => {
+            setDateSelected(value.format("DD/MM/YYYY"));
+            handleScreen(EnumMenu.SELECTHOUR);
           }}
+          url={shop.url}
+          dateSelected={moment(dateSelected)}
         />
       ),
       SELECTHOUR: (
@@ -38,7 +62,8 @@ export default function Agenda() {
             setModalConfirm(true);
           }}
           dateSelected={dateSelected}
-          onBack={(value: EnumMenu) => setTypeBody(value)}
+          onBack={(value: EnumMenu) => handleScreen(value)}
+          listReserveDate={listReserveDate}
         />
       ),
       SELECTREGISTER: (
@@ -47,7 +72,7 @@ export default function Agenda() {
           phone={phone}
           alterarName={(value) => setName(value)}
           alterarPhone={(value) => setPhone(value)}
-          onConfirm={(value) => setTypeBody(value)}
+          onConfirm={(value) => handleScreen(value)}
         />
       ),
       MYSERVICES: <></>,
@@ -56,7 +81,7 @@ export default function Agenda() {
   };
 
   const onConfirm = () => {
-    sendSolicitationReserved("MLJ0k39Q9ELsH78X3lHW", {
+    sendSolicitationReserved(shop.id ? shop.id : "MLJ0k39Q9ELsH78X3lHW", {
       name: name,
       phone: phone,
       date: dateSelected,
@@ -69,11 +94,11 @@ export default function Agenda() {
     setPhone("");
 
     alert("Solicitação de reserva enviada");
-    navigate("/");
+    navigate("/" + shop.url);
   };
   return (
     <div className={styles.container}>
-      <BannerComponent bannerImage={bannerImage} />
+      <BannerComponent bannerImage={shop.url} />
       {renderBody()}
       <ModalComponent
         isOpen={modalConfirm}
@@ -100,4 +125,7 @@ export default function Agenda() {
       </ModalComponent>
     </div>
   );
+}
+function setLoading(arg0: boolean) {
+  throw new Error("Function not implemented.");
 }

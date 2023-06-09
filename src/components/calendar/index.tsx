@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 import moment, { Moment } from "moment";
 import MonthCard from "./monthCard";
-import arrowRight from "../../assets/arrowRight.svg";
-import arrowLeft from "../../assets/arrowLeft.svg";
+import arrowRight from "../../assets/icons/arrowRight.svg";
+import arrowLeft from "../../assets/icons/arrowLeft.svg";
 import styles from "./styles.module.scss";
 import { Reserved } from "../../types/reserved";
 import { EnumStatus } from "../../types/enums";
@@ -10,13 +10,18 @@ import { EnumStatus } from "../../types/enums";
 export interface CalendarProps {
   onSelectDate: (value: Moment) => void;
   listReserved?: Reserved[];
+  minDate?: Moment;
+  dateSelected: Moment | null;
+  setDateSelected: (value: Moment) => void;
 }
 
 export default function Calendar({
   onSelectDate,
   listReserved = [],
+  minDate,
+  dateSelected,
+  setDateSelected,
 }: CalendarProps) {
-  const [dateSelected, setDateSelected] = useState<Moment>(moment());
   const [monthEndYearSelected, setMonthEndYearSelected] = useState<Moment>(
     moment()
   );
@@ -70,6 +75,7 @@ export default function Calendar({
           setDateSelected={setDateSelected}
           onClick={(value: Moment) => onSelectDate(value)}
           jobsForDays={jobsForDays}
+          minDate={minDate}
         />
       </div>
     </div>

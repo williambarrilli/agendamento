@@ -1,20 +1,26 @@
-import { useState, useEffect } from "react";
-import styles from "./styles.module.scss";
-import "react-calendar/dist/Calendar.css";
-import { getSolicitationList } from "../../controllers/firestore";
-import { Reserved } from "../../types/reserved";
 import moment, { Moment } from "moment";
+import { useEffect, useState } from "react";
+import "react-calendar/dist/Calendar.css";
 import Calendar from "../../components/calendar";
-import ModalComponent from "../../components/modal";
 import ListComponents from "../../components/listComponents";
+import ModalComponent from "../../components/modal";
+import { getShopByUrl } from "../../controllers/firestore";
 import { EnumStatus } from "../../types/enums";
+import { Reserved } from "../../types/reserved";
+import styles from "./styles.module.scss";
+import { useParams } from "react-router-dom";
+import { Shop } from "../../types/shop";
+import { getSessionStorage } from "../../utils/sessionStorage";
 
 export default function MyArea() {
-  const [list, setList] = useState<Reserved[]>([]);
+  const { loja } = useParams();
+
+  const [shop, setShop] = useState<Shop>();
   const [filterList, setFilterList] = useState<Reserved[]>([]);
 
   const [dateSelected, setDateSelected] = useState<Moment | null>(null);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const session: Shop = getSessionStorage("shopData");
 
   const renderTableBody = () => {
     return horarios.map((horario, index) => {
@@ -44,29 +50,30 @@ export default function MyArea() {
 
   const fetchData = async () => {
     try {
-      const solicitationList = await getSolicitationList(
-        "MLJ0k39Q9ELsH78X3lHW"
-      );
-      setList(solicitationList);
+      const shop = await getShopByUrl(loja ? loja : "juliana-silva");
+
+      setShop(shop);
     } catch (error) {
       console.log("Error fetching data:", error);
     }
   };
 
   useEffect(() => {
-    fetchData();
+    if (session?.url && session?.url === loja) {
+      setShop(session);
+    } else fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (list.length)
+    if (shop?.solicitationList?.length)
       setFilterList(
-        list.filter((reserved) =>
+        shop?.solicitationList?.filter((reserved) =>
           dateSelected?.isSame(moment(reserved.date, "DD/MM/YYYY"))
         )
       );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateSelected, list]);
+  }, [dateSelected, shop]);
 
   useEffect(() => {
     if (dateSelected) return setIsOpenModal(true);
@@ -82,29 +89,42 @@ export default function MyArea() {
         <div className={styles.content}>
           <Calendar
             onSelectDate={(value: Moment) => setDateSelected(value)}
-            listReserved={list}
+            listReserved={shop?.solicitationList}
+            setDateSelected={setDateSelected}
+            dateSelected={dateSelected}
           />
         </div>
         <h3 className={styles.text}>Solicitações de reservas</h3>
-
-        <ListComponents
-          listItems={list.filter(
-            (reserved) => reserved.status === EnumStatus.PENDENT
-          )}
-        />
+        {shop?.id && (
+          <ListComponents
+            shopId={shop.id}
+            listItems={shop?.solicitationList?.filter(
+              (reserved) => reserved.status === EnumStatus.PENDENT
+            )}
+          />
+        )}
       </div>
       <ModalComponent
         isOpen={isOpenModal}
         onClose={() => setIsOpenModal(false)}
       >
-        {/* <h1> Horarios do dia: {dateSelected?.format("DD/MM/YYYY")} </h1> */}
-        <table>
-          <thead>
+        <h1 className={styles.text}>
+          Horarios do dia: {dateSelected?.format("DD/MM/YYYY")}
+        </h1>
+        <table className={styles.table}>
+          <thead className={styles.textTread}>
             <th>Horário</th>
-            <th>Nome</th>
+            <th className={styles.columMax}>Nome</th>
             <th>Contato</th>
           </thead>
-          <tbody>{renderTableBody()}</tbody>
+
+          <tr>
+            <td className={styles.separator}></td>
+            <td className={styles.separator}></td>
+            <td className={styles.separator}></td>
+          </tr>
+
+          <tbody className={styles.textTable}>{renderTableBody()}</tbody>
         </table>
       </ModalComponent>
     </div>

@@ -1,9 +1,10 @@
 import Button from "../../../components/button";
+import { Shop } from "../../../types/shop";
 import { sendMessage } from "../../../utils/send-message-whats-app";
 import "./styles.css";
 import { useNavigate } from "react-router-dom";
 
-export default function ButtonsView() {
+export default function ButtonsView({ shop }: { shop: Shop }) {
   const navigate = useNavigate();
   const message =
     "Olá, tenho interesse em saber mais sobre os serviços oferecidos!";
@@ -15,7 +16,7 @@ export default function ButtonsView() {
           <Button
             text="Agendar"
             size="lg"
-            onclick={() => navigate("/agenda")}
+            onclick={() => navigate("/agendar")}
           />
         </div>
         {/* <div className="content-buttons">
@@ -29,7 +30,7 @@ export default function ButtonsView() {
           <Button
             size="lg"
             text="Contato"
-            onclick={() => sendMessage(message, "5554981559983")}
+            onclick={() => sendMessage(message, shop.phone)}
           />
         </div>
         <div className="divider"></div>

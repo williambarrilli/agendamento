@@ -17,10 +17,10 @@ export default function RegisterView({
   alterarPhone,
   onConfirm,
 }: RegisterViewProps) {
-  const handleNomeChange = (value: any) => {
+  const handleNomeChange = (value: string) => {
     alterarName(value);
   };
-  const handlePhoneChange = (value: any) => {
+  const handlePhoneChange = (value: string) => {
     alterarPhone(value);
   };
 
@@ -46,7 +46,7 @@ export default function RegisterView({
           />
           <div className={styles["box-button"]}>
             <Button
-              styleOption="secondary"
+              styleOption="primary"
               text="Continuar"
               size="md"
               onclick={() => onConfirm(EnumMenu.SELECTDATE)}
