@@ -1,53 +1,40 @@
-import styles from "./styles.module.scss";
-import ButtonsView from "../../views/home/buttonsView";
-import BannerComponent from "../../components/banner";
-import { useParams } from "react-router-dom";
-import { getShopByUrl } from "../../controllers/firestore";
-import { useEffect, useState } from "react";
+import CardComponent from "../../components/card";
 import { Shop } from "../../types/shop";
-import { getSessionStorage } from "../../utils/sessionStorage";
+import styles from "./styles.module.scss";
 
 export default function Home() {
-  const { loja } = useParams();
-  const [loading, setLoading] = useState(true);
-  const [shop, setShop] = useState<Shop>();
+  const mock: Shop[] = [
+    {
+      name: "Ana",
+      url: "ana-unhas",
+      phone: "string",
+      instagram: "string",
+      reservedList: [],
+      solicitationList: [],
+      bannerImage: "string",
+    },
+    {
+      name: "Will",
+      url: "will",
+      phone: "string",
+      instagram: "string",
+      reservedList: [],
+      solicitationList: [],
+      bannerImage: "string",
+    },
+  ];
 
-  const session: Shop = getSessionStorage("shopData");
-
-  //TODO refatorar
-  useEffect(() => {
-    if (!loja) return;
-    setLoading(true);
-    if (session?.url && session?.url === loja) {
-      setShop(session);
-      setLoading(false);
-    } else {
-      getShopByUrl(loja?.toString())
-        .then((response) => {
-          setShop(response);
-          setLoading(false); // Altera o estado para "false" quando o request é concluído
-        })
-        .catch((error) => {
-          console.error("Erro ao buscar informações da loja:", error);
-          setLoading(false); // Altera o estado para "false" mesmo em caso de erro
-        });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  // Verifica se ainda está carregando
-  if (loading) {
-    return <div className={styles.content}>Carregando...</div>; // Mostra um indicador de carregamento enquanto espera
-  } else if (!loading && !shop?.url)
-    return (
-      <div className={styles.content}>ops, não encontramos este endereço</div>
-    );
-  else if (shop?.url)
-    return (
-      <>
-        <BannerComponent bannerImage={shop && shop.url} />
-        <h1 className={styles.text}> {shop?.name} </h1>
-        <ButtonsView shop={shop} />
-      </>
-    );
-  return <></>;
+  return (
+    <>
+      {mock.map((loja) => (
+        <div>
+          <CardComponent
+            image={loja.url}
+            title={loja.name}
+            url={loja.url}
+          ></CardComponent>
+        </div>
+      ))}
+    </>
+  );
 }
