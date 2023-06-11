@@ -6,6 +6,7 @@ import Home from "./pages/home";
 import MyArea from "./pages/my-area";
 import Login from "./pages/login";
 import Agenda from "./pages/agenda";
+import HomeShop from "./pages/home-shop";
 
 import moment from "moment";
 moment.locale("pt-br");
@@ -18,7 +19,7 @@ root.render(
     <Router>
       <Routes>
         <Route Component={Home} path="/" />
-        <Route Component={Home} path="/:loja" />
+        <Route Component={HomeShop} path="/:loja" />
         <Route Component={MyArea} path="/minha-area" />
         <Route Component={MyArea} path="/minha-area/:loja" />
         <Route Component={Login} path="/login" />

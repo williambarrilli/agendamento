@@ -1,38 +1,16 @@
 import CardComponent from "../../components/card";
-import { Shop } from "../../types/shop";
-import styles from "./styles.module.scss";
+import { useGetShopsListHook } from "../../hook/getShopsList";
 
 export default function Home() {
-  const mock: Shop[] = [
-    {
-      name: "Ana",
-      url: "ana-unhas",
-      phone: "string",
-      instagram: "string",
-      reservedList: [],
-      solicitationList: [],
-      bannerImage: "string",
-    },
-    {
-      name: "Will",
-      url: "will",
-      phone: "string",
-      instagram: "string",
-      reservedList: [],
-      solicitationList: [],
-      bannerImage: "string",
-    },
-  ];
+  const { data, isLoading, error } = useGetShopsListHook();
 
+  if (isLoading) return <>carregando...</>;
+  if (error) return <>Ocorreu um erro inesperado</>;
   return (
     <>
-      {mock.map((loja) => (
-        <div>
-          <CardComponent
-            image={loja.url}
-            title={loja.name}
-            url={loja.url}
-          ></CardComponent>
+      {data?.map((loja, index) => (
+        <div key={index}>
+          <CardComponent image={loja.url} title={loja.name} url={loja.url} />
         </div>
       ))}
     </>

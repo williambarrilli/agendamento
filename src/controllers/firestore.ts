@@ -29,6 +29,19 @@ const db = getFirestore(app);
 //   }
 // };
 
+export const getShopsList = async () => {
+  const retorno: any[] = [];
+  const shopsRef = collection(db, "shops");
+  const q = query(shopsRef);
+
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    retorno.push(doc.data());
+  });
+
+  return retorno;
+};
+
 export const getShopByUrl = async (url: string | undefined) => {
   const shopsRef = collection(db, "shops");
   const searchQuery = query(shopsRef, where("url", "==", url));

@@ -126,6 +126,3 @@ export default function Agenda() {
     </div>
   );
 }
-function setLoading(arg0: boolean) {
-  throw new Error("Function not implemented.");
-}

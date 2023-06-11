@@ -12,12 +12,14 @@ export default function Button({
   onclick,
   styleOption = "primary",
   size = "md",
+  ...rest
 }: ButtonProps) {
   return (
     <div>
       <button
         className={`button ${styleOption} ${size}`}
         onClick={() => onclick()}
+        {...rest}
       >
         {text}
       </button>

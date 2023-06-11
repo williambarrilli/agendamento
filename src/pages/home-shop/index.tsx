@@ -6,9 +6,8 @@ import { getShopByUrl } from "../../controllers/firestore";
 import { useEffect, useState } from "react";
 import { Shop } from "../../types/shop";
 import { getSessionStorage } from "../../utils/sessionStorage";
-import Button from "../../components/button";
 
-export default function Home() {
+export default function HomeShop() {
   const { loja } = useParams();
   const [loading, setLoading] = useState(true);
   const [shop, setShop] = useState<Shop>();
