@@ -6,6 +6,8 @@ import { getShopByUrl } from "../../controllers/firestore";
 import { useEffect, useState } from "react";
 import { Shop } from "../../types/shop";
 import { getSessionStorage } from "../../utils/sessionStorage";
+import Loading from "../../components/loading";
+import Error from "../../pages/error";
 
 export default function HomeShop() {
   const { loja } = useParams();
@@ -36,11 +38,9 @@ export default function HomeShop() {
   }, []);
   // Verifica se ainda está carregando
   if (loading) {
-    return <div className={styles.content}>carregando...</div>; // Mostra um indicador de carregamento enquanto espera
+    return <Loading />; // Mostra um indicador de carregamento enquanto espera
   } else if (!loading && !shop?.url)
-    return (
-      <div className={styles.content}>ops, não encontramos este endereço</div>
-    );
+    return <Error message="Página não encontrada." />;
   else if (shop?.url)
     return (
       <>
