@@ -11,6 +11,7 @@ import styles from "./styles.module.scss";
 import { useParams } from "react-router-dom";
 import { Shop } from "../../types/shop";
 import { getSessionStorage } from "../../utils/sessionStorage";
+import Button from "../../components/button";
 
 export default function MyArea() {
   const { loja } = useParams();
@@ -126,6 +127,14 @@ export default function MyArea() {
 
           <tbody className={styles.textTable}>{renderTableBody()}</tbody>
         </table>
+        <div className={styles.button}>
+          <Button
+            styleOption="primary"
+            size="sm"
+            onclick={() => alert}
+            text={"Adicionar"}
+          />
+        </div>
       </ModalComponent>
     </div>
   );
