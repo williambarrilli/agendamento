@@ -8,6 +8,16 @@
 .divider {
   border-top: 3px solid #906646;
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   width: 100%;
+}
+.content-icons {
+  display: flex;
+  justify-content: center;
+}
+.iconInstagram {
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  cursor: pointer;
 }

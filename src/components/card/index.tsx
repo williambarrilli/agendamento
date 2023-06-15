@@ -1,7 +1,6 @@
 import styles from "./styles.module.scss";
 import { useNavigate } from "react-router-dom";
 import BannerComponent from "../banner";
-import Button from "../button";
 
 export interface CardComponentProps {
   image: string;
@@ -17,13 +16,17 @@ export default function CardComponent({
   subtitle = "Agende seu horario",
 }: CardComponentProps) {
   const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(url);
+  };
+
   return (
     <div>
-      <div className={styles.card}>
+      <div className={styles.card} onClick={handleClick}>
         <BannerComponent bannerImage={image} />
         <h5 className={styles.cardsTitle}>{title}</h5>
-        <p className={styles.cardsSubtitle}>{subtitle}</p>
-        <Button size="md" text="Visite" onclick={() => navigate(url)} />
+        {/* <p className={styles.cardsSubtitle}>{subtitle}</p> */}
       </div>
     </div>
   );

@@ -3,11 +3,17 @@ import { Shop } from "../../../types/shop";
 import { sendMessage } from "../../../utils/send-message-whats-app";
 import "./styles.css";
 import { useNavigate } from "react-router-dom";
+import instagram from "../../../assets/icons/instagram.svg";
 
 export default function ButtonsView({ shop }: { shop: Shop }) {
   const navigate = useNavigate();
   const message =
     "Olá, tenho interesse em saber mais sobre os serviços oferecidos!";
+  const redirectToInstagram = () => {
+    // Substitua "nome_do_perfil" pelo nome de usuário do perfil do Instagram
+    const instagramURL = `https://www.instagram.com/${shop.instagram}`;
+    window.open(instagramURL, "_blank");
+  };
   return (
     <div className="container-buttons">
       <div>
@@ -34,6 +40,14 @@ export default function ButtonsView({ shop }: { shop: Shop }) {
           />
         </div>
         <div className="divider"></div>
+        <div className="content-icons">
+          <img
+            className="iconInstagram"
+            onClick={redirectToInstagram}
+            src={instagram}
+            alt="instagram"
+          />
+        </div>
       </div>
     </div>
   );
