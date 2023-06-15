@@ -1,35 +1,6 @@
-.text {
-  font-family: Didot, serif;
-  font-style: italic;
-  text-align: center;
-  font-weight: 500px;
-  font-size: 40px;
-  color: #dd9965;
-}
-.content {
+.container {
   display:grid;
   justify-content: center;
   align-items: center;
  
-}
-.card {
-  margin: 20px;
-  width: 18rem; 
-  border: solid 1px #55361d;
-  text-align: center;
-}
-.cardsTitle {
-  font-family: Didot, serif;
-  font-style: italic;
-
-  font-size: 25px;
-  color: #c68f65;
-  margin: 20px;
-}
-.cardsSubtitle {
-  font-family: Didot, serif;
- 
-  font-size: 18px;
-  color: #55361d;
-  margin: 10px;
 }
