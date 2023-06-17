@@ -3,6 +3,7 @@ import { useGetShopsListHook } from "../../hook/getShopsList";
 import styles from "./styles.module.scss";
 import Loading from "../../components/loading";
 import Error from "../../pages/error";
+import ReservedComponent from "../../components/addFormReserved";
 
 export default function Home() {
   const { data, isLoading, error } = useGetShopsListHook();
