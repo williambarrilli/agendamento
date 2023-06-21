@@ -3,7 +3,7 @@ import "./styles.button.scss";
 interface ButtonProps {
   text: string;
   onclick: () => void;
-  styleOption?: "primary" | "secondary";
+  styleOption?: "primary" | "secondary" | "alternative";
   size?: "sm" | "md" | "lg" | "xl";
 }
 

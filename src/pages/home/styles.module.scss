@@ -2,5 +2,22 @@
   display:grid;
   justify-content: center;
   align-items: center;
+  background-color: #ede4e4;
  
+}
+
+.presentation {
+  text-align: center;
+  font-family: Didot, serif;;
+  padding: 24px;
+  background-color: #ede4e4;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-bottom: solid 1px #000000;
+}
+.subtitle {
+  font-size: 18px;
+}
+.orange {
+  color: #f76c16 ;
 }
