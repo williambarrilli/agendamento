@@ -1,18 +1,20 @@
-import styles from "./styles.module.scss";
+import moment, { Moment } from "moment";
 import { useEffect, useMemo, useState } from "react";
-import CalendarView from "../../views/home/calendarView";
-import { EnumMenu, EnumStatus } from "../../types/enums";
-import Button from "../../components/button";
-import ModalComponent from "../../components/modal";
-import { sendSolicitationReserved } from "../../controllers/firestore";
-import RegisterView from "../../views/home/registerView";
-import SelectHourView from "../../views/home/selectHourView";
 import { useNavigate } from "react-router-dom";
 import BannerComponent from "../../components/banner";
+import Button from "../../components/button";
+import ModalComponent from "../../components/modal";
+
+import { sendSolicitationReserved } from "../../controllers/firestore";
+import { EnumMenu, EnumStatus } from "../../types/enums";
+import { Reserved } from "../../types/reserved";
 import { Shop } from "../../types/shop";
 import { getSessionStorage } from "../../utils/sessionStorage";
-import { Reserved } from "../../types/reserved";
-import moment, { Moment } from "moment";
+
+import CalendarView from "../../views/home/calendarView";
+import RegisterView from "../../views/home/registerView";
+import SelectHourView from "../../views/home/selectHourView";
+import styles from "./styles.module.scss";
 
 export default function Agenda() {
   const navigate = useNavigate();
@@ -112,13 +114,13 @@ export default function Agenda() {
           <div className={styles["footer-buttons-modal"]}>
             <div className={styles["footer-button-box"]}>
               <Button
-                onclick={() => setModalConfirm(false)}
+                onClick={() => setModalConfirm(false)}
                 text={"Voltar"}
                 styleOption="secondary"
               />
             </div>
             <div className={styles["footer-button-box"]}>
-              <Button onclick={() => onConfirm()} text={"Confirmar"} />
+              <Button onClick={() => onConfirm()} text={"Confirmar"} />
             </div>
           </div>
         </div>

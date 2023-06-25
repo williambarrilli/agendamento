@@ -1,44 +1,42 @@
-import { ReactNode } from "react";
 import styles from "./styles.module.scss";
 import Input from "../input";
 import Button from "../button";
-import { EnumMenu } from "../../types/enums";
+import { Reserved } from "../../types/reserved";
+import { useState } from "react";
+import { EnumStatus } from "../../types/enums";
+import InputSelect from "../inputSelect";
+import { horarios } from "../../utils/constants";
+import { sendSolicitationReserved } from "../../controllers/firestore";
+import moment from "moment";
 
 interface ReservedProps {
-  name: string;
-  phone: string;
-  date: string;
-  hour: string;
-  alterarName: (value: string) => void;
-  alterarPhone: (value: string) => void;
-  alterarDate: (value: string) => void;
-  alterarHour: (value: string) => void;
-  onConfirm: (value: EnumMenu) => void;
+  shopId?: string;
+  onClose: () => void;
 }
+export default function ReservedComponent({ shopId, onClose }: ReservedProps) {
+  const [newReserved, setNewReserved] = useState<Reserved>({
+    name: "",
+    phone: "",
+    date: "",
+    hour: "",
+    status: EnumStatus.APROVED,
+  });
 
-export default function ReservedComponent({
-  name,
-  phone,
-  date,
-  hour,
-  alterarName,
-  alterarPhone,
-  alterarDate,
-  alterarHour,
-  onConfirm,
-}: ReservedProps) {
-  const handleNomeChange = (value: string) => {
-    alterarName(value);
+  const handleChange = (name: string, value: string | number | boolean) => {
+    setNewReserved((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
-  const handlePhoneChange = (value: string) => {
-    alterarPhone(value);
+  const submitReserved = () => {
+    sendSolicitationReserved(
+      shopId ? shopId : "MLJ0k39Q9ELsH78X3lHW",
+      newReserved
+    );
+    alert("Reserva adicionada");
+    onClose();
   };
-  const handleDateChange = (value: string) => {
-    alterarDate(value);
-  };
-  const handleHourChange = (value: string) => {
-    alterarHour(value);
-  };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.text}> Adicionar Reserva </h2>
@@ -46,39 +44,48 @@ export default function ReservedComponent({
         <div>
           <Input
             type="date"
-            value={date}
+            value={newReserved.date}
             placeholder="Selecione uma data"
             label="Data:"
-            onChange={handleDateChange}
+            onChange={(e) =>
+              handleChange("date", moment(e, "YYYY/MM/DD").format("DD/MM/YYYY"))
+            }
           />
-          <Input
-            type="text"
-            value={hour}
+
+          <InputSelect
+            options={horarios}
+            value={newReserved.hour}
             placeholder="Selecione uma horario"
             label="Horário:"
-            onChange={handleHourChange}
+            onChange={(e) => handleChange("hour", e)}
           />
           <Input
             type="text"
-            value={name}
+            value={newReserved.name}
             placeholder="Digite o nome"
             label="Nome:"
-            onChange={handleNomeChange}
+            onChange={(e) => handleChange("name", e)}
           />
 
           <Input
             type="tel"
-            value={phone}
+            value={newReserved.phone}
             placeholder="(**)****-****"
             label="Telefone:"
-            onChange={handlePhoneChange}
+            onChange={(e) => handleChange("phone", e)}
           />
           <div className={styles["box-button"]}>
+            <Button
+              styleOption="secondary"
+              text="Voltar"
+              size="md"
+              onClick={() => onClose()}
+            />
             <Button
               styleOption="primary"
               text="Confirmar"
               size="md"
-              onclick={() => onConfirm(EnumMenu.SELECTDATE)}
+              onClick={() => submitReserved()}
             />
           </div>
         </div>
@@ -86,5 +93,3 @@ export default function ReservedComponent({
     </div>
   );
 }
-
-//tirar o botao q ta no modal e por em baixoo do calendario

@@ -14,9 +14,10 @@ export default function ModalComponent({
 }: ModalProps) {
   if (isOpen)
     return (
-      <div className={styles.overlay} onClick={() => onClose()}>
+      <>
+        <div className={styles.overlay} onClick={() => onClose()}></div>
         <div className={styles.content}>{children}</div>;
-      </div>
+      </>
     );
   return <></>;
 }

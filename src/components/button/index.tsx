@@ -2,14 +2,14 @@ import "./styles.button.scss";
 
 interface ButtonProps {
   text: string;
-  onclick: () => void;
+  onClick: () => void;
   styleOption?: "primary" | "secondary" | "alternative";
   size?: "sm" | "md" | "lg" | "xl";
 }
 
 export default function Button({
   text,
-  onclick,
+  onClick,
   styleOption = "primary",
   size = "md",
   ...rest
@@ -18,7 +18,7 @@ export default function Button({
     <div>
       <button
         className={`button ${styleOption} ${size}`}
-        onClick={() => onclick()}
+        onClick={() => onClick()}
         {...rest}
       >
         {text}
