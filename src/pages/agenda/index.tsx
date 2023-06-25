@@ -114,13 +114,13 @@ export default function Agenda() {
           <div className={styles["footer-buttons-modal"]}>
             <div className={styles["footer-button-box"]}>
               <Button
-                onclick={() => setModalConfirm(false)}
+                onClick={() => setModalConfirm(false)}
                 text={"Voltar"}
                 styleOption="secondary"
               />
             </div>
             <div className={styles["footer-button-box"]}>
-              <Button onclick={() => onConfirm()} text={"Confirmar"} />
+              <Button onClick={() => onConfirm()} text={"Confirmar"} />
             </div>
           </div>
         </div>

@@ -33,7 +33,7 @@ export default function SelectHourView({
       <Button
         size="md"
         styleOption="secondary"
-        onclick={() => onBack(EnumMenu.SELECTDATE)}
+        onClick={() => onBack(EnumMenu.SELECTDATE)}
         text={"Voltar"}
       />
     </div>

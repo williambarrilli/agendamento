@@ -1,37 +1,26 @@
 .container {
-display: flex;
-justify-content: center;
-}
-
-.content {
-  margin-top: 20%;
-  max-width: 60%;
-
- 
-  
-}
-.input-box {
-  margin: 10% 0;
-  width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ac7246;
 }
-.text {
-  font-family: Didot, serif;
-  text-align: center;
-  color: #ac7246;
+.modalContent {
+  font-family: sans-serif;
   font-size: 20px;
-  display: flex;
-  justify-content: center;
+  background-color: #f2f2f2;
+  border: solid 1px rgb(164, 164, 164);
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
 }
-.input {
-  text-align: center;
-  border: 1.5px solid #be885e;
-  width: 200px;
-  height: 20px;
-  font-size: 15px;
+.modalContent > * {
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
-.center {
+
+.button {
+  align-items: center;
   display: flex;
   justify-content: center;
 }

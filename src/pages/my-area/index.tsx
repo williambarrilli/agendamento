@@ -1,22 +1,18 @@
 import moment, { Moment } from "moment";
 import { useEffect, useState } from "react";
+import ReservedComponent from "../../components/addFormReserved";
+import Button from "../../components/button";
 import Calendar from "../../components/calendar";
 import ListComponents from "../../components/listComponents";
 import ModalComponent from "../../components/modal";
-import { getShopByUrl } from "../../controllers/firestore";
 import { EnumStatus } from "../../types/enums";
 import { Reserved } from "../../types/reserved";
-import styles from "./styles.module.scss";
-import { useParams } from "react-router-dom";
 import { Shop } from "../../types/shop";
-import { getSessionStorage } from "../../utils/sessionStorage";
-import Button from "../../components/button";
-import ReservedComponent from "../../components/addFormReserved";
 import { horarios } from "../../utils/constants";
+import { getSessionStorage } from "../../utils/sessionStorage";
+import styles from "./styles.module.scss";
 
 export default function MyArea() {
-  const { loja } = useParams();
-
   const [shop, setShop] = useState<Shop>();
   const [filterList, setFilterList] = useState<Reserved[]>([]);
 
@@ -24,8 +20,6 @@ export default function MyArea() {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [isOpenModalNewReserved, setIsOpenModalNewReserved] =
     useState<boolean>(false);
-
-  const session: Shop = getSessionStorage("shopData");
 
   const renderTableBody = () => {
     return horarios.map((horario, index) => {
@@ -42,23 +36,6 @@ export default function MyArea() {
     });
   };
 
-  const fetchData = async () => {
-    try {
-      const shop = await getShopByUrl(loja ? loja : "juliana-silva");
-
-      setShop(shop);
-    } catch (error) {
-      console.log("Error fetching data:", error);
-    }
-  };
-
-  useEffect(() => {
-    if (session?.url && session?.url === loja) {
-      setShop(session);
-    } else fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   useEffect(() => {
     if (shop?.solicitationList?.length)
       setFilterList(
@@ -68,6 +45,10 @@ export default function MyArea() {
       );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dateSelected, shop]);
+
+  useEffect(() => {
+    if (window.location) setShop(getSessionStorage("shopData"));
+  }, []);
 
   useEffect(() => {
     if (dateSelected) return setIsOpenModal(true);
@@ -93,7 +74,7 @@ export default function MyArea() {
           <Button
             styleOption="primary"
             size="md"
-            onclick={() => setIsOpenModalNewReserved(true)}
+            onClick={() => setIsOpenModalNewReserved(true)}
             text={"Adicionar Reserva"}
           />
         </div>

@@ -35,7 +35,7 @@ export default function CalendarView({
           <Button
             styleOption="secondary"
             size="md"
-            onclick={() => navigate("/" + url)}
+            onClick={() => navigate("/" + url)}
             text={"Voltar"}
           />
         </div>

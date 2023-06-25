@@ -24,7 +24,7 @@ export default function ButtonsView({ shop }: { shop: Shop }) {
           <Button
             text="Agendar"
             size="lg"
-            onclick={() => navigate("/agendar")}
+            onClick={() => navigate("/agendar")}
           />
         </div>
 
@@ -32,7 +32,7 @@ export default function ButtonsView({ shop }: { shop: Shop }) {
           <Button
             size="lg"
             text="Contato"
-            onclick={() => sendMessage(message, shop.phone)}
+            onClick={() => sendMessage(message, shop.phone)}
           />
         </div>
         <div className={styles.divider} />

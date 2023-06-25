@@ -59,7 +59,7 @@ export default function ListComponents({
                     styleOption="secondary"
                     size="sm"
                     text="Rejeitar"
-                    onclick={() => onReject(item, index)}
+                    onClick={() => onReject(item, index)}
                   />
                 </div>
                 <div className={styles.rowBotton}>
@@ -67,7 +67,7 @@ export default function ListComponents({
                     styleOption="secondary"
                     size="sm"
                     text="Confirmar"
-                    onclick={() => onConfirm(item, index)}
+                    onClick={() => onConfirm(item, index)}
                   />
                 </div>
               </>
@@ -77,7 +77,7 @@ export default function ListComponents({
                 styleOption="secondary"
                 size="sm"
                 text="Contato"
-                onclick={() => sendMessage("Olá tudo bem?", "5554981559983")}
+                onClick={() => sendMessage("Olá tudo bem?", "5554981559983")}
               />
             </div>
           </div>

@@ -13,21 +13,10 @@ import { firebaseConfig } from "../init-firebase";
 import { Reserved } from "../types/reserved";
 import { EnumStatus } from "../types/enums";
 import { setSessionStorage } from "../utils/sessionStorage";
+// TODO REFATORAR CHAMADAS
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
-// export const updateData = async () => {
-//   try {
-//     const ref = doc(db, "shops", "");
-//     await updateDoc(ref,{
-
-//     })
-//   } catch (e) {
-//     console.error("Error adding document: ", e);
-//   }
-// };
 
 export const getShopsList = async () => {
   const retorno: any[] = [];
@@ -39,6 +28,20 @@ export const getShopsList = async () => {
     retorno.push(doc.data());
   });
 
+  return retorno;
+};
+
+export const getShopByEmail = async (email: string) => {
+  const shopsRef = collection(db, "shops");
+  const searchQuery = query(shopsRef, where("email", "==", email));
+
+  const querySnapshot = await getDocs(searchQuery);
+  let retorno;
+
+  querySnapshot.forEach((doc) => {
+    if (doc.data()) retorno = { ...doc.data(), id: doc.id };
+  });
+  if (retorno) setSessionStorage("shopData", retorno);
   return retorno;
 };
 

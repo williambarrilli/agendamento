@@ -28,7 +28,7 @@ export default function Home() {
           styleOption="alternative"
           size="md"
           text="Contato"
-          onclick={() => alert}
+          onClick={() => alert}
         />
       </div>
       <div className={styles.container}>

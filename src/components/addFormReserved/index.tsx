@@ -79,13 +79,13 @@ export default function ReservedComponent({ shopId, onClose }: ReservedProps) {
               styleOption="secondary"
               text="Voltar"
               size="md"
-              onclick={() => onClose()}
+              onClick={() => onClose()}
             />
             <Button
               styleOption="primary"
               text="Confirmar"
               size="md"
-              onclick={() => submitReserved()}
+              onClick={() => submitReserved()}
             />
           </div>
         </div>
