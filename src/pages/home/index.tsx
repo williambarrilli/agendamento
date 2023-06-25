@@ -1,53 +1,43 @@
+import CardComponent from "../../components/card";
+import { useGetShopsListHook } from "../../hook/getShopsList";
 import styles from "./styles.module.scss";
-import ButtonsView from "../../views/home/buttonsView";
-import BannerComponent from "../../components/banner";
-import { useParams } from "react-router-dom";
-import { getShopByUrl } from "../../controllers/firestore";
-import { useEffect, useState } from "react";
-import { Shop } from "../../types/shop";
-import { getSessionStorage } from "../../utils/sessionStorage";
+import Loading from "../../components/loading";
+import Error from "../../pages/error";
+import Header from "../../components/header";
+import iconMR from "../../assets/images/iconMR.png";
+import Button from "../../components/button";
 
 export default function Home() {
-  const { loja } = useParams();
-  const [loading, setLoading] = useState(true);
-  const [shop, setShop] = useState<Shop>();
+  const { data, isLoading, error } = useGetShopsListHook();
 
-  const session: Shop = getSessionStorage("shopData");
-
-  //TODO refatorar
-  useEffect(() => {
-    if (!loja) return;
-    setLoading(true);
-    if (session?.url && session?.url === loja) {
-      setShop(session);
-      setLoading(false);
-    } else {
-      getShopByUrl(loja?.toString())
-        .then((response) => {
-          setShop(response);
-          setLoading(false); // Altera o estado para "false" quando o request é concluído
-        })
-        .catch((error) => {
-          console.error("Erro ao buscar informações da loja:", error);
-          setLoading(false); // Altera o estado para "false" mesmo em caso de erro
-        });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  // Verifica se ainda está carregando
-  if (loading) {
-    return <div className={styles.content}>Carregando...</div>; // Mostra um indicador de carregamento enquanto espera
-  } else if (!loading && !shop?.url)
-    return (
-      <div className={styles.content}>ops, não encontramos este endereço</div>
-    );
-  else if (shop?.url)
-    return (
-      <>
-        <BannerComponent bannerImage={shop && shop.url} />
-        <h1 className={styles.text}> {shop?.name} </h1>
-        <ButtonsView shop={shop} />
-      </>
-    );
-  return <></>;
+  if (isLoading) return <Loading />;
+  if (error) return <Error message="Ocorreu um erro inesperado." />;
+  return (
+    <div>
+      <Header logoImage={iconMR} />
+      <div className={styles.presentation}>
+        <h2>
+          Agendamento <span className={styles.orange}>simplificado!</span>
+        </h2>
+        <p className={styles.subtitle}>
+          Bem-vindo a nossa página de agendamento, a solução perfeita para
+          otimizar a gestão do tempo e aumentar a eficiência do seu negócio!
+          Entre em contato para uma demonstração personalizada!{" "}
+        </p>
+        <Button
+          styleOption="alternative"
+          size="md"
+          text="Contato"
+          onClick={() => alert}
+        />
+      </div>
+      <div className={styles.container}>
+        {data?.map((loja, index) => (
+          <div key={index}>
+            <CardComponent image={loja.url} title={loja.name} url={loja.url} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }

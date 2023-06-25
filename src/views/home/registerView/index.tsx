@@ -49,7 +49,7 @@ export default function RegisterView({
               styleOption="primary"
               text="Continuar"
               size="md"
-              onclick={() => onConfirm(EnumMenu.SELECTDATE)}
+              onClick={() => onConfirm(EnumMenu.SELECTDATE)}
             />
           </div>
         </div>

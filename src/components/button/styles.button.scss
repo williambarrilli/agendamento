@@ -2,6 +2,7 @@
   text-align: center;
   cursor: pointer;
   font-family: Didot, serif;
+  border-radius: 5px;
 }
 .primary {
   background-color: #c68f65 ;
@@ -14,6 +15,12 @@
   color: #d1966a;
   border: 1px solid;
   border-color: #d1966a;
+}
+.alternative {
+  background-color: #f4d8c3;
+  color: black;
+  border: 1px solid;
+  border-color: black;
 }
 
 .sm {

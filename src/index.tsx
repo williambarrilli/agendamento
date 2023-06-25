@@ -6,21 +6,32 @@ import Home from "./pages/home";
 import MyArea from "./pages/my-area";
 import Login from "./pages/login";
 import Agenda from "./pages/agenda";
+import HomeShop from "./pages/home-shop";
 
 import moment from "moment";
+import { RequireAuth } from "./auth";
 moment.locale("pt-br");
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <Router>
       <Routes>
         <Route Component={Home} path="/" />
-        <Route Component={Home} path="/:loja" />
-        <Route Component={MyArea} path="/minha-area" />
-        <Route Component={MyArea} path="/minha-area/:loja" />
+        <Route Component={HomeShop} path="/:loja" />
+        <Route
+          element={
+            <>
+              <RequireAuth>
+                <MyArea />
+              </RequireAuth>
+            </>
+          }
+          path="/minha-area"
+        />
         <Route Component={Login} path="/login" />
         <Route Component={Agenda} path="/agendar" />
       </Routes>

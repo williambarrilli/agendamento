@@ -1,16 +1,25 @@
-.text {
-  font-family: Didot, serif;
-  font-style: italic;
-  text-align: center;
-  font-weight: 500px;
-  font-size: 40px;
-  color: #dd9965;
-}
-.content {
-  display: flex;
+.container {
+  display:grid;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  position: absolute;
-  top: 50%;
+  background-color: #ede4e4;
+ 
+}
+
+.presentation {
+  text-align: center;
+  font-family: Didot, serif;;
+  padding: 24px;
+  background-color: #fae9dc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: solid 1px #a4a0a0;
+  border-radius: 10px;
+  margin: 20px;
+}
+.subtitle {
+  font-size: 18px;
+}
+.orange {
+  color: #f76c16 ;
 }
