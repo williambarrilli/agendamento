@@ -1,6 +1,5 @@
 import moment, { Moment } from "moment";
 import { useEffect, useState } from "react";
-import "react-calendar/dist/Calendar.css";
 import Calendar from "../../components/calendar";
 import ListComponents from "../../components/listComponents";
 import ModalComponent from "../../components/modal";
@@ -12,6 +11,8 @@ import { useParams } from "react-router-dom";
 import { Shop } from "../../types/shop";
 import { getSessionStorage } from "../../utils/sessionStorage";
 import Button from "../../components/button";
+import ReservedComponent from "../../components/addFormReserved";
+import { horarios } from "../../utils/constants";
 
 export default function MyArea() {
   const { loja } = useParams();
@@ -21,6 +22,9 @@ export default function MyArea() {
 
   const [dateSelected, setDateSelected] = useState<Moment | null>(null);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const [isOpenModalNewReserved, setIsOpenModalNewReserved] =
+    useState<boolean>(false);
+
   const session: Shop = getSessionStorage("shopData");
 
   const renderTableBody = () => {
@@ -29,7 +33,7 @@ export default function MyArea() {
         (reserved: Reserved) => reserved.hour === horario
       );
       return (
-        <tr>
+        <tr key={index}>
           <td>{horario}</td>
           <td>{filterHour?.name ? filterHour.name : "livre"}</td>
           <td>{filterHour?.phone ? filterHour.phone : ""}</td>
@@ -37,17 +41,6 @@ export default function MyArea() {
       );
     });
   };
-
-  const horarios = [
-    "08:00",
-    "09:00",
-    "10:00",
-    "11:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-  ];
 
   const fetchData = async () => {
     try {
@@ -95,6 +88,15 @@ export default function MyArea() {
             dateSelected={dateSelected}
           />
         </div>
+
+        <div className={styles.button}>
+          <Button
+            styleOption="primary"
+            size="md"
+            onclick={() => setIsOpenModalNewReserved(true)}
+            text={"Adicionar Reserva"}
+          />
+        </div>
         <h3 className={styles.text}>Solicitações de reservas</h3>
         {shop?.id && (
           <ListComponents
@@ -106,35 +108,38 @@ export default function MyArea() {
         )}
       </div>
       <ModalComponent
+        isOpen={isOpenModalNewReserved}
+        onClose={() => setIsOpenModalNewReserved(false)}
+      >
+        <ReservedComponent
+          shopId={shop?.id}
+          onClose={() => setIsOpenModalNewReserved(false)}
+        />
+      </ModalComponent>
+      <ModalComponent
         isOpen={isOpenModal}
         onClose={() => setIsOpenModal(false)}
       >
-        <h1 className={styles.text}>
-          Horarios do dia: {dateSelected?.format("DD/MM/YYYY")}
-        </h1>
-        <table className={styles.table}>
-          <thead className={styles.textTread}>
-            <th>Horário</th>
-            <th className={styles.columMax}>Nome</th>
-            <th>Contato</th>
-          </thead>
+        <>
+          <h1 className={styles.text}>
+            Horarios do dia: {dateSelected?.format("DD/MM/YYYY")}
+          </h1>
+          <table className={styles.table}>
+            <thead className={styles.textTread}>
+              <th>Horário</th>
+              <th className={styles.columMax}>Nome</th>
+              <th>Contato</th>
+            </thead>
 
-          <tr>
-            <td className={styles.separator}></td>
-            <td className={styles.separator}></td>
-            <td className={styles.separator}></td>
-          </tr>
+            <tr>
+              <td className={styles.separator}></td>
+              <td className={styles.separator}></td>
+              <td className={styles.separator}></td>
+            </tr>
 
-          <tbody className={styles.textTable}>{renderTableBody()}</tbody>
-        </table>
-        <div className={styles.button}>
-          <Button
-            styleOption="primary"
-            size="sm"
-            onclick={() => alert}
-            text={"Adicionar"}
-          />
-        </div>
+            <tbody className={styles.textTable}>{renderTableBody()}</tbody>
+          </table>
+        </>
       </ModalComponent>
     </div>
   );

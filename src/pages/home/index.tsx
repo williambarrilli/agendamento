@@ -3,7 +3,6 @@ import { useGetShopsListHook } from "../../hook/getShopsList";
 import styles from "./styles.module.scss";
 import Loading from "../../components/loading";
 import Error from "../../pages/error";
-import ReservedComponent from "../../components/addFormReserved";
 import Header from "../../components/header";
 import iconMR from "../../assets/images/iconMR.png";
 import Button from "../../components/button";
