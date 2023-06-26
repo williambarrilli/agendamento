@@ -8,18 +8,19 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { setSessionStorage } from "../../utils/sessionStorage";
 import Input from "../../components/input";
 import { getShopByEmail } from "../../controllers/firestore";
+import Loading from "../../components/loading";
 
 export default function Login() {
   initializeApp(firebaseConfig);
   const navigate = useNavigate();
 
-  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const auth = getAuth();
-
-  const handleChangeLogin = (value: string) => {
-    setLogin(value);
+  const handleChangeEmail = (value: string) => {
+    setEmail(value);
   };
 
   const handleChangePassword = (value: string) => {
@@ -27,18 +28,23 @@ export default function Login() {
   };
   const handleLogin = async () => {
     // TODO refatorar para hook
-    const user = await signInWithEmailAndPassword(auth, login, password)
+    setLoading(true);
+    const user = await signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => user)
       .catch((error) => {
         console.log(error);
         alert("Seu email ou senha estão incorretos");
       });
+
     if (user?.email) {
       await getShopByEmail(user?.email);
       setSessionStorage("user", user);
       navigate("/minha-area");
     }
+    setLoading(false);
   };
+  if (loading) return <Loading />;
+  if (auth.currentUser) navigate("/minha-area");
 
   return (
     <div>
@@ -46,16 +52,16 @@ export default function Login() {
         <div className={styles.modalContent}>
           <Input
             type="text"
-            value={login}
-            placeholder="Digite seu login"
-            label="Email:"
-            onChange={handleChangeLogin}
+            value={email}
+            placeholder="Digite seu email"
+            label="Email"
+            onChange={handleChangeEmail}
           />
           <Input
             type="password"
             value={password}
             placeholder="Digite sua senha"
-            label="Senha:"
+            label="Senha"
             onChange={handleChangePassword}
           />
           <div className={styles.button}>

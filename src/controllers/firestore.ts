@@ -8,6 +8,7 @@ import {
   collection,
   doc,
   getDoc,
+  orderBy,
 } from "firebase/firestore";
 import { firebaseConfig } from "../init-firebase";
 import { Reserved } from "../types/reserved";
@@ -21,7 +22,7 @@ const db = getFirestore(app);
 export const getShopsList = async () => {
   const retorno: any[] = [];
   const shopsRef = collection(db, "shops");
-  const q = query(shopsRef);
+  const q = query(shopsRef, orderBy("name", "asc"));
 
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
