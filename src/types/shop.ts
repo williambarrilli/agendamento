@@ -8,5 +8,5 @@ export interface Shop {
   instagram: string;
   reservedList: Reserved[];
   solicitationList: Reserved[];
-  bannerImage: string;
+  email: string;
 }
