@@ -11,7 +11,8 @@
 }
 .footer-buttons-modal {
   display: flex;
-  align-items: center;
+
+  justify-content: center;
 }
 
 .footer-button-box {
@@ -19,8 +20,6 @@
 }
 
 .modal-content {
-  height: 170px;
-  width: 250px;
   font-family: Didot, serif;
   color: #ac7348;
   text-align: center;

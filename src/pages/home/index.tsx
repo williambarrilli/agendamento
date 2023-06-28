@@ -6,6 +6,7 @@ import Error from "../../pages/error";
 import Header from "../../components/header";
 import iconMR from "../../assets/images/iconMR.png";
 import Button from "../../components/button";
+import { sendMessage } from "../../utils/send-message-whats-app";
 
 export default function Home() {
   const { data, isLoading, error } = useGetShopsListHook();
@@ -22,13 +23,18 @@ export default function Home() {
         <p className={styles.subtitle}>
           Bem-vindo a nossa página de agendamento, a solução perfeita para
           otimizar a gestão do tempo e aumentar a eficiência do seu negócio!
-          Entre em contato para uma demonstração personalizada!{" "}
+          Entre em contato para uma demonstração personalizada!
         </p>
         <Button
           styleOption="alternative"
           size="md"
           text="Contato"
-          onClick={() => alert}
+          onClick={() =>
+            sendMessage(
+              "Olá, estou entrando em contato referente ao Minhar Reserva",
+              "54 981559983"
+            )
+          }
         />
       </div>
       <div className={styles.container}>
