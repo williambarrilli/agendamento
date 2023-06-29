@@ -17,6 +17,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const auth = getAuth();
   const handleChangeEmail = (value: string) => {
@@ -33,7 +34,7 @@ export default function Login() {
       .then(({ user }) => user)
       .catch((error) => {
         console.log(error);
-        alert("Seu email ou senha estão incorretos");
+        setError("Seu email ou senha estão incorretos!");
       });
 
     if (user?.email) {
@@ -64,6 +65,7 @@ export default function Login() {
             label="Senha"
             onChange={handleChangePassword}
           />
+          {error && <div className={styles.error}>{error}</div>}
           <div className={styles.button}>
             <Button
               styleOption="primary"
