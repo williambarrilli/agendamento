@@ -20,25 +20,31 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
-    <Header logoImage={iconMR} />
-    <Router>
-      <Routes>
-        <Route Component={Home} path="/" />
-        <Route Component={HomeShop} path="/:loja" />
-        <Route
-          element={
-            <>
-              <RequireAuth>
-                <MyArea />
-              </RequireAuth>
-            </>
-          }
-          path="/minha-area"
-        />
-        <Route Component={Login} path="/login" />
-        <Route Component={Agenda} path="/agendar" />
-      </Routes>
-    </Router>
-  </React.StrictMode>
+  <>
+    <header>
+      <Header logoImage={iconMR} />
+    </header>
+    <body>
+      <React.StrictMode>
+        <Router>
+          <Routes>
+            <Route Component={Home} path="/" />
+            <Route Component={HomeShop} path="/:loja" />
+            <Route
+              element={
+                <>
+                  <RequireAuth>
+                    <MyArea />
+                  </RequireAuth>
+                </>
+              }
+              path="/minha-area"
+            />
+            <Route Component={Login} path="/login" />
+            <Route Component={Agenda} path="/agendar" />
+          </Routes>
+        </Router>
+      </React.StrictMode>
+    </body>
+  </>
 );
