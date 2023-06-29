@@ -9,5 +9,6 @@ export const bannersByUrl: banners = {
   "juliana-silva": JulianaBannerImage,
   will: WillBanner,
   "ana-unhas": AnaUnhasBanner,
+  herick: WillBanner,
   default: JulianaBannerImage,
 };

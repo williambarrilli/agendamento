@@ -3,8 +3,6 @@ import { useGetShopsListHook } from "../../hook/getShopsList";
 import styles from "./styles.module.scss";
 import Loading from "../../components/loading";
 import Error from "../../pages/error";
-import Header from "../../components/header";
-import iconMR from "../../assets/images/iconMR.png";
 import Button from "../../components/button";
 import { sendMessage } from "../../utils/send-message-whats-app";
 
@@ -15,7 +13,6 @@ export default function Home() {
   if (error) return <Error message="Ocorreu um erro inesperado." />;
   return (
     <div>
-      <Header logoImage={iconMR} />
       <div className={styles.presentation}>
         <h2>
           Agendamento <span className={styles.orange}>simplificado!</span>

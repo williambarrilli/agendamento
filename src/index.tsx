@@ -1,7 +1,9 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { RequireAuth } from "./auth";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
 import Home from "./pages/home";
 import MyArea from "./pages/my-area";
 import Login from "./pages/login";
@@ -9,7 +11,8 @@ import Agenda from "./pages/agenda";
 import HomeShop from "./pages/home-shop";
 
 import moment from "moment";
-import { RequireAuth } from "./auth";
+import Header from "./components/header";
+import iconMR from "./assets/images/iconMR.png";
 moment.locale("pt-br");
 
 const root = ReactDOM.createRoot(
@@ -18,6 +21,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
+    <Header logoImage={iconMR} />
     <Router>
       <Routes>
         <Route Component={Home} path="/" />
