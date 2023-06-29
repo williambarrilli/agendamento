@@ -9,15 +9,37 @@ import {
   doc,
   getDoc,
   orderBy,
+  addDoc,
 } from "firebase/firestore";
 import { firebaseConfig } from "../init-firebase";
 import { Reserved } from "../types/reserved";
 import { EnumStatus } from "../types/enums";
 import { setSessionStorage } from "../utils/sessionStorage";
+import { Shop } from "../types/shop";
 // TODO REFATORAR CHAMADAS
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+export const addNewShop = async () => {
+  try {
+    const newShop: Shop = {
+      name: "Herick Giaretta",
+      email: "herickgiaretta@outlook.com",
+      url: "herick",
+      phone: "5554 9130-1887",
+      instagram: "herickgiaretta",
+      reservedList: [],
+      solicitationList: [],
+    };
+    if (!(await getShopByUrl("herick"))) {
+      const docRef = await addDoc(collection(db, "shops"), newShop);
+      console.log("Document written with ID: ", docRef.id);
+    }
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+};
 
 export const getShopsList = async () => {
   const retorno: any[] = [];
