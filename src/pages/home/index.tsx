@@ -1,10 +1,10 @@
-import CardComponent from "../../components/card";
-import { useGetShopsListHook } from "../../hook/getShopsList";
+import CardComponent from "components/card";
+import { useGetShopsListHook } from "hook/getShopsList";
 import styles from "./styles.module.scss";
-import Loading from "../../components/loading";
-import Error from "../../pages/error";
-import Button from "../../components/button";
-import { sendMessage } from "../../utils/send-message-whats-app";
+import Loading from "components/loading";
+import Error from "pages/error";
+import Button from "components/button";
+import { sendMessage } from "utils/send-message-whats-app";
 
 export default function Home() {
   const { data, isLoading, error } = useGetShopsListHook();
