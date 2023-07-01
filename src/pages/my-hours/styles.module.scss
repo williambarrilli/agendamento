@@ -1,10 +1,17 @@
 .container {
   display: flex;
-  margin-top: 20px;
   justify-content: center;
+  align-items: center;
+  height: 80vh;
 }
 .content {
+  font-family: sans-serif;
+  font-size: 20px;
+  background-color: #f2f2f2;
+  border: solid 1px #c8c8c8;
   padding: 10px;
+  border-radius: 5px;
+  width: 350px;
 }
 .text {
   font-family: Didot, serif;
@@ -12,6 +19,21 @@
   font-weight: 500px;
   font-size: 23px;
   color: black
+}
+.text {
+  font-family: Didot, serif;
+  text-align: center;
+  font-weight: 500px;
+  font-size: 23px;
+  color: black
+}
+.paragraph{
+  font-family: Didot, serif;
+  text-align: center;
+  font-size: 15px;
+  color: #ff5d1d;
+  margin-top: 40px;
+  margin-bottom: 0;
 }
 .table{
   align-items: center;
@@ -40,4 +62,13 @@
   display: flex;
   justify-content: center;
   margin-top: 8px;
+}
+.section {
+ display: flex;
+ justify-content: center;
+ 
+}
+.sigla {
+  padding: 20px 10px 0 10px;
+  font-size: 20px;
 }

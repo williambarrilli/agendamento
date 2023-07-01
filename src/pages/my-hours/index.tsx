@@ -30,29 +30,33 @@ export default function MyHours() {
 
   return (
     <div className={styles.container}>
-      <div>
+      <div className={styles.content}>
         <h1 className={styles.text}>Meus Horarios</h1>
-        <h3 className={styles.text}>
-          Selecione os horarios que deseja atender
+        <h3 className={styles.paragraph}>
+          Selecione os horarios que deseja atender:
         </h3>
-        <InputSelect
-          value={selectedHour}
-          label="h"
-          placeholder="horas"
-          options={hours}
-          onChange={setSelectedHour}
-        />
-        <InputSelect
-          value={selectedMinute}
-          label="m"
-          placeholder="horas"
-          options={minutes}
-          onChange={setSelectedMinute}
-        />
+        <section className={styles.section}>
+          <InputSelect
+            value={selectedHour}
+            placeholder="horas"
+            options={hours}
+            onChange={setSelectedHour}
+            size="sm"
+          />
+          <div className={styles.sigla}>h</div>
+          <InputSelect
+            value={selectedMinute}
+            placeholder="horas"
+            options={minutes}
+            onChange={setSelectedMinute}
+            size="sm"
+          />
+          <div className={styles.sigla}>min</div>
+        </section>
         <div className={styles.button}>
           <Button
             styleOption="primary"
-            size="md"
+            size="sm"
             onClick={() => handleAddNewHour()}
             text={"Adicionar Horario"}
           />
@@ -63,7 +67,7 @@ export default function MyHours() {
             <div className={styles.button}>
               <Button
                 styleOption="primary"
-                size="md"
+                size="sm"
                 onClick={() => handleRemoveItem(index)}
                 text={"X"}
               />
@@ -71,19 +75,17 @@ export default function MyHours() {
             (remover da lista)
           </div>
         ))}
-        Lista de horarios atuais
+        <div>Lista de horarios atuais</div>
         <div className={styles.button}>
           <Button
-            styleOption="primary"
-            size="md"
+            styleOption="secondary"
+            size="sm"
             onClick={() => navigate("/minha-area")}
             text={"Cancelar alterações"}
           />
-        </div>
-        <div className={styles.button}>
           <Button
             styleOption="primary"
-            size="md"
+            size="sm"
             onClick={() => alert("n fiz ainda")}
             text={"Salvar alterações"}
           />

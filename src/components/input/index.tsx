@@ -7,6 +7,7 @@ interface InputProps {
   placeholder?: string;
   onChange: (value: string) => void;
   label?: string;
+  size?: "sm" | "md" | "lg";
 }
 export default function Input({
   type,
@@ -14,6 +15,7 @@ export default function Input({
   placeholder,
   onChange,
   label,
+  size,
   ...rest
 }: InputProps) {
   return (
@@ -21,7 +23,7 @@ export default function Input({
       <h1 className={styles.text}>{label}</h1>
       <input
         {...rest}
-        className={styles.input}
+        className={`${styles.input} ${size ? styles[size] : ""}`}
         type={type}
         value={value}
         placeholder={placeholder}
