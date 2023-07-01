@@ -1,3 +1,5 @@
+@import "config/colors/styles.module.scss";
+
 .container-buttons {
   display: flex;
   justify-content: center;
@@ -6,7 +8,7 @@
   margin: 30px;
 }
 .divider {
-  border-top: 3px solid black;
+  border-top: 3px solid $secondary-color;
   margin-top: 30px;
   margin-bottom: 10px;
   width: 100%;

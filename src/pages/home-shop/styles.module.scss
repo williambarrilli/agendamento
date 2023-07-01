@@ -1,13 +1,14 @@
+@import "config/colors/styles.module.scss";
+
 .text {
   font-family: Graphik-Medium;
   text-align: center;
   font-weight: 500px;
   font-size: 40px;
-  color: black;
+  color: $secondary-color;
 }
 .content {
-  display:grid;
+  display: grid;
   justify-content: center;
   align-items: center;
- 
 }

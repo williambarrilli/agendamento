@@ -1,3 +1,5 @@
+@import "config/colors/styles.module.scss";
+
 .button {
   text-align: center;
   cursor: pointer;
@@ -5,22 +7,22 @@
   border-radius: 5px;
 }
 .primary {
-  background-color: #ff5d1d ;
-  color: #ffffff;
+  background-color: $primary-color;
+  color: $tertiary-color;
   border: none;
-} 
+}
 
 .secondary {
-  background-color: #ffffff;
-  color: #ff5d1d;
+  background-color: $tertiary-color;
+  color: $primary-color;
   border: 1px solid;
-  border-color: #ff5d1d;
+  border-color: $primary-color;
 }
 .alternative {
-  background-color: #ffffff;
-  color: black;
+  background-color: $tertiary-color;
+  color: $secondary-color;
   border: 1px solid;
-  border-color: black;
+  border-color: $secondary-color;
 }
 
 .sm {

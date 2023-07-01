@@ -1,3 +1,5 @@
+@import "config/colors/styles.module.scss";
+
 .container {
   display: flex;
   margin-top: 20px;
@@ -11,22 +13,22 @@
   text-align: center;
   font-weight: 500px;
   font-size: 23px;
-  color: black
+  color: $secondary-color;
 }
-.table{
+.table {
   align-items: center;
 }
 .textTread {
   font-family: Didot, serif;
   text-align: center;
-  color: #ff5d1d;
-  font-size: 15px;  
+  color: $primary-color;
+  font-size: 15px;
 }
 .textTable {
   font-family: Didot, serif;
   text-align: center;
-  font-size: 15px;  
-  color: black;
+  font-size: 15px;
+  color: $secondary-color;
 }
 
 .columMax {
@@ -34,7 +36,7 @@
 }
 
 .separator {
-  border-bottom: 1px solid #ff5d1d;
+  border-bottom: 1px solid $primary-color;
 }
 .button {
   display: flex;
