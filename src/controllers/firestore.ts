@@ -21,6 +21,12 @@ import { Shop } from "../types/shop";
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+const getCollection = (nameCollection: string) => {
+  return collection(db, nameCollection);
+};
+
+const shopsRef = getCollection("shops");
+
 export const addNewShop = async () => {
   try {
     const newShop: Shop = {
@@ -31,9 +37,10 @@ export const addNewShop = async () => {
       instagram: "herickgiaretta",
       reservedList: [],
       solicitationList: [],
+      hoursShopOpen: [],
     };
     if (!(await getShopByUrl("herick"))) {
-      const docRef = await addDoc(collection(db, "shops"), newShop);
+      const docRef = await addDoc(shopsRef, newShop);
       console.log("Document written with ID: ", docRef.id);
     }
   } catch (e) {
@@ -43,7 +50,7 @@ export const addNewShop = async () => {
 
 export const getShopsList = async () => {
   const retorno: any[] = [];
-  const shopsRef = collection(db, "shops");
+
   const q = query(shopsRef, orderBy("name", "asc"));
 
   const querySnapshot = await getDocs(q);
@@ -51,11 +58,10 @@ export const getShopsList = async () => {
     retorno.push(doc.data());
   });
 
-  return retorno;
+  return retorno as Shop[];
 };
 
 export const getShopByEmail = async (email: string) => {
-  const shopsRef = collection(db, "shops");
   const searchQuery = query(shopsRef, where("email", "==", email));
 
   const querySnapshot = await getDocs(searchQuery);
@@ -69,7 +75,6 @@ export const getShopByEmail = async (email: string) => {
 };
 
 export const getShopByUrl = async (url: string | undefined) => {
-  const shopsRef = collection(db, "shops");
   const searchQuery = query(shopsRef, where("url", "==", url));
 
   const querySnapshot = await getDocs(searchQuery);
@@ -79,15 +84,6 @@ export const getShopByUrl = async (url: string | undefined) => {
   });
   if (retorno) setSessionStorage("shopData", retorno);
   return retorno;
-};
-
-export const getSolicitationList = async (shopId: string) => {
-  const documentRef = doc(db, "shops", shopId);
-  const docSnapshot = await getDoc(documentRef);
-  if (docSnapshot.exists()) {
-    const documentData = docSnapshot.data();
-    return documentData.solicitationList;
-  }
 };
 
 export const sendSolicitationReserved = async (
@@ -138,5 +134,21 @@ export const updateSolicitationReserve = async (
     }
   } catch (error) {
     console.log("Error getting document:", error);
+  }
+};
+
+export const setHourShop = async (shopId: string, hoursShopOpen: string[]) => {
+  try {
+    const documentRef = doc(db, "shops", shopId);
+    const docSnapshot = await getDoc(documentRef);
+    if (docSnapshot.exists()) {
+      const documentData = docSnapshot.data();
+
+      await updateDoc(documentRef, { ...documentData, hoursShopOpen });
+    } else {
+      console.log("Document not found");
+    }
+  } catch (error) {
+    console.log("Error setHourShop document:", error);
   }
 };
