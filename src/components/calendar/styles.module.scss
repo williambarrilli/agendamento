@@ -1,3 +1,5 @@
+@import "config/colors/styles.module.scss";
+
 .container {
 }
 .header-page {
@@ -6,9 +8,9 @@
   align-items: center;
   justify-content: space-between;
   font-size: 25px;
-  color: #ff5d1d;
+  color: $primary-color;
   font-weight: 550;
-  background: #ffffff;
+  background: $tertiary-color;
 }
 
 .content {

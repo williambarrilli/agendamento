@@ -1,3 +1,5 @@
+@import "config/colors/styles.module.scss";
+
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -9,11 +11,11 @@
 }
 
 .itemHour {
-  color: #ffffff;
+  color: $tertiary-color;
   font-size: 20px;
   margin: 5px;
-  border: 2px solid #ff5d1d;
-  background: #ff5d1d;
+  border: 2px solid $primary-color;
+  background: $primary-color;
   padding: 5px;
 
   &:disabled {
@@ -23,6 +25,6 @@
   }
   &:hover {
     background: #d1966a;
-    color: #ffffff;
+    color: $tertiary-color;
   }
 }

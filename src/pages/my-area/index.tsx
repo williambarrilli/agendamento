@@ -11,6 +11,7 @@ import { Shop } from "../../types/shop";
 import { horarios } from "../../utils/constants";
 import { getSessionStorage } from "../../utils/sessionStorage";
 import styles from "./styles.module.scss";
+import { sendMessage } from "utils/send-message-whats-app";
 
 export default function MyArea() {
   const [shop, setShop] = useState<Shop>();
@@ -30,7 +31,20 @@ export default function MyArea() {
         <tr key={index}>
           <td>{horario}</td>
           <td>{filterHour?.name ? filterHour.name : "livre"}</td>
-          <td>{filterHour?.phone ? filterHour.phone : ""}</td>
+          <td>
+            {filterHour?.phone && (
+              <div className={styles.rowBotton}>
+                <Button
+                  styleOption="secondary"
+                  size="sm"
+                  text="Contato"
+                  onClick={() =>
+                    sendMessage("Olá tudo bem?", filterHour?.phone)
+                  }
+                />
+              </div>
+            )}
+          </td>
         </tr>
       );
     });
@@ -111,13 +125,11 @@ export default function MyArea() {
               <th className={styles.columMax}>Nome</th>
               <th>Contato</th>
             </thead>
-
-            <tr>
-              <td className={styles.separator}></td>
-              <td className={styles.separator}></td>
-              <td className={styles.separator}></td>
-            </tr>
-
+            {/* <tbody>
+              <td className={styles.separator} />
+              <td className={styles.separator} />
+              <td className={styles.separator} />
+            </tbody> */}
             <tbody className={styles.textTable}>{renderTableBody()}</tbody>
           </table>
         </>

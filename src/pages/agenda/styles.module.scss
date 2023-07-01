@@ -1,3 +1,5 @@
+@import "config/colors/styles.module.scss";
+
 .container {
 }
 
@@ -21,7 +23,7 @@
 
 .modal-content {
   font-family: Didot, serif;
-  color: black;
+  color: $secondary-color;
   text-align: center;
   font-size: 18px;
 }

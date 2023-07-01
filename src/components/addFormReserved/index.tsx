@@ -29,10 +29,14 @@ export default function ReservedComponent({ shopId, onClose }: ReservedProps) {
     }));
   };
   const submitReserved = () => {
-    sendSolicitationReserved(
-      shopId ? shopId : "MLJ0k39Q9ELsH78X3lHW",
-      newReserved
+    const formatedDate = moment(newReserved.date, "YYYY/MM/DD").format(
+      "DD/MM/YYYY"
     );
+
+    sendSolicitationReserved(shopId ? shopId : "MLJ0k39Q9ELsH78X3lHW", {
+      ...newReserved,
+      date: formatedDate,
+    });
     alert("Reserva adicionada");
     onClose();
   };
@@ -47,9 +51,7 @@ export default function ReservedComponent({ shopId, onClose }: ReservedProps) {
             value={newReserved.date}
             placeholder="Selecione uma data"
             label="Data:"
-            onChange={(e) =>
-              handleChange("date", moment(e, "YYYY/MM/DD").format("DD/MM/YYYY"))
-            }
+            onChange={(e) => handleChange("date", e)}
           />
 
           <InputSelect
