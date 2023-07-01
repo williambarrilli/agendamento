@@ -12,7 +12,7 @@ export default function HomeShop() {
 
   const { data, isLoading } = useGetShopByUrl(loja?.toString());
 
-  if (isLoading) {
+  if (!isLoading) {
     return <Loading />;
   }
   if (data?.url)
