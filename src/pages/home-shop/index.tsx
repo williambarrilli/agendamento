@@ -1,17 +1,16 @@
-import styles from "./styles.module.scss";
-import ButtonsView from "../../views/home/buttonsView";
-import BannerComponent from "../../components/banner";
 import { useParams } from "react-router-dom";
+import BannerComponent from "../../components/banner";
+import ButtonsView from "../../views/home/buttonsView";
+import styles from "./styles.module.scss";
 
 import Loading from "../../components/loading";
-import Error from "../../pages/error";
 import { useGetShopByUrl } from "../../hook/getShopByUrl";
+import Error from "../../pages/error";
 
 export default function HomeShop() {
   const { loja } = useParams();
 
   const { data, isLoading } = useGetShopByUrl(loja?.toString());
-
   if (!isLoading) {
     return <Loading />;
   }
