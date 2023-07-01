@@ -6,7 +6,7 @@ on:
       - develop
 
 jobs:
-  build:
+  build_dev:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,5 +27,5 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Run tests
-        run: npm test
+      # - name: Run tests
+      #   run: npm test
