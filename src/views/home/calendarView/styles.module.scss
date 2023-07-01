@@ -1,12 +1,14 @@
+@import "config/colors/styles.module.scss";
+
 .container {
-  display:flex;
+  display: flex;
   justify-content: center;
 }
 
 .text {
   font-family: Didot, serif;
   text-align: center;
-  color: black;
+  color: $secondary-color;
   font-size: 23px;
 }
 .contentButtons {

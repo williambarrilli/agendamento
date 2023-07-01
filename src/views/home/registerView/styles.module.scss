@@ -1,3 +1,5 @@
+@import "config/colors/styles.module.scss";
+
 .container {
   text-align: center;
 }
@@ -13,7 +15,7 @@
   text-align: center;
   font-weight: 500px;
   font-size: 30px;
-  color: black;
+  color: $secondary-color;
 }
 
 .box-button {

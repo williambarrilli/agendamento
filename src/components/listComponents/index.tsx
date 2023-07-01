@@ -1,10 +1,9 @@
-import { updateSolicitationReserve } from "../../controllers/firestore";
+import { updateSolicitationReserved } from "../../controllers/firestore";
 import { EnumStatus, EnumStatusKeys } from "../../types/enums";
 import { Reserved } from "../../types/reserved";
 import { sendMessage } from "../../utils/send-message-whats-app";
 import Button from "../button";
 import styles from "./styles.module.scss";
-import { useNavigate } from "react-router-dom";
 
 interface ListComponentsProps {
   listItems?: Reserved[];
@@ -15,22 +14,26 @@ export default function ListComponents({
   listItems,
   shopId,
 }: ListComponentsProps) {
-  const navigate = useNavigate();
-
   const onConfirm = (item: Reserved, index: number) => {
     item.status = EnumStatus.APROVED;
-    updateSolicitationReserve(shopId, item, index);
-    const messageConfirm = `Olá, sua solicitação de agendamento foi confirmada, te aguardo no dia ${item.date} as ${item.hour} horas.`;
-    navigate("/minha-area");
-    sendMessage(messageConfirm, item.phone);
+    updateSolicitationReserved(shopId, item, index);
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm("Deseja enviar uma mensagem de confirmação?")) {
+      const messageConfirm = `Olá, sua solicitação de agendamento foi confirmada, te aguardo no dia ${item.date} as ${item.hour} horas.`;
+      sendMessage(messageConfirm, item.phone);
+    }
   };
 
   const onReject = (item: Reserved, index: number) => {
     item.status = EnumStatus.REPROVED;
-    updateSolicitationReserve(shopId, item, index);
-    const messageReject = `Olá, não estarei disponivel neste horário, podemos agendar um outro horário?`;
-    sendMessage(messageReject, item.phone);
+    updateSolicitationReserved(shopId, item, index);
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm("Deseja enviar uma mensagem para reagendamento?")) {
+      const messageReject = `Olá, não estarei disponivel neste horário, podemos agendar um outro horário?`;
+      sendMessage(messageReject, item.phone);
+    }
   };
+
   if (!listItems?.length) {
     return (
       <div className={styles.text}>
@@ -77,7 +80,7 @@ export default function ListComponents({
                 styleOption="secondary"
                 size="sm"
                 text="Contato"
-                onClick={() => sendMessage("Olá tudo bem?", "5554981559983")}
+                onClick={() => sendMessage("Olá tudo bem?", item.phone)}
               />
             </div>
           </div>

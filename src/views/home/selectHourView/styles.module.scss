@@ -1,8 +1,10 @@
+@import "config/colors/styles.module.scss";
+
 .container {
   font-family: Didot, serif;
   text-align: center;
   justify-content: centers;
-  color: black;
+  color: $secondary-color;
   font-size: 20px;
 }
 
