@@ -8,11 +8,10 @@
 }
 .text {
   font-family: Didot, serif;
-  font-style: italic;
   text-align: center;
   font-weight: 500px;
   font-size: 23px;
-  color: #ac7348;
+  color: black
 }
 .table{
   align-items: center;
@@ -20,22 +19,22 @@
 .textTread {
   font-family: Didot, serif;
   text-align: center;
-  color: #ac7246;
+  color: #ff5d1d;
   font-size: 15px;  
 }
 .textTable {
   font-family: Didot, serif;
   text-align: center;
   font-size: 15px;  
-  color: #442711;
+  color: black;
 }
 
 .columMax {
-  padding: 2px 85px;
+  padding: 2px 65px;
 }
 
 .separator {
-  border-bottom: 1px solid #ac7246;
+  border-bottom: 1px solid #ff5d1d;
 }
 .button {
   display: flex;

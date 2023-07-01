@@ -8,13 +8,13 @@
 .header {
   text-align: center;
   font-weight: bold;
-  color: #ac7348;
+  color: #ff5d1d;
   font-size: 20px;
 }
 
 .week-days {
   border-bottom: 1px solid #ccc;
-  color: #ac7348;
+  color: #ff5d1d;
   text-align: center;
 }
 .week-day {
@@ -43,7 +43,7 @@
   vertical-align: center;
   margin: 1px;
   &:hover {
-    background: #d1966a;
+    background: #ff5d1d;
     color: #ffffff;
   }
 }
@@ -51,7 +51,7 @@
   opacity: 0.3;
 }
 .is-selected {
-  background: #d1966a;
+  background: #ff5d1d;
   color: #ffffff;
 }
 
