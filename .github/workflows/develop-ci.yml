@@ -1,0 +1,31 @@
+name: deploy dev
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build_dev:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Linting
+        run: npm run lint
+
+      - name: Build project
+        run: npm run build
+
+      # - name: Run tests
+      #   run: npm test
