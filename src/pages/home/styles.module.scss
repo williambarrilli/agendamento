@@ -1,14 +1,15 @@
+@import "config/colors/styles.module.scss";
+
 .container {
-  display:grid;
+  display: grid;
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
- 
 }
 
 .presentation {
   text-align: center;
-  font-family: Didot, serif;;
+  font-family: Didot, serif;
   padding: 24px;
   background-color: #ffffff;
   border-radius: 8px;
@@ -21,5 +22,5 @@
   font-size: 18px;
 }
 .orange {
-  color: #f76c16 ;
+  color: #f76c16;
 }
