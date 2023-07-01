@@ -45,7 +45,6 @@ export default function Login() {
     setLoading(false);
   };
   if (loading) return <Loading />;
-  if (auth.currentUser) navigate("/minha-area");
 
   return (
     <div>

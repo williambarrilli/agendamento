@@ -9,4 +9,5 @@ export interface Shop {
   reservedList: Reserved[];
   solicitationList: Reserved[];
   email: string;
+  hoursShopOpen: string[];
 }

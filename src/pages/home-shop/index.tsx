@@ -2,52 +2,26 @@ import styles from "./styles.module.scss";
 import ButtonsView from "../../views/home/buttonsView";
 import BannerComponent from "../../components/banner";
 import { useParams } from "react-router-dom";
-import { getShopByUrl } from "../../controllers/firestore";
-import { useEffect, useState } from "react";
-import { Shop } from "../../types/shop";
-import { getSessionStorage } from "../../utils/sessionStorage";
+
 import Loading from "../../components/loading";
 import Error from "../../pages/error";
+import { useGetShopByUrl } from "../../hook/getShopByUrl";
 
 export default function HomeShop() {
   const { loja } = useParams();
-  const [loading, setLoading] = useState(true);
-  const [shop, setShop] = useState<Shop>();
 
-  const session: Shop = getSessionStorage("shopData");
+  const { data, isLoading } = useGetShopByUrl(loja?.toString());
 
-  //TODO refatorar
-  useEffect(() => {
-    if (!loja) return;
-    setLoading(true);
-    if (session?.url && session?.url === loja) {
-      setShop(session);
-      setLoading(false);
-    } else {
-      getShopByUrl(loja?.toString())
-        .then((response) => {
-          setShop(response);
-          setLoading(false); // Altera o estado para "false" quando o request é concluído
-        })
-        .catch((error) => {
-          console.error("Erro ao buscar informações da loja:", error);
-          setLoading(false); // Altera o estado para "false" mesmo em caso de erro
-        });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  // Verifica se ainda está carregando
-  if (loading) {
-    return <Loading />; // Mostra um indicador de carregamento enquanto espera
-  } else if (!loading && !shop?.url)
-    return <Error message="Página não encontrada." />;
-  else if (shop?.url)
+  if (!isLoading) {
+    return <Loading />;
+  }
+  if (data?.url)
     return (
       <>
-        <BannerComponent bannerImage={shop && shop.url} />
-        <h1 className={styles.text}> {shop?.name} </h1>
-        <ButtonsView shop={shop} />
+        <BannerComponent bannerImage={data && data.url} />
+        <h1 className={styles.text}> {data?.name} </h1>
+        <ButtonsView shop={data} />
       </>
     );
-  return <></>;
+  return <Error message="Página não encontrada." />;
 }

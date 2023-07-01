@@ -12,8 +12,6 @@ export default function ListComponents({
   setHourSelected,
   reservedList,
 }: ListComponentsProps) {
-  // TODO: Componente de listagem recebe a lista como parametro
-
   const horarios = useMemo(
     () => [
       "08:00",
@@ -42,6 +40,7 @@ export default function ListComponents({
       return { hour, hasReservation };
     });
   }, [reservedList, horarios]);
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
