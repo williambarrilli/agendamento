@@ -4,14 +4,14 @@
   display: grid;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
+  background-color: $tertiary-color;
 }
 
 .presentation {
   text-align: center;
   font-family: Didot, serif;
   padding: 24px;
-  background-color: #ffffff;
+  background-color: $tertiary-color;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: solid 1px #a4a0a0;
