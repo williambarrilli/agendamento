@@ -23,7 +23,7 @@ export default function Home() {
           Entre em contato para uma demonstração personalizada!
         </p>
         <Button
-          styleOption="alternative"
+          styleOption="primary"
           size="md"
           text="Contato"
           onClick={() =>

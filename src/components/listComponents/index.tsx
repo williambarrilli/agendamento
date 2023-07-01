@@ -64,7 +64,7 @@ export default function ListComponents({
                 </div>
                 <div className={styles.rowBotton}>
                   <Button
-                    styleOption="secondary"
+                    styleOption="primary"
                     size="sm"
                     text="Confirmar"
                     onClick={() => onConfirm(item, index)}
