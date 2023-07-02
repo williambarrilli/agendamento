@@ -137,7 +137,10 @@ export const updateSolicitationReserved = async (
   }
 };
 
-export const setHourShop = async (shopId: string, hoursShopOpen: string[]) => {
+export const updateHourShop = async (
+  shopId: string,
+  hoursShopOpen: string[]
+) => {
   try {
     const documentRef = doc(db, "shops", shopId);
     const docSnapshot = await getDoc(documentRef);
