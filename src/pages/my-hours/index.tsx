@@ -47,9 +47,6 @@ export default function MyHours() {
     <div className={styles.container}>
       <div className={styles.content}>
         <h1 className={styles.text}>Meus Horarios</h1>
-        <h3 className={styles.paragraph}>
-          Selecione os horarios que deseja atender:
-        </h3>
         <section className={styles.section}>
           <InputSelect
             value={selectedHour}
@@ -67,16 +64,17 @@ export default function MyHours() {
             size="sm"
           />
           <div className={styles.sigla}>min</div>
+          <div className={styles.siglaButton}>
+            <Button
+              styleOption="primary"
+              size="sm"
+              onClick={() => handleAddNewHour()}
+              text={"Adicionar"}
+            />
+          </div>
         </section>
-        <div className={styles.button}>
-          <Button
-            styleOption="primary"
-            size="sm"
-            onClick={() => handleAddNewHour()}
-            text={"Adicionar Horario"}
-          />
-        </div>
-        <h3 className={styles.paragraph}>Lista de horários atuais:</h3>
+
+        <h3 className={styles.paragraph}>Horários que deseja atender:</h3>
         <div className={styles.pill}>
           {myHours.map((hour, index) => (
             <div key={index}>
@@ -96,17 +94,17 @@ export default function MyHours() {
           <div className={styles.button}>
             <Button
               styleOption="secondary"
-              size="sm"
+              size="md"
               onClick={() => navigate("/minha-area")}
-              text={"Cancelar alterações"}
+              text={"Cancelar"}
             />
           </div>
           <div className={styles.button}>
             <Button
               styleOption="primary"
-              size="sm"
+              size="md"
               onClick={() => handleSubmit()}
-              text={"Salvar alterações"}
+              text={"Salvar"}
             />
           </div>
         </div>
