@@ -17,14 +17,14 @@
   font-size: 25px;
   color: $secondary-color;
 }
-.paragraph{
+.paragraph {
   font-family: Didot, serif;
   font-size: 20px;
   color: $secondary-color;
   text-align: center;
   margin-bottom: 1px;
 }
-.table{
+.table {
   align-items: center;
 }
 .textTread {
@@ -54,9 +54,9 @@
   padding: 0 5px;
 }
 .section {
- display: flex;
- justify-content: center;
- 
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
 }
 .pill {
   display: flex;
@@ -70,12 +70,4 @@
   width: 350px;
   justify-content: center;
   margin-top: 10px;
-}
-.sigla {
-  padding: 20px 10px 0 10px;
-  font-size: 20px;
-}
-.siglaButton {
-  padding: 18px 10px 0 10px;
-  font-size: 20px;
 }

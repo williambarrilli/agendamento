@@ -10,20 +10,32 @@ import { useNavigate } from "react-router-dom";
 import { updateHourShop } from "controllers/firestore";
 import { getSessionStorage, setSessionStorage } from "utils/sessionStorage";
 import { Shop } from "types/shop";
+import moment from "moment";
 
 export default function MyHours() {
   const navigate = useNavigate();
   const session: Shop = getSessionStorage("shopData");
 
   const [myHours, setMyHours] = useState<string[]>([]);
-  const [selectedHour, setSelectedHour] = useState<string>("7");
-  const [selectedMinute, setSelectedMinute] = useState<string>("00");
+  const [selectedHour, setSelectedHour] = useState<string>("");
+  const [selectedMinute, setSelectedMinute] = useState<string>("");
 
   const handleAddNewHour = () => {
-    const updatedList = [...myHours, `${selectedHour}:${selectedMinute}`];
-    setSelectedHour("7");
-    setSelectedMinute("00");
+    const newHour = `${selectedHour}:${selectedMinute}`;
+
+    if (myHours.includes(newHour)) {
+      return alert("Este horário já foi adicionado");
+    }
+    const updatedList = [...myHours, newHour];
+    updatedList.sort(compareHours);
+
     setMyHours(updatedList);
+  };
+
+  const compareHours = (timeA: string, timeB: string) => {
+    const momentA = moment(timeA, "H:mm");
+    const momentB = moment(timeB, "H:mm");
+    return momentA.diff(momentB);
   };
 
   const handleRemoveItem = (index: number) => {
@@ -36,6 +48,7 @@ export default function MyHours() {
     const shopId = session?.id as string;
     updateHourShop(shopId, myHours);
     setSessionStorage("shopData", { ...session, hoursShopOpen: myHours });
+    navigate("/minha-area");
   };
 
   useEffect(() => {
@@ -55,7 +68,7 @@ export default function MyHours() {
             onChange={setSelectedHour}
             size="sm"
           />
-          <div className={styles.sigla}>h</div>
+          <article>h</article>
           <InputSelect
             value={selectedMinute}
             placeholder="horas"
@@ -63,8 +76,8 @@ export default function MyHours() {
             onChange={setSelectedMinute}
             size="sm"
           />
-          <div className={styles.sigla}>min</div>
-          <div className={styles.siglaButton}>
+          <article>min</article>
+          <div>
             <Button
               styleOption="primary"
               size="sm"
@@ -78,7 +91,6 @@ export default function MyHours() {
         <div className={styles.pill}>
           {myHours.map((hour, index) => (
             <div key={index}>
-              {" "}
               <div className={styles.button}>
                 <Button
                   styleOption="primary"

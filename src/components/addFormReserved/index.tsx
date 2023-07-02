@@ -5,15 +5,15 @@ import { Reserved } from "../../types/reserved";
 import { useState } from "react";
 import { EnumStatus } from "../../types/enums";
 import InputSelect from "../inputSelect";
-import { horarios } from "../../utils/constants";
 import { sendSolicitationReserved } from "../../controllers/firestore";
 import moment from "moment";
+import { Shop } from "types/shop";
 
 interface ReservedProps {
-  shopId?: string;
+  shop?: Shop;
   onClose: () => void;
 }
-export default function ReservedComponent({ shopId, onClose }: ReservedProps) {
+export default function ReservedComponent({ shop, onClose }: ReservedProps) {
   const [newReserved, setNewReserved] = useState<Reserved>({
     name: "",
     phone: "",
@@ -32,7 +32,7 @@ export default function ReservedComponent({ shopId, onClose }: ReservedProps) {
     const formatedDate = moment(newReserved.date, "YYYY/MM/DD").format(
       "DD/MM/YYYY"
     );
-
+    const shopId = shop?.id;
     sendSolicitationReserved(shopId ? shopId : "MLJ0k39Q9ELsH78X3lHW", {
       ...newReserved,
       date: formatedDate,
@@ -55,7 +55,7 @@ export default function ReservedComponent({ shopId, onClose }: ReservedProps) {
           />
 
           <InputSelect
-            options={horarios}
+            options={shop?.hoursShopOpen || []}
             value={newReserved.hour}
             placeholder="Selecione uma horario"
             label="Horário:"

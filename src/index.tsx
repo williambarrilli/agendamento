@@ -29,6 +29,7 @@ root.render(
           <Routes>
             <Route Component={Home} path="/" />
             <Route Component={HomeShop} path="/:loja" />
+            <Route Component={Login} path="/login" />
             <Route
               element={
                 <>
@@ -39,9 +40,17 @@ root.render(
               }
               path="/minha-area"
             />
-            <Route Component={Login} path="/login" />
+            <Route
+              element={
+                <>
+                  <RequireAuth>
+                    <MyHours />
+                  </RequireAuth>
+                </>
+              }
+              path="/minha-area/meus-horarios"
+            />
             <Route Component={Agenda} path="/agendar" />
-            <Route Component={MyHours} path="/minha-area/meus-horarios" />
           </Routes>
         </Router>
       </React.StrictMode>
