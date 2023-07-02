@@ -11,9 +11,7 @@ export default function HomeShop() {
   const { loja } = useParams();
 
   const { data, isLoading } = useGetShopByUrl(loja?.toString());
-  if (!isLoading) {
-    return <Loading />;
-  }
+
   if (data?.url)
     return (
       <>
@@ -22,5 +20,10 @@ export default function HomeShop() {
         <ButtonsView shop={data} />
       </>
     );
+
+  if (!isLoading) {
+    return <Loading />;
+  }
+
   return <Error message="Página não encontrada." />;
 }
