@@ -5,6 +5,7 @@ interface ButtonProps {
   onClick: () => void;
   styleOption?: "primary" | "secondary" | "alternative";
   size?: "sm" | "md" | "lg" | "xl";
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -12,6 +13,7 @@ export default function Button({
   onClick,
   styleOption = "primary",
   size = "md",
+  disabled,
   ...rest
 }: ButtonProps) {
   return (
@@ -20,6 +22,7 @@ export default function Button({
         className={`button ${styleOption} ${size}`}
         onClick={() => onClick()}
         {...rest}
+        disabled={disabled}
       >
         {text}
       </button>

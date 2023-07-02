@@ -2,6 +2,7 @@ import Input from "../../../components/input";
 import Button from "../../../components/button";
 import styles from "./styles.module.scss";
 import { EnumMenu } from "../../../types/enums";
+import { useMemo } from "react";
 export interface RegisterViewProps {
   name: string;
   phone: string;
@@ -24,6 +25,8 @@ export default function RegisterView({
     alterarPhone(value);
   };
 
+  const isError = useMemo(() => !name || !phone, [name, phone]);
+
   return (
     <div className={styles.container}>
       <h2 className={styles.text}> Informações do cliente </h2>
@@ -38,7 +41,7 @@ export default function RegisterView({
           />
 
           <Input
-            type="text"
+            type="number"
             value={phone}
             placeholder="(**)****-****"
             label="Telefone:"
@@ -50,6 +53,7 @@ export default function RegisterView({
               text="Continuar"
               size="md"
               onClick={() => onConfirm(EnumMenu.SELECTDATE)}
+              disabled={isError}
             />
           </div>
         </div>
