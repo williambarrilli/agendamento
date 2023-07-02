@@ -61,8 +61,9 @@ export default function MyHours() {
             text={"Adicionar Horario"}
           />
         </div>
+        <h3 className={styles.paragraph}>Lista de horários atuais:</h3>
         {myHours.map((hour, index) => (
-          <div key={index}>
+          <div key={index} className={styles.pill}>
             {hour}{" "}
             <div className={styles.button}>
               <Button
@@ -75,20 +76,24 @@ export default function MyHours() {
             (remover da lista)
           </div>
         ))}
-        <div>Lista de horarios atuais</div>
+
         <div className={styles.button}>
-          <Button
-            styleOption="secondary"
-            size="sm"
-            onClick={() => navigate("/minha-area")}
-            text={"Cancelar alterações"}
-          />
-          <Button
-            styleOption="primary"
-            size="sm"
-            onClick={() => alert("n fiz ainda")}
-            text={"Salvar alterações"}
-          />
+          <div className={styles.button}>
+            <Button
+              styleOption="secondary"
+              size="sm"
+              onClick={() => navigate("/minha-area")}
+              text={"Cancelar alterações"}
+            />
+          </div>
+          <div className={styles.button}>
+            <Button
+              styleOption="primary"
+              size="sm"
+              onClick={() => alert("n fiz ainda")}
+              text={"Salvar alterações"}
+            />
+          </div>
         </div>
       </div>
     </div>
