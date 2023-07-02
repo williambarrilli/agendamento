@@ -51,17 +51,19 @@ export default function Login() {
       <div className={styles.container}>
         <div className={styles.modalContent}>
           <Input
-            type="text"
+            type="email"
             value={email}
             placeholder="Digite seu email"
             label="Email"
             onChange={handleChangeEmail}
+            size="lg"
           />
           <Input
             type="password"
             value={password}
             placeholder="Digite sua senha"
             label="Senha"
+            size="lg"
             onChange={handleChangePassword}
           />
           {error && <div className={styles.error}>{error}</div>}
