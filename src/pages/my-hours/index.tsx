@@ -36,6 +36,7 @@ export default function MyHours() {
     const shopId = session?.id as string;
     updateHourShop(shopId, myHours);
     setSessionStorage("shopData", { ...session, hoursShopOpen: myHours });
+    navigate("/minha-area");
   };
 
   useEffect(() => {
@@ -55,7 +56,7 @@ export default function MyHours() {
             onChange={setSelectedHour}
             size="sm"
           />
-          <div className={styles.sigla}>h</div>
+          <article>h</article>
           <InputSelect
             value={selectedMinute}
             placeholder="horas"
@@ -63,8 +64,8 @@ export default function MyHours() {
             onChange={setSelectedMinute}
             size="sm"
           />
-          <div className={styles.sigla}>min</div>
-          <div className={styles.siglaButton}>
+          <article>min</article>
+          <div>
             <Button
               styleOption="primary"
               size="sm"
@@ -78,7 +79,6 @@ export default function MyHours() {
         <div className={styles.pill}>
           {myHours.map((hour, index) => (
             <div key={index}>
-              {" "}
               <div className={styles.button}>
                 <Button
                   styleOption="primary"
