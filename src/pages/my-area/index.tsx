@@ -44,7 +44,7 @@ export default function MyArea() {
     return setIsOpenModal(false);
   }, [dateSelected]);
   const renderTableBody = () => {
-    return horarios.map((horario, index) => {
+    return shop?.hoursShopOpen?.map((horario, index) => {
       const filterHour = filterList.find(
         (reserved: Reserved) => reserved.hour === horario
       );
@@ -117,7 +117,7 @@ export default function MyArea() {
         onClose={() => setIsOpenModalNewReserved(false)}
       >
         <ReservedComponent
-          shopId={shop?.id}
+          shop={shop}
           onClose={() => setIsOpenModalNewReserved(false)}
         />
       </ModalComponent>
