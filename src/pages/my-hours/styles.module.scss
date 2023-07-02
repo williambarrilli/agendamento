@@ -9,25 +9,20 @@
 .content {
   font-family: sans-serif;
   font-size: 20px;
-  background-color: #f2f2f2;
-  border: solid 1px #c8c8c8;
-  padding: 10px;
-  border-radius: 5px;
-  width: 350px;
 }
 .text {
   font-family: Didot, serif;
   text-align: center;
   font-weight: 500px;
-  font-size: 23px;
+  font-size: 25px;
   color: $secondary-color;
 }
 .paragraph{
   font-family: Didot, serif;
-  font-size: 18px;
+  font-size: 20px;
   color: $secondary-color;
   text-align: center;
-  margin-bottom: 0;
+  margin-bottom: 1px;
 }
 .table{
   align-items: center;
@@ -62,6 +57,19 @@
  display: flex;
  justify-content: center;
  
+}
+.pill {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: sans-serif;
+  font-size: 20px;
+  background-color: #f2f2f2;
+  border: solid 1px #c8c8c8;
+  padding: 10px;
+  border-radius: 5px;
+  width: 350px;
+  justify-content: center;
+  margin-top: 10px;
 }
 .sigla {
   padding: 20px 10px 0 10px;

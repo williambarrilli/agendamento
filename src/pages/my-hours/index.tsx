@@ -77,21 +77,21 @@ export default function MyHours() {
           />
         </div>
         <h3 className={styles.paragraph}>Lista de horários atuais:</h3>
-        {myHours.map((hour, index) => (
-          <div key={index} className={styles.pill}>
-            {hour}{" "}
-            <div className={styles.button}>
-              <Button
-                styleOption="primary"
-                size="sm"
-                onClick={() => handleRemoveItem(index)}
-                text={"X"}
-              />
+        <div className={styles.pill}>
+          {myHours.map((hour, index) => (
+            <div key={index}>
+              {" "}
+              <div className={styles.button}>
+                <Button
+                  styleOption="primary"
+                  size="sm"
+                  onClick={() => handleRemoveItem(index)}
+                  text={hour + "  X"}
+                />
+              </div>
             </div>
-            (remover da lista)
-          </div>
-        ))}
-
+          ))}
+        </div>
         <div className={styles.button}>
           <div className={styles.button}>
             <Button
