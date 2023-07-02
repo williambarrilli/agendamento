@@ -1,3 +1,5 @@
+@import "config/colors/styles.module.scss";
+
 .container {
   padding: 7px;
   border: 1px solid #ccc;
@@ -8,13 +10,13 @@
 .header {
   text-align: center;
   font-weight: bold;
-  color: #ff5d1d;
+  color: $primary-color;
   font-size: 20px;
 }
 
 .week-days {
   border-bottom: 1px solid #ccc;
-  color: #ff5d1d;
+  color: $primary-color;
   text-align: center;
 }
 .week-day {
@@ -43,16 +45,16 @@
   vertical-align: center;
   margin: 1px;
   &:hover {
-    background: #ff5d1d;
-    color: #ffffff;
+    background: $primary-color;
+    color: $tertiary-color;
   }
 }
 .is-not-current-month {
   opacity: 0.3;
 }
 .is-selected {
-  background: #ff5d1d;
-  color: #ffffff;
+  background: $primary-color;
+  color: $tertiary-color;
 }
 
 .arrow-box {

@@ -109,7 +109,7 @@ export const sendSolicitationReserved = async (
   }
 };
 
-export const updateSolicitationReserve = async (
+export const updateSolicitationReserved = async (
   shopId: string,
   reserved: Reserved,
   index: number
@@ -118,13 +118,13 @@ export const updateSolicitationReserve = async (
     const documentRef = doc(db, "shops", shopId);
     const docSnapshot = await getDoc(documentRef);
     if (docSnapshot.exists()) {
-      const documentData = docSnapshot.data();
-
-      documentData.solicitationList[index] = reserved;
+      const documentData = docSnapshot.data() as Shop;
 
       if (reserved.status === EnumStatus.APROVED) {
         documentData?.reservedList.push(reserved);
       }
+      documentData.solicitationList.splice(index, 1);
+
       await updateDoc(documentRef, {
         solicitationList: documentData.solicitationList,
         reservedList: documentData.reservedList,
@@ -137,7 +137,10 @@ export const updateSolicitationReserve = async (
   }
 };
 
-export const setHourShop = async (shopId: string, hoursShopOpen: string[]) => {
+export const updateHourShop = async (
+  shopId: string,
+  hoursShopOpen: string[]
+) => {
   try {
     const documentRef = doc(db, "shops", shopId);
     const docSnapshot = await getDoc(documentRef);

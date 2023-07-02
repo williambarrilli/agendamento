@@ -11,8 +11,12 @@ import { Shop } from "../../types/shop";
 import { horarios } from "../../utils/constants";
 import { getSessionStorage } from "../../utils/sessionStorage";
 import styles from "./styles.module.scss";
+import { sendMessage } from "utils/send-message-whats-app";
+import { useNavigate } from "react-router-dom";
 
 export default function MyArea() {
+  const navigate = useNavigate();
+
   const [shop, setShop] = useState<Shop>();
   const [filterList, setFilterList] = useState<Reserved[]>([]);
 
@@ -20,21 +24,6 @@ export default function MyArea() {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [isOpenModalNewReserved, setIsOpenModalNewReserved] =
     useState<boolean>(false);
-
-  const renderTableBody = () => {
-    return horarios.map((horario, index) => {
-      const filterHour = filterList.find(
-        (reserved: Reserved) => reserved.hour === horario
-      );
-      return (
-        <tr key={index}>
-          <td>{horario}</td>
-          <td>{filterHour?.name ? filterHour.name : "livre"}</td>
-          <td>{filterHour?.phone ? filterHour.phone : ""}</td>
-        </tr>
-      );
-    });
-  };
 
   useEffect(() => {
     if (shop?.solicitationList?.length)
@@ -54,7 +43,33 @@ export default function MyArea() {
     if (dateSelected) return setIsOpenModal(true);
     return setIsOpenModal(false);
   }, [dateSelected]);
-
+  const renderTableBody = () => {
+    return horarios.map((horario, index) => {
+      const filterHour = filterList.find(
+        (reserved: Reserved) => reserved.hour === horario
+      );
+      return (
+        <tr key={index}>
+          <td>{horario}</td>
+          <td>{filterHour?.name ? filterHour.name : "livre"}</td>
+          <td>
+            {filterHour?.phone && (
+              <div className={styles.rowBotton}>
+                <Button
+                  styleOption="secondary"
+                  size="sm"
+                  text="Contato"
+                  onClick={() =>
+                    sendMessage("Olá tudo bem?", filterHour?.phone)
+                  }
+                />
+              </div>
+            )}
+          </td>
+        </tr>
+      );
+    });
+  };
   return (
     <div className={styles.container}>
       <div>
@@ -69,15 +84,24 @@ export default function MyArea() {
             dateSelected={dateSelected}
           />
         </div>
-
-        <div className={styles.button}>
-          <Button
-            styleOption="primary"
-            size="md"
-            onClick={() => setIsOpenModalNewReserved(true)}
-            text={"Adicionar Reserva"}
-          />
-        </div>
+        <section className={styles["box-button"]}>
+          <div className={styles.button}>
+            <Button
+              styleOption="primary"
+              size="md"
+              onClick={() => setIsOpenModalNewReserved(true)}
+              text={"Adicionar Reserva"}
+            />
+          </div>
+          <div className={styles.button}>
+            <Button
+              styleOption="primary"
+              size="md"
+              onClick={() => navigate("/minha-area/meus-horarios")}
+              text={"Meus Horarios"}
+            />
+          </div>
+        </section>
         <h3 className={styles.text}>Solicitações de reservas</h3>
         {shop?.id && (
           <ListComponents
@@ -111,13 +135,11 @@ export default function MyArea() {
               <th className={styles.columMax}>Nome</th>
               <th>Contato</th>
             </thead>
-
-            <tr>
-              <td className={styles.separator}></td>
-              <td className={styles.separator}></td>
-              <td className={styles.separator}></td>
-            </tr>
-
+            {/* <tbody>
+              <td className={styles.separator} />
+              <td className={styles.separator} />
+              <td className={styles.separator} />
+            </tbody> */}
             <tbody className={styles.textTable}>{renderTableBody()}</tbody>
           </table>
         </>

@@ -6,6 +6,7 @@ interface InputSelectProps {
   onChange: (value: string) => void;
   label?: string;
   options: string[];
+  size?: "sm" | "md" | "lg";
 }
 export default function InputSelect({
   value,
@@ -13,6 +14,7 @@ export default function InputSelect({
   onChange,
   label,
   options,
+  size,
   ...rest
 }: InputSelectProps) {
   return (
@@ -20,7 +22,7 @@ export default function InputSelect({
       <h1 className={styles.text}>{label}</h1>
       <select
         {...rest}
-        className={styles.input}
+        className={`${styles.input} ${size ? styles[size] : ""}`}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}

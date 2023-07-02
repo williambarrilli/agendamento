@@ -13,6 +13,7 @@ import HomeShop from "./pages/home-shop";
 import moment from "moment";
 import Header from "./components/header";
 import iconMR from "./assets/images/iconMR.png";
+import MyHours from "pages/my-hours";
 moment.locale("pt-br");
 
 const root = ReactDOM.createRoot(
@@ -21,12 +22,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <>
-    <header>
-      <Header logoImage={iconMR} />
-    </header>
     <body>
       <React.StrictMode>
         <Router>
+          <Header logoImage={iconMR} />
           <Routes>
             <Route Component={Home} path="/" />
             <Route Component={HomeShop} path="/:loja" />
@@ -42,6 +41,7 @@ root.render(
             />
             <Route Component={Login} path="/login" />
             <Route Component={Agenda} path="/agendar" />
+            <Route Component={MyHours} path="/minha-area/meus-horarios" />
           </Routes>
         </Router>
       </React.StrictMode>

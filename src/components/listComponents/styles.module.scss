@@ -1,11 +1,10 @@
+@import "config/colors/styles.module.scss";
+
 .container {
-  
- 
-  
 }
 
 .card {
-  border: 1px solid black;
+  border: 1px solid $secondary-color;
   background-color: white;
   padding: 5px;
   margin-top: 10px;
@@ -16,7 +15,6 @@
   margin-right: 5px;
   margin-left: 5px;
   font-family: Didot, serif;
-
 }
 
 .row {
@@ -26,7 +24,7 @@
   display: flex;
   justify-content: center;
   margin-top: 2px;
-  color: black;
+  color: $secondary-color;
 }
 .rowBotton {
   padding: 5px;
