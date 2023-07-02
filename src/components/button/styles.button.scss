@@ -5,6 +5,9 @@
   cursor: pointer;
   font-family: Didot, serif;
   border-radius: 5px;
+  &:disabled {
+    background-color: rgb(196, 196, 196);
+  }
 }
 .primary {
   background-color: $primary-color;
@@ -26,8 +29,8 @@
 }
 
 .sm {
-  height: 25px;
-  font-size: 18px;
+  height: 28px;
+  font-size: 20px;
 }
 
 .md {

@@ -9,13 +9,10 @@ export const useGetShopByUrl = (url?: string) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setIsLoading(true);
-
-    const session: Shop = getSessionStorage("shopData");
-
-    if (session?.url === url) return setData(session);
-
     if (url) {
+      setIsLoading(true);
+      const session: Shop = getSessionStorage("shopData");
+      if (session?.url === url) return setData(session);
       getShopByUrl(url)
         .then((response) => {
           setData(response);

@@ -22,12 +22,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <>
-    <header>
-      <Header logoImage={iconMR} />
-    </header>
     <body>
       <React.StrictMode>
         <Router>
+          <Header logoImage={iconMR} />
           <Routes>
             <Route Component={Home} path="/" />
             <Route Component={HomeShop} path="/:loja" />

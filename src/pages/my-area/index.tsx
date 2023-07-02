@@ -12,8 +12,11 @@ import { horarios } from "../../utils/constants";
 import { getSessionStorage } from "../../utils/sessionStorage";
 import styles from "./styles.module.scss";
 import { sendMessage } from "utils/send-message-whats-app";
+import { useNavigate } from "react-router-dom";
 
 export default function MyArea() {
+  const navigate = useNavigate();
+
   const [shop, setShop] = useState<Shop>();
   const [filterList, setFilterList] = useState<Reserved[]>([]);
 
@@ -22,6 +25,24 @@ export default function MyArea() {
   const [isOpenModalNewReserved, setIsOpenModalNewReserved] =
     useState<boolean>(false);
 
+  useEffect(() => {
+    if (shop?.solicitationList?.length)
+      setFilterList(
+        shop?.solicitationList?.filter((reserved) =>
+          dateSelected?.isSame(moment(reserved.date, "DD/MM/YYYY"))
+        )
+      );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dateSelected, shop]);
+
+  useEffect(() => {
+    if (window.location) setShop(getSessionStorage("shopData"));
+  }, []);
+
+  useEffect(() => {
+    if (dateSelected) return setIsOpenModal(true);
+    return setIsOpenModal(false);
+  }, [dateSelected]);
   const renderTableBody = () => {
     return horarios.map((horario, index) => {
       const filterHour = filterList.find(
@@ -49,26 +70,6 @@ export default function MyArea() {
       );
     });
   };
-
-  useEffect(() => {
-    if (shop?.solicitationList?.length)
-      setFilterList(
-        shop?.solicitationList?.filter((reserved) =>
-          dateSelected?.isSame(moment(reserved.date, "DD/MM/YYYY"))
-        )
-      );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateSelected, shop]);
-
-  useEffect(() => {
-    if (window.location) setShop(getSessionStorage("shopData"));
-  }, []);
-
-  useEffect(() => {
-    if (dateSelected) return setIsOpenModal(true);
-    return setIsOpenModal(false);
-  }, [dateSelected]);
-
   return (
     <div className={styles.container}>
       <div>
@@ -83,15 +84,24 @@ export default function MyArea() {
             dateSelected={dateSelected}
           />
         </div>
-
-        <div className={styles.button}>
-          <Button
-            styleOption="primary"
-            size="md"
-            onClick={() => setIsOpenModalNewReserved(true)}
-            text={"Adicionar Reserva"}
-          />
-        </div>
+        <section className={styles["box-button"]}>
+          <div className={styles.button}>
+            <Button
+              styleOption="primary"
+              size="md"
+              onClick={() => setIsOpenModalNewReserved(true)}
+              text={"Adicionar Reserva"}
+            />
+          </div>
+          <div className={styles.button}>
+            <Button
+              styleOption="primary"
+              size="md"
+              onClick={() => navigate("/minha-area/meus-horarios")}
+              text={"Meus Horarios"}
+            />
+          </div>
+        </section>
         <h3 className={styles.text}>Solicitações de reservas</h3>
         {shop?.id && (
           <ListComponents

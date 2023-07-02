@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Button from "../../components/button";
 
@@ -7,9 +7,13 @@ import { hours, minutes } from "../../utils/constants";
 import styles from "./styles.module.scss";
 import InputSelect from "components/inputSelect";
 import { useNavigate } from "react-router-dom";
+import { updateHourShop } from "controllers/firestore";
+import { getSessionStorage, setSessionStorage } from "utils/sessionStorage";
+import { Shop } from "types/shop";
 
 export default function MyHours() {
   const navigate = useNavigate();
+  const session: Shop = getSessionStorage("shopData");
 
   const [myHours, setMyHours] = useState<string[]>([]);
   const [selectedHour, setSelectedHour] = useState<string>("7");
@@ -28,65 +32,81 @@ export default function MyHours() {
     setMyHours(updatedList);
   };
 
+  const handleSubmit = () => {
+    const shopId = session?.id as string;
+    updateHourShop(shopId, myHours);
+    setSessionStorage("shopData", { ...session, hoursShopOpen: myHours });
+  };
+
+  useEffect(() => {
+    if (session?.hoursShopOpen?.length) setMyHours(session.hoursShopOpen);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className={styles.container}>
-      <div>
+      <div className={styles.content}>
         <h1 className={styles.text}>Meus Horarios</h1>
-        <h3 className={styles.text}>
-          Selecione os horarios que deseja atender
-        </h3>
-        <InputSelect
-          value={selectedHour}
-          label="h"
-          placeholder="horas"
-          options={hours}
-          onChange={setSelectedHour}
-        />
-        <InputSelect
-          value={selectedMinute}
-          label="m"
-          placeholder="horas"
-          options={minutes}
-          onChange={setSelectedMinute}
-        />
-        <div className={styles.button}>
-          <Button
-            styleOption="primary"
-            size="md"
-            onClick={() => handleAddNewHour()}
-            text={"Adicionar Horario"}
+        <section className={styles.section}>
+          <InputSelect
+            value={selectedHour}
+            placeholder="horas"
+            options={hours}
+            onChange={setSelectedHour}
+            size="sm"
           />
-        </div>
-        {myHours.map((hour, index) => (
-          <div key={index}>
-            {hour}{" "}
-            <div className={styles.button}>
-              <Button
-                styleOption="primary"
-                size="md"
-                onClick={() => handleRemoveItem(index)}
-                text={"X"}
-              />
-            </div>
-            (remover da lista)
+          <div className={styles.sigla}>h</div>
+          <InputSelect
+            value={selectedMinute}
+            placeholder="horas"
+            options={minutes}
+            onChange={setSelectedMinute}
+            size="sm"
+          />
+          <div className={styles.sigla}>min</div>
+          <div className={styles.siglaButton}>
+            <Button
+              styleOption="primary"
+              size="sm"
+              onClick={() => handleAddNewHour()}
+              text={"Adicionar"}
+            />
           </div>
-        ))}
-        Lista de horarios atuais
-        <div className={styles.button}>
-          <Button
-            styleOption="primary"
-            size="md"
-            onClick={() => navigate("/minha-area")}
-            text={"Cancelar alterações"}
-          />
+        </section>
+
+        <h3 className={styles.paragraph}>Horários que deseja atender:</h3>
+        <div className={styles.pill}>
+          {myHours.map((hour, index) => (
+            <div key={index}>
+              {" "}
+              <div className={styles.button}>
+                <Button
+                  styleOption="primary"
+                  size="sm"
+                  onClick={() => handleRemoveItem(index)}
+                  text={hour + "  X"}
+                />
+              </div>
+            </div>
+          ))}
         </div>
         <div className={styles.button}>
-          <Button
-            styleOption="primary"
-            size="md"
-            onClick={() => alert("n fiz ainda")}
-            text={"Salvar alterações"}
-          />
+          <div className={styles.button}>
+            <Button
+              styleOption="secondary"
+              size="md"
+              onClick={() => navigate("/minha-area")}
+              text={"Cancelar"}
+            />
+          </div>
+          <div className={styles.button}>
+            <Button
+              styleOption="primary"
+              size="md"
+              onClick={() => handleSubmit()}
+              text={"Salvar"}
+            />
+          </div>
         </div>
       </div>
     </div>
