@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Button from "../../components/button";
 
@@ -7,9 +7,13 @@ import { hours, minutes } from "../../utils/constants";
 import styles from "./styles.module.scss";
 import InputSelect from "components/inputSelect";
 import { useNavigate } from "react-router-dom";
+import { updateHourShop } from "controllers/firestore";
+import { getSessionStorage, setSessionStorage } from "utils/sessionStorage";
+import { Shop } from "types/shop";
 
 export default function MyHours() {
   const navigate = useNavigate();
+  const session: Shop = getSessionStorage("shopData");
 
   const [myHours, setMyHours] = useState<string[]>([]);
   const [selectedHour, setSelectedHour] = useState<string>("7");
@@ -27,6 +31,17 @@ export default function MyHours() {
     updatedList.splice(index, 1);
     setMyHours(updatedList);
   };
+
+  const handleSubmit = () => {
+    const shopId = session?.id as string;
+    updateHourShop(shopId, myHours);
+    setSessionStorage("shopData", { ...session, hoursShopOpen: myHours });
+  };
+
+  useEffect(() => {
+    if (session?.hoursShopOpen?.length) setMyHours(session.hoursShopOpen);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -90,7 +105,7 @@ export default function MyHours() {
             <Button
               styleOption="primary"
               size="sm"
-              onClick={() => alert("n fiz ainda")}
+              onClick={() => handleSubmit()}
               text={"Salvar alterações"}
             />
           </div>
