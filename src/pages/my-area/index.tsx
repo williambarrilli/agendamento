@@ -62,7 +62,6 @@ export default function MyArea() {
 
   const renderTableBody = () => {
     return shop?.hoursShopOpen?.map((horario, index) => {
-      console.log(shop?.hoursShopOpen, filterList);
       const filterHour = filterList.find(
         (reserved: Reserved) => reserved.hour === horario
       );
