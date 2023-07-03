@@ -1,21 +1,25 @@
 import moment, { Moment } from "moment";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { EnumStatus } from "types/enums";
+import { logPageAnalytics } from "utils/analitycs";
+import { sendMessage } from "utils/send-message-whats-app";
+
 import ReservedComponent from "../../components/addFormReserved";
 import Button from "../../components/button";
 import Calendar from "../../components/calendar";
 import ListComponents from "../../components/listComponents";
 import ModalComponent from "../../components/modal";
+
 import { Reserved } from "../../types/reserved";
 import { Shop } from "../../types/shop";
-import { getSessionStorage } from "../../utils/sessionStorage";
 import styles from "./styles.module.scss";
-import { sendMessage } from "utils/send-message-whats-app";
-import { useNavigate } from "react-router-dom";
-import { logPageAnalytics } from "utils/analitycs";
-import { EnumStatus } from "types/enums";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getShopByEmail } from "controllers/firestore";
 
 export default function MyArea() {
   const navigate = useNavigate();
+  const auth = getAuth();
 
   useEffect(() => {
     logPageAnalytics("My Area");
@@ -41,9 +45,15 @@ export default function MyArea() {
   }, [dateSelected, shop]);
 
   useEffect(() => {
-    if (window.location) setShop(getSessionStorage("shopData"));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    onAuthStateChanged(auth, async (user) => {
+      if (user && user.email) {
+        const shop = await getShopByEmail(user.email);
+        setShop(shop);
+      }
+    });
+  }, [auth, navigate]);
+
+  // const getShopByEmail = async (email: string) => await getShopByEmail(email);
 
   useEffect(() => {
     if (dateSelected) return setIsOpenModal(true);

@@ -11,7 +11,6 @@ import {
 } from "firebase/auth";
 import { setSessionStorage } from "../../utils/sessionStorage";
 import Input from "../../components/input";
-import { getShopByEmail } from "../../controllers/firestore";
 import Loading from "../../components/loading";
 import { logLoginUserAnalytics, logPageAnalytics } from "utils/analitycs";
 
@@ -49,7 +48,6 @@ export default function Login() {
 
     if (user?.email) {
       logLoginUserAnalytics();
-      await getShopByEmail(user?.email);
       setSessionStorage("user", user);
       navigate("/minha-area");
     }
@@ -59,7 +57,6 @@ export default function Login() {
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user && user.email) {
-        await getShopByEmail(user?.email);
         setSessionStorage("user", user);
         navigate("/minha-area");
       }
