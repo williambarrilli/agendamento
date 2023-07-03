@@ -1,14 +1,14 @@
-import JulianaBannerImage from "./juliana-banner-image.jpg";
-import WillBanner from "./will-banner-image.jpg";
-import AnaUnhasBanner from "./ana-unhas-banner-image.jpg";
+import Default from "./default.jpg";
+import WillBanner from "./will.jpg";
+import AnaUnhasBanner from "./ana-unhas.jpg";
 interface banners {
   [key: string]: string;
 }
 
 export const bannersByUrl: banners = {
-  "juliana-silva": JulianaBannerImage,
+  "juliana-silva": Default,
   will: WillBanner,
   "ana-unhas": AnaUnhasBanner,
   herick: WillBanner,
-  default: JulianaBannerImage,
+  default: Default,
 };

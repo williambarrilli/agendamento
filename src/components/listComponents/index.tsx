@@ -20,20 +20,17 @@ export default function ListComponents({
     logReserved("Aprove Reserved");
     item.status = EnumStatus.APROVED;
     updateSolicitationReserved(shopId, item, index);
-    if (confirm("Deseja enviar uma mensagem de confirmação?")) {
-      const messageConfirm = `Olá, sua solicitação de agendamento foi confirmada, te aguardo no dia ${item.date} as ${item.hour} horas.`;
-      sendMessage(messageConfirm, item.phone);
-    }
+    const messageConfirm = `Olá, sua solicitação de agendamento foi confirmada, te aguardo no dia ${item.date} as ${item.hour} horas.`;
+
+    sendMessage(messageConfirm, item.phone);
   };
 
   const onReject = (item: Reserved, index: number) => {
     logReserved("Reprove Reserved");
     item.status = EnumStatus.REPROVED;
     updateSolicitationReserved(shopId, item, index);
-    if (confirm("Deseja enviar uma mensagem para reagendamento?")) {
-      const messageReject = `Olá, não estarei disponivel neste horário, podemos agendar um outro horário?`;
-      sendMessage(messageReject, item.phone);
-    }
+    const messageReject = `Olá, não estarei disponivel neste horário, podemos agendar um outro horário?`;
+    sendMessage(messageReject, item.phone);
   };
 
   if (!listItems?.length) {

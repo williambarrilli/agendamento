@@ -40,6 +40,7 @@ export default function Home() {
           }
         />
       </div>
+
       <div className={styles.container}>
         {data?.map((loja, index) => (
           <div key={index}>
