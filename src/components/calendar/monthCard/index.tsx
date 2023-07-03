@@ -66,9 +66,9 @@ export default function MonthCard({
       day.isSame(moment(job.date, "DD/MM/YYYY"), "day")
     ).length;
     if (!numberJobs) return;
-    if (numberJobs <= 1) return "low";
-    if (numberJobs <= 3) return "medium";
-    if (numberJobs >= 4) return "high";
+    else if (numberJobs <= 1) return "low";
+    else if (numberJobs <= 3) return "medium";
+    else if (numberJobs >= 4) return "high";
   };
 
   const isCurrentDay = (day: Moment) => {

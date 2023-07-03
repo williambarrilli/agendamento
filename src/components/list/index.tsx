@@ -34,7 +34,7 @@ export default function ListComponents({
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        {listHours.map((horario, index) => (
+        {listHours?.map((horario, index) => (
           <button
             className={`${objStr({
               [styles["itemHour"]]: true,

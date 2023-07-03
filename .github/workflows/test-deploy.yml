@@ -6,7 +6,7 @@ name: deploy dev
 on:
   push:
     branches:
-      - develop
+      - lalala
 
 jobs:
   build_dev:

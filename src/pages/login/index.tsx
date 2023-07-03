@@ -4,7 +4,11 @@ import Button from "../../components/button";
 import { useNavigate } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../../init-firebase";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { setSessionStorage } from "../../utils/sessionStorage";
 import Input from "../../components/input";
 import { getShopByEmail } from "../../controllers/firestore";
@@ -51,6 +55,17 @@ export default function Login() {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user && user.email) {
+        await getShopByEmail(user?.email);
+        setSessionStorage("user", user);
+        navigate("/minha-area");
+      }
+    });
+  }, [auth, navigate]);
+
   if (loading) return <Loading />;
 
   return (
