@@ -5,12 +5,18 @@ import Loading from "components/loading";
 import Error from "pages/error";
 import Button from "components/button";
 import { sendMessage } from "utils/send-message-whats-app";
+import { logPageAnalytics } from "utils/analitycs";
+import { useEffect } from "react";
 
 export default function Home() {
   const { data, isLoading, error } = useGetShopsListHook();
+  useEffect(() => {
+    logPageAnalytics("Home");
+  }, []);
 
   if (isLoading) return <Loading />;
-  if (error) return <Error message="Ocorreu um erro inesperado." />;
+  if (error)
+    return <Error message="Ocorreu um erro inesperado." error={error} />;
   return (
     <div>
       <div className={styles.presentation}>

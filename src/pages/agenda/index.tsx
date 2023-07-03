@@ -15,9 +15,15 @@ import CalendarView from "../../views/home/calendarView";
 import RegisterView from "../../views/home/registerView";
 import SelectHourView from "../../views/home/selectHourView";
 import styles from "./styles.module.scss";
+import { logPageAnalytics, logReserved } from "utils/analitycs";
 
 export default function Agenda() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    logPageAnalytics("Agenda");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [typeBody, setTypeBody] = useState<EnumMenu>(EnumMenu.SELECTREGISTER);
   const [dateSelected, setDateSelected] = useState<string>("");
@@ -83,6 +89,7 @@ export default function Agenda() {
   };
 
   const onConfirm = () => {
+    logReserved("New Reserved");
     sendSolicitationReserved(shop.id ? shop.id : "MLJ0k39Q9ELsH78X3lHW", {
       name: name,
       phone: phone,
