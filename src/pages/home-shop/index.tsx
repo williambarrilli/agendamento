@@ -6,11 +6,18 @@ import styles from "./styles.module.scss";
 import Loading from "../../components/loading";
 import { useGetShopByUrl } from "../../hook/getShopByUrl";
 import Error from "../../pages/error";
+import { useEffect } from "react";
+import { logPageAnalytics } from "utils/analitycs";
 
 export default function HomeShop() {
   const { loja } = useParams();
 
-  const { data, isLoading } = useGetShopByUrl(loja?.toString());
+  useEffect(() => {
+    logPageAnalytics("Home Shop", loja?.toString());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const { data, error } = useGetShopByUrl(loja?.toString());
 
   if (data?.url)
     return (
@@ -21,9 +28,15 @@ export default function HomeShop() {
       </>
     );
 
-  if (!isLoading) {
-    return <Loading />;
+  if (!data?.url) {
+    return (
+      <Error
+        message="Página não encontrada."
+        error={error}
+        url={loja?.toString()}
+      />
+    );
   }
 
-  return <Error message="Página não encontrada." />;
+  return <Loading />;
 }

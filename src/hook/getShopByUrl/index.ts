@@ -6,7 +6,7 @@ import { getSessionStorage } from "../../utils/sessionStorage";
 export const useGetShopByUrl = (url?: string) => {
   const [data, setData] = useState<Shop>();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (url) {

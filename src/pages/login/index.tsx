@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import Button from "../../components/button";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import { setSessionStorage } from "../../utils/sessionStorage";
 import Input from "../../components/input";
 import { getShopByEmail } from "../../controllers/firestore";
 import Loading from "../../components/loading";
+import { logLoginUserAnalytics, logPageAnalytics } from "utils/analitycs";
 
 export default function Login() {
   initializeApp(firebaseConfig);
@@ -24,6 +25,11 @@ export default function Login() {
     setEmail(value);
   };
 
+  useEffect(() => {
+    logPageAnalytics("Login");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleChangePassword = (value: string) => {
     setPassword(value);
   };
@@ -38,6 +44,7 @@ export default function Login() {
       });
 
     if (user?.email) {
+      logLoginUserAnalytics();
       await getShopByEmail(user?.email);
       setSessionStorage("user", user);
       navigate("/minha-area");

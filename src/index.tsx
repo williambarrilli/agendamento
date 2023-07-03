@@ -22,38 +22,34 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <>
-    <body>
-      <React.StrictMode>
-        <Router>
-          <Header logoImage={iconMR} />
-          <Routes>
-            <Route Component={Home} path="/" />
-            <Route Component={HomeShop} path="/:loja" />
-            <Route Component={Login} path="/login" />
-            <Route
-              element={
-                <>
-                  <RequireAuth>
-                    <MyArea />
-                  </RequireAuth>
-                </>
-              }
-              path="/minha-area"
-            />
-            <Route
-              element={
-                <>
-                  <RequireAuth>
-                    <MyHours />
-                  </RequireAuth>
-                </>
-              }
-              path="/minha-area/meus-horarios"
-            />
-            <Route Component={Agenda} path="/agendar" />
-          </Routes>
-        </Router>
-      </React.StrictMode>
-    </body>
+    <Router>
+      <Header logoImage={iconMR} />
+      <Routes>
+        <Route Component={Home} path="/" />
+        <Route Component={HomeShop} path="/:loja" />
+        <Route Component={Login} path="/login" />
+        <Route
+          element={
+            <>
+              <RequireAuth>
+                <MyArea />
+              </RequireAuth>
+            </>
+          }
+          path="/minha-area"
+        />
+        <Route
+          element={
+            <>
+              <RequireAuth>
+                <MyHours />
+              </RequireAuth>
+            </>
+          }
+          path="/minha-area/meus-horarios"
+        />
+        <Route Component={Agenda} path="/agendar" />
+      </Routes>
+    </Router>
   </>
 );

@@ -8,14 +8,19 @@ import ModalComponent from "../../components/modal";
 import { EnumStatus } from "../../types/enums";
 import { Reserved } from "../../types/reserved";
 import { Shop } from "../../types/shop";
-import { horarios } from "../../utils/constants";
 import { getSessionStorage } from "../../utils/sessionStorage";
 import styles from "./styles.module.scss";
 import { sendMessage } from "utils/send-message-whats-app";
 import { useNavigate } from "react-router-dom";
+import { logPageAnalytics } from "utils/analitycs";
 
 export default function MyArea() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    logPageAnalytics("My Area");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [shop, setShop] = useState<Shop>();
   const [filterList, setFilterList] = useState<Reserved[]>([]);

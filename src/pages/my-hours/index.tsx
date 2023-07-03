@@ -11,9 +11,16 @@ import { updateHourShop } from "controllers/firestore";
 import { getSessionStorage, setSessionStorage } from "utils/sessionStorage";
 import { Shop } from "types/shop";
 import moment from "moment";
+import { logPageAnalytics } from "utils/analitycs";
 
 export default function MyHours() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    logPageAnalytics("My Hours");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const session: Shop = getSessionStorage("shopData");
 
   const [myHours, setMyHours] = useState<string[]>([]);
