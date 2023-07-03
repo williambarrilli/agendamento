@@ -17,9 +17,9 @@ export default function HomeShop() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { data, error } = useGetShopByUrl(loja?.toString());
+  const { data, isLoading, error } = useGetShopByUrl(loja?.toString());
 
-  if (data?.url)
+  if (data)
     return (
       <>
         <BannerComponent bannerImage={data && data.url} />
@@ -28,7 +28,7 @@ export default function HomeShop() {
       </>
     );
 
-  if (!data?.url) {
+  if (!data && !isLoading && error !== "")
     return (
       <Error
         message="Página não encontrada."
@@ -36,7 +36,5 @@ export default function HomeShop() {
         url={loja?.toString()}
       />
     );
-  }
-
   return <Loading />;
 }
