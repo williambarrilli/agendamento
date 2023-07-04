@@ -11,3 +11,15 @@ export interface Shop {
   email: string;
   hoursShopOpen: string[];
 }
+
+export const initialShop = {
+  id: "",
+  name: "",
+  url: "",
+  phone: "",
+  instagram: "",
+  reservedList: [],
+  solicitationList: [],
+  email: "",
+  hoursShopOpen: [],
+};
