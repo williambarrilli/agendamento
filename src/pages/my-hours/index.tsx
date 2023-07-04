@@ -24,8 +24,8 @@ export default function MyHours() {
   const session: Shop = getSessionStorage("shopData");
 
   const [myHours, setMyHours] = useState<string[]>([]);
-  const [selectedHour, setSelectedHour] = useState<string>("");
-  const [selectedMinute, setSelectedMinute] = useState<string>("");
+  const [selectedHour, setSelectedHour] = useState<string>("07");
+  const [selectedMinute, setSelectedMinute] = useState<string>("00");
 
   const handleAddNewHour = () => {
     const newHour = `${selectedHour}:${selectedMinute}`;

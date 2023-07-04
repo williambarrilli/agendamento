@@ -53,8 +53,6 @@ export default function MyArea() {
     });
   }, [auth, navigate]);
 
-  // const getShopByEmail = async (email: string) => await getShopByEmail(email);
-
   useEffect(() => {
     if (dateSelected) return setIsOpenModal(true);
     return setIsOpenModal(false);
