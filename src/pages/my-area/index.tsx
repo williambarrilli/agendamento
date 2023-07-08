@@ -148,14 +148,9 @@ export default function MyArea() {
           <table className={styles.table}>
             <thead className={styles.textTread}>
               <th>Horário</th>
-              <th className={styles.columMax}>Nome</th>
+              <th>Nome</th>
               <th>Contato</th>
             </thead>
-            {/* <tbody>
-              <td className={styles.separator} />
-              <td className={styles.separator} />
-              <td className={styles.separator} />
-            </tbody> */}
             <tbody className={styles.textTable}>{renderTableBody()}</tbody>
           </table>
         </>
