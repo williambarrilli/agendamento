@@ -50,6 +50,7 @@ export default function ReservedComponent({ shop, onClose }: ReservedProps) {
         <div>
           <Input
             type="date"
+            size="md"
             value={newReserved.date}
             placeholder="Selecione uma data"
             label="Data:"
@@ -58,6 +59,7 @@ export default function ReservedComponent({ shop, onClose }: ReservedProps) {
 
           <InputSelect
             options={shop?.hoursShopOpen || []}
+            size="md"
             value={newReserved.hour}
             placeholder="Selecione uma horario"
             label="Horário:"
@@ -65,6 +67,7 @@ export default function ReservedComponent({ shop, onClose }: ReservedProps) {
           />
           <Input
             type="text"
+            size="md"
             value={newReserved.name}
             placeholder="Digite o nome"
             label="Nome:"
@@ -73,6 +76,7 @@ export default function ReservedComponent({ shop, onClose }: ReservedProps) {
 
           <Input
             type="tel"
+            size="md"
             value={newReserved.phone}
             placeholder="(**)****-****"
             label="Telefone:"
