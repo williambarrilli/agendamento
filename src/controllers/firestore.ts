@@ -86,21 +86,27 @@ export const getShopByUrl = async (url: string | undefined) => {
   return retorno;
 };
 
-export const sendSolicitationReserved = async (
+export const sendReserved = async (
   shopId: string,
-  reserved: Reserved
+  reserved: Reserved,
+  type: "solicitacion" | "reserved"
 ) => {
   try {
     const documentRef = doc(db, "shops", shopId);
     const docSnapshot = await getDoc(documentRef);
     if (docSnapshot.exists()) {
       const documentData = docSnapshot.data();
-
-      documentData.solicitationList.push(reserved);
-
-      await updateDoc(documentRef, {
-        solicitationList: documentData?.solicitationList,
-      });
+      if (type === "solicitacion") {
+        documentData.solicitationList.push(reserved);
+        await updateDoc(documentRef, {
+          solicitationList: documentData?.solicitationList,
+        });
+      } else {
+        documentData.reservedList.push(reserved);
+        await updateDoc(documentRef, {
+          reservedList: documentData?.reservedList,
+        });
+      }
     } else {
       console.log("Document not found");
     }

@@ -5,9 +5,6 @@
   margin-top: 20px;
   justify-content: center;
 }
-.content {
-  padding: 10px;
-}
 .text {
   font-family: Didot, serif;
   text-align: center;
@@ -16,27 +13,18 @@
   color: $secondary-color;
 }
 .table {
+  font-family: Didot, serif;
+  font-size: 15px;
+  color: $primary-color;
   align-items: center;
+  width: 100%;
 }
 .textTread {
-  font-family: Didot, serif;
-  text-align: center;
-  color: $primary-color;
-  font-size: 15px;
+
 }
 .textTable {
-  font-family: Didot, serif;
   text-align: center;
-  font-size: 15px;
   color: $secondary-color;
-}
-
-.columMax {
-  padding: 2px 65px;
-}
-
-.separator {
-  border-bottom: 1px solid $primary-color;
 }
 .button {
   display: flex;

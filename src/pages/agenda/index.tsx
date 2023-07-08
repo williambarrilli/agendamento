@@ -5,7 +5,7 @@ import BannerComponent from "../../components/banner";
 import Button from "../../components/button";
 import ModalComponent from "../../components/modal";
 
-import { sendSolicitationReserved } from "../../controllers/firestore";
+import { sendReserved } from "../../controllers/firestore";
 import { EnumMenu, EnumStatus } from "../../types/enums";
 import { Reserved } from "../../types/reserved";
 import { Shop } from "../../types/shop";
@@ -90,13 +90,17 @@ export default function Agenda() {
 
   const onConfirm = () => {
     logReserved("New Reserved");
-    sendSolicitationReserved(shop.id ? shop.id : "MLJ0k39Q9ELsH78X3lHW", {
-      name: name,
-      phone: phone,
-      date: dateSelected,
-      hour: hourSelected,
-      status: EnumStatus.PENDENT,
-    });
+    sendReserved(
+      shop.id as string,
+      {
+        name: name,
+        phone: phone,
+        date: dateSelected,
+        hour: hourSelected,
+        status: EnumStatus.PENDENT,
+      },
+      "solicitacion"
+    );
     setDateSelected("");
     setHourSelected("");
     setName("");

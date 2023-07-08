@@ -1,5 +1,5 @@
 import moment, { Moment } from "moment";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { EnumStatus } from "types/enums";
 import { logPageAnalytics } from "utils/analitycs";
@@ -12,7 +12,7 @@ import ListComponents from "../../components/listComponents";
 import ModalComponent from "../../components/modal";
 
 import { Reserved } from "../../types/reserved";
-import { Shop } from "../../types/shop";
+import { Shop, initialShop } from "../../types/shop";
 import styles from "./styles.module.scss";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getShopByEmail } from "controllers/firestore";
@@ -26,7 +26,7 @@ export default function MyArea() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [shop, setShop] = useState<Shop>();
+  const [shop, setShop] = useState<Shop>(initialShop);
   const [filterList, setFilterList] = useState<Reserved[]>([]);
 
   const [dateSelected, setDateSelected] = useState<Moment | null>(null);
@@ -41,24 +41,23 @@ export default function MyArea() {
           dateSelected?.isSame(moment(reserved.date, "DD/MM/YYYY"))
         )
       );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateSelected, shop]);
+  }, [dateSelected, shop.reservedList]);
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user && user.email) {
         const shop = await getShopByEmail(user.email);
-        setShop(shop);
+        if (shop) setShop(shop);
       }
     });
   }, [auth, navigate]);
-
-  // const getShopByEmail = async (email: string) => await getShopByEmail(email);
 
   useEffect(() => {
     if (dateSelected) return setIsOpenModal(true);
     return setIsOpenModal(false);
   }, [dateSelected]);
+
+  const reservedList = useMemo(() => shop.reservedList, [shop.reservedList]);
 
   const renderTableBody = () => {
     return shop?.hoursShopOpen?.map((horario, index) => {
@@ -96,7 +95,7 @@ export default function MyArea() {
         <div className={styles.content}>
           <Calendar
             onSelectDate={(value: Moment) => setDateSelected(value)}
-            listReserved={shop?.reservedList}
+            listReserved={reservedList}
             setDateSelected={setDateSelected}
             dateSelected={dateSelected}
           />
@@ -149,14 +148,9 @@ export default function MyArea() {
           <table className={styles.table}>
             <thead className={styles.textTread}>
               <th>Horário</th>
-              <th className={styles.columMax}>Nome</th>
+              <th>Nome</th>
               <th>Contato</th>
             </thead>
-            {/* <tbody>
-              <td className={styles.separator} />
-              <td className={styles.separator} />
-              <td className={styles.separator} />
-            </tbody> */}
             <tbody className={styles.textTable}>{renderTableBody()}</tbody>
           </table>
         </>

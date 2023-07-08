@@ -5,9 +5,10 @@ import { Reserved } from "../../types/reserved";
 import { useState } from "react";
 import { EnumStatus } from "../../types/enums";
 import InputSelect from "../inputSelect";
-import { sendSolicitationReserved } from "../../controllers/firestore";
+import { sendReserved } from "../../controllers/firestore";
 import moment from "moment";
 import { Shop } from "types/shop";
+import { setSessionStorage } from "utils/sessionStorage";
 
 interface ReservedProps {
   shop?: Shop;
@@ -32,11 +33,12 @@ export default function ReservedComponent({ shop, onClose }: ReservedProps) {
     const formatedDate = moment(newReserved.date, "YYYY/MM/DD").format(
       "DD/MM/YYYY"
     );
-    const shopId = shop?.id;
-    sendSolicitationReserved(shopId ? shopId : "MLJ0k39Q9ELsH78X3lHW", {
+    const shopId = shop?.id as string;
+    const reserved = {
       ...newReserved,
       date: formatedDate,
-    });
+    };
+    sendReserved(shopId, reserved, "reserved");
     alert("Reserva adicionada");
     onClose();
   };
@@ -48,6 +50,7 @@ export default function ReservedComponent({ shop, onClose }: ReservedProps) {
         <div>
           <Input
             type="date"
+            size="md"
             value={newReserved.date}
             placeholder="Selecione uma data"
             label="Data:"
@@ -56,6 +59,7 @@ export default function ReservedComponent({ shop, onClose }: ReservedProps) {
 
           <InputSelect
             options={shop?.hoursShopOpen || []}
+            size="md"
             value={newReserved.hour}
             placeholder="Selecione uma horario"
             label="Horário:"
@@ -63,6 +67,7 @@ export default function ReservedComponent({ shop, onClose }: ReservedProps) {
           />
           <Input
             type="text"
+            size="md"
             value={newReserved.name}
             placeholder="Digite o nome"
             label="Nome:"
@@ -71,6 +76,7 @@ export default function ReservedComponent({ shop, onClose }: ReservedProps) {
 
           <Input
             type="tel"
+            size="md"
             value={newReserved.phone}
             placeholder="(**)****-****"
             label="Telefone:"
