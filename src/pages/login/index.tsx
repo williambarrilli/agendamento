@@ -88,6 +88,7 @@ export default function Login() {
           {error && <div className={styles.error}>{error}</div>}
           <div className={styles.button}>
             <Button
+              type="submit"
               styleOption="primary"
               onClick={() => handleLogin()}
               text="Entrar"

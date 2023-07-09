@@ -1,10 +1,11 @@
+import { ButtonHTMLAttributes } from "react";
 import "./styles.button.scss";
 
 interface ButtonProps {
   text: string;
   onClick: () => void;
   styleOption?: "primary" | "secondary" | "alternative";
-  size?: "sm" | "md" | "lg" | "xl";
+  size?: "ssm" | "sm" | "md" | "lg" | "xl";
   disabled?: boolean;
 }
 
@@ -15,7 +16,7 @@ export default function Button({
   size = "md",
   disabled,
   ...rest
-}: ButtonProps) {
+}: ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <div>
       <button
