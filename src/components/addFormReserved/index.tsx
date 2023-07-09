@@ -8,7 +8,6 @@ import InputSelect from "../inputSelect";
 import { sendReserved } from "../../controllers/firestore";
 import moment from "moment";
 import { Shop } from "types/shop";
-import { setSessionStorage } from "utils/sessionStorage";
 
 interface ReservedProps {
   shop?: Shop;
