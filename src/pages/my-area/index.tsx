@@ -73,7 +73,7 @@ export default function MyArea() {
               <div className={styles.rowBotton}>
                 <Button
                   styleOption="secondary"
-                  size="sm"
+                  size="ssm"
                   text="Contato"
                   onClick={() =>
                     sendMessage("Olá tudo bem?", filterHour?.phone)
