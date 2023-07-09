@@ -13,7 +13,6 @@ export default function CardComponent({
   image,
   title,
   url,
-  subtitle = "Agende seu horario",
 }: CardComponentProps) {
   const navigate = useNavigate();
 
