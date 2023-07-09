@@ -2,7 +2,7 @@ name: Deploy to Firebase Hosting on merge
 "on":
   push:
     tags:
-      - "*"
+      - "develop"
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -29,4 +29,4 @@ jobs:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_AGENDAMENTO_C8DFA }}"
           channelId: live
-          projectId: agendamento-c8dfa
+          projectId: "${{ variables.PROJECT_ID }}"
