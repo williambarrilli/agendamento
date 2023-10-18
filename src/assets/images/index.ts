@@ -12,6 +12,6 @@ export const bannersByUrl: banners = {
   will: WillBanner,
   "ana-unhas": AnaUnhasBanner,
   herick: WillBanner,
-  karolguedes: KarolGuedesBanner,
+  karolguedescilios: KarolGuedesBanner,
   default: Default,
 };
